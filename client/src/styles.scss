@@ -1,0 +1,16 @@
+@import 'scss/reset';
+
+@import 'scss/base';
+
+
+// css for the demo
+html, body {
+  //height: 100%;
+  //width: 100%;
+}
+
+.test {
+  height: 500px;
+  width: 500px;
+  background-color: red;
+}
