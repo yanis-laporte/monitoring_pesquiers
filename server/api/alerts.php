@@ -1,5 +1,6 @@
 <?php
 include('../includes/database_conn.php');
+include('../includes/functions.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // echo "GET";
@@ -74,16 +75,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
     header('Content-Type: application/json');
     echo json_encode(array("errorInfo" => $req->errorInfo()));
-}
-
-/**
- * 
- */
-function jsonInput() {
-    $rawJson = json_decode(file_get_contents('php://input'));
-    $json = [];
-    foreach ($rawJson as $key => $value) {
-        $json[$key] = $value;
-    }
-    return $json;
 }
