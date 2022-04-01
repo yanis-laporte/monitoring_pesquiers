@@ -1,0 +1,1 @@
+ffmpeg -i input.mp4 -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 1920:1080 output_filename.webp
