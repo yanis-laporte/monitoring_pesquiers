@@ -1,3 +1,5 @@
+const { API_URL } = require('./base')
+
 var map = L.map('map', { doubleClickZoom: false }).setView([43.05832154846533, 6.170368194580079], 14);
 
 L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
@@ -19,7 +21,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
 
 //fetch data from api
 
-fetch('http://127.0.0.1/edsa-pesquiers/api/nodes.php', {
+fetch(`${API_URL}/nodes.php`, {
     mode: 'cors',
 })
     .then(res => res.json())
