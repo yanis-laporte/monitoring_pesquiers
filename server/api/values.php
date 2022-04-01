@@ -60,16 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($_GET && $_GET['u'] == true) {
 
-        $req = $bdd->query(
+        $req = $bdd->prepare(
             'SELECT
                 v.id,v.balise_id,v.sensor_id, 
                 (CEIL((v.value + (SELECT calbr_rect from sensorsCalbr where sensor_id = v.sensor_id limit 1)) * 100)/100) AS value,
                 v.timestamp, s.name, s.unite, s.symbole
             FROM sensorsValues v
             LEFT JOIN listSensors s
-            ON v.sensor_id=s.sensor_id'
+            ON v.sensor_id=s.sensor_id WHERE v.sensor_id = :sensor_id '
         );
+        $req->execute(array(
+            "sensor_id" => $_GET['id']
+        ));
 
+        $data;
         $i = 0;
         while ($req_f = $req->fetch()) {
             foreach ($req_f as $key => $value) {
@@ -79,6 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
             $i++;
         }
+
+        cors();
         header('Content-Type: application/json');
         echo json_encode($data);
     } else {
