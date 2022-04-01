@@ -1,0 +1,23 @@
+@import "reset";
+@import "base";
+
+html,
+body,
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+#map {
+    height: 95%;
+    width: 100%;
+}
+
+// #leftpanel {
+//     position: absolute;
+//     z-index: 410;
+//     right: 0;
+//     height: 100%;
+//     width: 50%;
+//     background: red;
+// }
