@@ -1,0 +1,41 @@
+Hauteur de l'eau
+  -> Temps
+  -> Line charts (https://canvasjs.com/html5-javascript-line-chart/)
+  -> Area (https://canvasjs.com/html5-javascript-area-chart/)
+
+
+Pollution (CO)
+Pollution (particule fines)
+  -> Temps
+  -> Multi Series Area Charts (https://canvasjs.com/javascript-charts/multi-series-spline-area-chart/)
+
+Vitesse de l'eau ms/s
+Débit de l'eau m²/s
+  -> Temps
+  -> Line charts
+
+Ultra violet
+  -> Temps
+  -> Line charts
+
+Humidité
+  -> Temps
+  -> Line charts
+
+Température eau
+Température ext
+  -> Temps
+  -> Line charts
+  -> Range spline area chart (https://canvasjs.com/javascript-range-area-spline-area-chart/)
+
+
+Niveau de batterie
+  -> Instant pas de graphique (?)
+  -> Line charts (https://canvasjs.com/html5-javascript-line-chart/)
+
+
+Vitesse vent (windguru.cz like)
+  -> Wind rose charts
+  https://www.highcharts.com/demo/windbarb-series
+  https://plotly.com/javascript/wind-rose-charts/
+  https://js.devexpress.com/Demos/WidgetsGallery/Demo/Charts/WindRose/jQuery/Light/
