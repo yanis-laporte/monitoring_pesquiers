@@ -4,8 +4,14 @@ include('../includes/functions.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // echo "GET";
+    if ($_GET && $_GET['id']) {
+        $req = $bdd->prepare('SELECT * FROM listBalise WHERE balise_id = :balise_id');
+        $req->bindParam(":balise_id", $_GET['id'], PDO::PARAM_INT);
+        $req->execute();
+    } else {
+        $req = $bdd->query('SELECT * FROM listBalise');
+    }
     $i = 0;
-    $req = $bdd->query('SELECT * FROM listBalise');
     while ($req_f = $req->fetch()) {
         foreach ($req_f as $key => $value) {
             if (!is_numeric($key)) {
