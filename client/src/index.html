@@ -1,17 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.scss" />
+    <link rel="stylesheet" href="scss/index.scss" />
     <title>Monitoring des Pesquiers</title>
 </head>
 
 <body>
-    <div class='test'>
-        <p>Login</p>
+    <div class="bg"></div>
+    <div class="main">
+        <form action="login.php" method="post" enctype="multipart/form-data">
+            <div class="title-wrapper">
+                <div class="title">Connexion</div>
+            </div>
+            <div class="input">
+                <div class="email">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" placeholder="E-mail">
+                </div>
+                <div class="password">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" placeholder="Mot de passe">
+                </div>
+            </div>
+            <div class="submit">
+                <div class="button">
+                    <input type="submit" name="submit" value="Valider">
+                </div>
+                <div class="blabla">
+                    <a href="">Pas de compte ? Crée en un</a>
+                    <a href="">Bla Blal ...</a>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
 
