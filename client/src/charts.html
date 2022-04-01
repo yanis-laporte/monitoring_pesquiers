@@ -5,14 +5,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.scss" />
+    <link rel="stylesheet" href="scss/charts.scss" />
+    <link rel="stylesheet" href="scss/topbar.scss" />
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <title>Monitoring des Pesquiers</title>
 </head>
 
 <body>
-    <div class='test'>
-        <p>Charts</p>
+    <div class="container">
+        <nav id="navbar">
+            <ul>
+                <li class="home"><a href="index.html">🏠</a></li>
+                <li class="btn"><a href="map.html">Carte</a></li>
+                <li class="btn"><a href="alerts.html">Alertes</a></li>
+                <li class="btn"><a href="calibrage.html">Calibrage</a></li>
+            </ul>
+        </nav>
+        <script src="js/topbar.js"></script>
     </div>
+
+
+
+
+
+
+    <!-- <div class='test'>
+        <p>Charts</p>
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    </div> -->
+    <script src="js/charts.js"></script>
+    <!-- Auto reload -->
+    <script src="/dist/client.59712999.js"></script>
 </body>
 
 </html>
