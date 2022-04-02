@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "parcel build ./src/*.html",
-    "dev": "parcel serve ./src/*.html"
+    "dev": "parcel serve ./src/*.html",
+    "clean": "rm -rf dist/*"
   },
   "author": "",
   "license": "ISC",
