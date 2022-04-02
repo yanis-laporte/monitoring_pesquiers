@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scss/alerts.scss" />
+    <link rel="stylesheet" href="scss/topbar.scss" />
+    <title>Monitoring des Pesquiers</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav id="navbar">
+            <ul>
+                <!-- <div class="left"> -->
+                <li class="home"><a href="index.html">🏠</a></li>
+                <!-- </div> -->
+                <!-- <div class="right"> -->
+                <li class="btn"><a href="map.html">Carte</a></li>
+                <li class="btn"><a href="alerts.html">Alertes</a></li>
+                <li class="btn"><a href="calibrage.html">Calibrage</a></li>
+                <!-- </div> -->
+            </ul>
+        </nav>
+        <div class="alerts">
+            <div class="alert" id="1">
+                <div class="baliseName">Nom de la Balise</div>
+                <div class="wrapper">
+                    <div class="left">
+                        <div class="top">
+                            <select name="sensor" id="">
+                                <option value="" selected disabled>Selectionner un capteur</option>
+                                <option value="1">Hauteur de l'eau</option>
+                                <option value="1">Température de l'eau</option>
+                            </select>
+                            <select name="operator" id="">
+                                <option value="" selected disabled>Opt</option>
+                                <option value="gt">&gt;</option>
+                                <option value="eq">&equals;</option>
+                                <option value="lt">&lt;</option>
+                            </select>
+                            <input type="number" name="comparator" placeholder="10">
+                        </div>
+                        <div class="mail">
+                            <input type="email" name="" id="" placeholder="adresse@mail">
+                        </div>
+                    </div>
+                    <div class="right">
+                        <textarea name="" id="" cols="30" rows="10" placeholder="Alerte"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript -->
+    <script src="js/topbar.js"></script>
+    <!-- Auto reload -->
+    <script src="/dist/client.59712999.js"></script>
+</body>
+
+</html>

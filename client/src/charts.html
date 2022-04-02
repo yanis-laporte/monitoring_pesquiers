@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="scss/charts.scss" />
     <link rel="stylesheet" href="scss/topbar.scss" />
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <title>Monitoring des Pesquiers</title>
@@ -15,25 +14,28 @@
     <div class="container">
         <nav id="navbar">
             <ul>
+                <li id="close"></li>
+                <li id="battery">🔋</li>
+                <li id="name"></li>
+            </ul>
+        </nav>
+        <!-- <nav id="navbar">
+            <ul>
                 <li class="home"><a href="index.html">🏠</a></li>
                 <li class="btn"><a href="map.html">Carte</a></li>
                 <li class="btn"><a href="alerts.html">Alertes</a></li>
                 <li class="btn"><a href="calibrage.html">Calibrage</a></li>
+
             </ul>
-        </nav>
-        <script src="js/topbar.js"></script>
+        </nav> -->
+        <div id="chartsContainer">
+            <div id="chartContainer"></div>
+        </div>
     </div>
 
-
-
-
-
-
-    <!-- <div class='test'>
-        <p>Charts</p>
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    </div> -->
-    <script src="js/charts.js"></script>
+    <!-- Javascript -->
+    <script type="module" src="js/charts.js"></script>
+    <script src="js/topbar.js"></script>
     <!-- Auto reload -->
     <script src="/dist/client.59712999.js"></script>
 </body>
