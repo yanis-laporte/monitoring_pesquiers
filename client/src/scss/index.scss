@@ -1,10 +1,20 @@
 @import "reset";
 @import "base";
+@import "colors";
+@import "_mixins";
 // @import "glassy";
 
-html {
+html,
+body,
+.root {
+  width: 100%;
+  height: 100%;
+}
+.root {
   background-image: url("../../assets/background.webp");
   background-size: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .bg {
@@ -20,9 +30,11 @@ html {
   position: absolute;
   top: 50%;
   right: 50%;
+
+  height: 700px;
+  width: 500px;
+
   transform: translate(50%, -50%);
-  width: 20%;
-  height: 60%;
 
   background: linear-gradient(212.48deg, rgba(255, 255, 255, 0.2) 1.45%, rgba(0, 0, 0, 0) 99.49%);
   border: 3px solid rgba(255, 255, 255, 0.4);
@@ -38,24 +50,25 @@ html {
   form {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   .title-wrapper {
-    background: rgba(255, 255, 255, 0.4);
-    border: 3px solid rgba(255, 255, 255, 0.4);
-    box-sizing: border-box;
-    backdrop-filter: blur(30px);
-    /* Note: backdrop-filter has minimal browser support */
-
-    border-radius: 30px;
-
-    height: 100%;
-    width: auto;
-
-    margin: 50;
-    padding: 22px;
-
     .title {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.4);
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      box-sizing: border-box;
+      /* Note: backdrop-filter has minimal browser support */
+      backdrop-filter: blur(30px);
+      border-radius: 30px;
+
+      padding: 22px;
+      margin: 50px;
+
+      height: 64px + 22 + 64;
+      width: auto;
+
       text-align: center;
       font-style: normal;
       font-weight: 600;
@@ -63,44 +76,55 @@ html {
       color: #6fa9dc;
     }
   }
+  // title-wrapper
 
-  .input {
-    width: 100%;
-    display: flex;
+  .input-wrapper {
+    flex: 1;
     flex-direction: column;
     align-items: center;
-    // background-color: red;
-    color: white;
+    display: flex;
+    width: 100%;
 
-    .email .password {
+    label {
+      color: white;
+    }
+
+    .email,
+    .password {
+      flex: 1;
       width: 70%;
-      // background-color: green;
+      padding-bottom: 10px;
+
+      .tooltip {
+        padding-top: 0.3em;
+        align-items: flex-start;
+      }
     }
     input {
-      background: #ffffff;
-      border: 3px solid rgba(255, 255, 255, 0.4);
-      box-sizing: border-box;
+      /* Positioning  */
       border-radius: 15px;
 
-      color: black;
-
+      /* Display & Box Model */
       height: 3rem;
-
-      padding: 1%;
-      // padding-left: 10%;
-      text-align: center;
-
+      width: 100%;
       margin: 1%;
+      padding: 1%;
+      padding-left: 10px;
+
+      /* Color */
+      background: #ffffff;
+
+      /* Text */
+      text-align: left;
 
       &::placeholder {
         text-align: center;
-        color: #c4c4c4;
+        color: $light-gray;
 
         transition: all 0.6s ease-in-out;
       }
 
       &:focus {
-        background-color: red;
         &::placeholder {
           transform: translate(-150%);
           transition: all 0.3s ease-in-out;
@@ -108,49 +132,46 @@ html {
       }
     }
   }
+  // .input-wrapper
 
   .submit {
+    flex: 1;
+    margin-top: 50px;
     width: 100%;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    background-color: red;
     color: white;
 
     .button {
-      width: 70%;
-      background-color: green;
+      display: flex;
+      justify-content: center;
+
+      width: 100%;
 
       input {
-        display: flex;
-        background: #ffffff;
-        border: 3px solid rgba(255, 255, 255, 0.4);
         box-sizing: border-box;
+        width: 50%;
+        margin-left: 2em;
+        margin-right: 2em;
+
+        background: rgba(111, 169, 220, 0.7);
+        border: 3px solid rgba(255, 255, 255, 0.4);
         border-radius: 15px;
 
-        color: black;
+        color: #ffffff;
 
-        width: 50%;
-
-        // height: 3rem;
-
-        // padding: 1%;
-        // padding-left: 10%;
-        // text-align: center;
-
-        // margin: 1%;
+        font-size: 33px;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       }
-    }
-
-    .blabla {
-      color: #c4c4c4;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
     }
   }
 
   // .main
+}
+
+.tooltip {
+  color: #c4c4c4;
+  // font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
