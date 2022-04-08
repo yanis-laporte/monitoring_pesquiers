@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "parcel build ./src/*.html",
-    "dev": "parcel serve ./src/*.html",
-    "clean": "rm -rf dist/*"
+    "dev": "del /Q /F \"./dist/\" && parcel serve ./src/*.html",
+    "clean": "del /Q /F \"./dist/\""
   },
   "author": "",
   "license": "ISC",
@@ -73,6 +73,7 @@
     "picocolors": "^1.0.0",
     "postcss-value-parser": "^4.2.0",
     "posthtml": "^0.16.6",
+    "posthtml-import": "^0.9.0",
     "posthtml-parser": "^0.10.2",
     "posthtml-render": "^3.0.0",
     "react-refresh": "^0.9.0",
