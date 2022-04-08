@@ -1,81 +1,175 @@
 @import "reset";
 @import "base";
+@import "glassy";
+@import "colors";
 
-html,
-body,
 .container {
-    height: 100%;
     width: 100%;
+    height: 100%;
 }
 
-.alerts {
+.alerts-container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: column;
+    height: 95%;
+    padding: 2%;
+    background-color: #ff00001c;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // flex-direction: column;
+
+    // padding: 5%;
 }
 
-.alert {
-    width: 70%;
-    background: radial-gradient(
-            100% 4069.56% at 100% 100%,
-            rgba(242, 249, 255, 0.95) 0%,
-            rgba(235, 246, 255, 0.95) 100%
-        )
-        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+.alert-item {
+    display: block;
+    min-width: 70%;
+    max-width: 100%;
+    width: fit-content;
+    height: min-content;
+
     border-radius: 30px;
 
-    .baliseName {
+    background: radial-gradient(
+        100% 4069.56% at 100% 100%,
+        rgba(242, 249, 255, 0.95) 0%,
+        rgba(235, 246, 255, 0.95) 100%
+    );
+}
+
+.baliseName {
+    width: 50%;
+    background: #9fc5e8;
+    border-radius: 30px 0px;
+    padding-left: 30px;
+    padding: 1em;
+}
+
+.inputs {
+    width: fit-content;
+    height: 100%;
+    /* top right bottom left */
+    margin: 0 1em 0 1em;
+}
+
+.L-inputs,
+.R-inputs {
+    height: 100%;
+    width: 100%;
+
+    .input {
+        width: 100%;
+    }
+
+    select,
+    input {
+        margin: 1em 0 1em 0;
+        padding: 10px;
+    }
+
+    select[name="sensor"] {
+        background: #ffffff;
+        border-radius: 10px 5px 5px 10px;
+    }
+    select[name="operator"] {
+        margin-left: 10px;
+        margin-right: 10px;
+
+        border-radius: 5px 5px 5px 5px;
+        background: #ffffff;
+    }
+    input[name="comparator"] {
+        background: #ffffff;
+        border-radius: 5px 10px 10px 5px;
         width: 50%;
-        background: #9fc5e8;
-        border-radius: 30px 0px;
-        padding-left: 30px;
-        padding: 1em;
     }
-    .wrapper {
-        display: flex;
-        flex-direction: row;
-        // background-color: crimson;
 
-        .left {
-            display: flex;
-            flex-direction: column;
-            // background-color: blue;
-            .top {
-                display: flex;
-                flex-direction: row;
+    input[name="email"] {
+        width: 100%;
+        background: #ffffff;
+        border-radius: 10px;
+    }
 
-                select[name="sensor"] {
-                    margin: 1%;
-                    background: #ffffff;
-                    border-radius: 20px 0px 0px 20px;
-                }
-                select[name="operator"] {
-                    margin: 1%;
-                    background: #ffffff;
-                }
-                input[name="comparator"] {
-                    margin: 1%;
-                    background: #ffffff;
-                    border-radius: 0px 20px 20px 0px;
-                }
-            }
-        }
-
-        .right {
-            display: flex;
-            // background-color: green;
-            textarea {
-                width: 740px;
-                height: 140px;
-            }
-        }
+    textarea {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        border-radius: 10px;
     }
 }
 
-input,
-textarea {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 20px;
+.R-inputs {
+    width: 50%;
 }
+
+// .alert-item {
+//     width: 70%;
+//     background: radial-gradient(
+//             100% 4069.56% at 100% 100%,
+//             rgba(242, 249, 255, 0.95) 0%,
+//             rgba(235, 246, 255, 0.95) 100%
+//         )
+//         /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+//     border-radius: 30px;
+
+//     .baliseName {
+//         width: 50%;
+//         background: #9fc5e8;
+//         border-radius: 30px 0px;
+//         padding-left: 30px;
+//         padding: 1em;
+//     }
+
+//     //
+//     .wrapper {
+//         display: flex;
+//         flex-direction: row;
+
+//         margin: 20px;
+
+//         .left {
+//             display: flex;
+//             flex-direction: column;
+//             .top {
+//                 display: flex;
+//                 flex-direction: row;
+
+//                 height: 60px;
+//                 width: 100%;
+
+//                 select[name="sensor"] {
+//                     // margin: 1%;
+//                     background: #ffffff;
+//                     border-radius: 20px 0px 0px 20px;
+//                 }
+//                 select[name="operator"] {
+//                     margin-left: 10px;
+//                     margin-right: 10px;
+//                     background: #ffffff;
+//                 }
+//                 input[name="comparator"] {
+//                     // margin: 1%;
+//                     background: #ffffff;
+//                     border-radius: 0px 20px 20px 0px;
+//                 }
+//             }
+//         }
+
+//         .right {
+//             display: flex;
+//             textarea {
+//                 width: 100px;
+//                 height: 100px;
+//             }
+//         }
+//     }
+// }
+
+// input,
+// textarea {
+//     background: #ffffff;
+//     border-radius: 20px;
+//     padding: 20px;
+// }

@@ -1,12 +1,11 @@
-.glass {
-    background: linear-gradient(212.48deg, rgba(255, 255, 255, 0.2) 1.45%, rgba(0, 0, 0, 0) 99.49%);
-    border: 3px solid rgba(255, 255, 255, 0.4);
-    box-sizing: border-box;
-    // background: rgba(255, 255, 255, 0.4);
-    // border: 3px solid rgba(255, 255, 255, 0.4);
-    // box-sizing: border-box;
-    // backdrop-filter: blur(30px);
-    // /* Note: backdrop-filter has minimal browser support */
+.bg {
+    background-image: url("../../assets/background_.webp");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-    // border-radius: 30px;
+.glass {
+    background: rgba(255, 255, 255, 0.026);
+    backdrop-filter: blur(2px);
 }

@@ -1,11 +1,16 @@
 @import "reset";
 @import "base";
-
 html,
 body,
 .container {
     height: 100%;
     width: 100%;
+
+    // Background
+    background-image: url("../../assets/background_.webp");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #map {
