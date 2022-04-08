@@ -11,54 +11,99 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav id="navbar">
-            <ul>
-                <!-- <div class="left"> -->
-                <li class="home"><a href="index.html">🏠</a></li>
-                <!-- </div> -->
-                <!-- <div class="right"> -->
-                <li class="btn"><a href="map.html">Carte</a></li>
-                <li class="btn"><a href="alerts.html">Alertes</a></li>
-                <li class="btn"><a href="calibrage.html">Calibrage</a></li>
-                <!-- </div> -->
-            </ul>
-        </nav>
-        <div class="alerts">
-            <div class="alert" id="1">
-                <div class="baliseName">Nom de la Balise</div>
-                <div class="wrapper">
-                    <div class="left">
-                        <div class="top">
-                            <select name="sensor" id="">
-                                <option value="" selected disabled>Selectionner un capteur</option>
-                                <option value="1">Hauteur de l'eau</option>
-                                <option value="1">Température de l'eau</option>
-                            </select>
-                            <select name="operator" id="">
-                                <option value="" selected disabled>Opt</option>
-                                <option value="gt">&gt;</option>
-                                <option value="eq">&equals;</option>
-                                <option value="lt">&lt;</option>
-                            </select>
-                            <input type="number" name="comparator" placeholder="10">
+    <div class="root bg">
+        <div class="container glass">
+            <nav id="navbar">
+                <import src="./nav.html" />
+            </nav>
+            <div class="addAlert">
+                <div class="btn">
+
+                </div>
+            </div>
+            <div class="alerts-container ">
+                <div class="alert-item" id="1">
+                    <div class="baliseName">Nom Balise</div>
+                    <div class="inputs flex-row-center">
+                        <div class="L-inputs flex-col-center">
+                            <div class="input flex-row-center">
+                                <select name="sensor" id="">
+                                    <option value="" selected disabled>Selectionner un capteur</option>
+                                    <option value="1">Hauteur de l'eau</option>
+                                    <option value="1">Température de l'eau</option>
+                                </select>
+                                <select name="operator" id="">
+                                    <option value="" selected disabled>&plusmn;</option>
+                                    <option value="gt">&gt;</option>
+                                    <!-- <option value="eq">&equals;</option> -->
+                                    <option value="lt">&lt;</option>
+                                </select>
+                                <input type="number" name="comparator" placeholder="10">
+                            </div>
+                            <div class="input flex-row-center">
+                                <input type="email" name="email" id="" placeholder="adresse@mail.fr">
+                            </div>
                         </div>
-                        <div class="mail">
-                            <input type="email" name="" id="" placeholder="adresse@mail">
+                        <div class="R-inputs flex-col-center">
+                            <label for="template">Message à envoyer: </label>
+                            <textarea name="template" id="" cols="1" rows="5"></textarea>
                         </div>
-                    </div>
-                    <div class="right">
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Alerte"></textarea>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+    <!-- <div class="root">
+        <div class="bg glass"></div>
+        <div class="container">
+            <nav id="navbar">
+                <ul>
+                    <li class="home"><a href="index.html">🏠</a></li>
+                    <ul class="glass">
+                        <li class="btn"><a href="map.html">Carte</a></li>
+                        <li class="btn"><a href="alerts.html">Alertes</a></li>
+                        <li class="btn"><a href="calibrage.html">Calibrage</a></li>
+                    </ul>
+                </ul>
+            </nav>
+            <div class="alerts">
+                <div class="alert-item" id="1">
+                    <div class="baliseName">Nom de la Balise</div>
+                    <div class="wrapper">
+                        <div class="left">
+                            <div class="top">
+                                <select name="sensor" id="">
+                                    <option value="" selected disabled>Selectionner un capteur</option>
+                                    <option value="1">Hauteur de l'eau</option>
+                                    <option value="1">Température de l'eau</option>
+                                </select>
+                                <select name="operator" id="">
+                                    <option value="" selected disabled>Opt</option>
+                                    <option value="gt">&gt;</option>
+                                    <option value="eq">&equals;</option>
+                                    <option value="lt">&lt;</option>
+                                </select>
+                                <input type="number" name="comparator" placeholder="10">
+                            </div>
+                            <div class="mail">
+                                <input type="email" name="" id="" placeholder="adresse@mail">
+                            </div>
+                        </div>
+                        <div class="right">
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Alerte"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 
-    <!-- Javascript -->
-    <script src="js/topbar.js"></script>
-    <!-- Auto reload -->
-    <script src="/dist/client.59712999.js"></script>
+    <!-- </div> -->
+
 </body>
+<!-- Javascript -->
+<script src="js/topbar.js"></script>
+<!-- Auto reload -->
+<script src="./js/client.59712999.js"></script>
 
 </html>
