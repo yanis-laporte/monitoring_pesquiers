@@ -1,0 +1,26 @@
+version: "2"
+services:
+  www:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html/
+    links:
+      - db
+    networks:
+      - default
+  db:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_USER: user
+      MARIADB_PASSWORD: user
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - ./database:/var/lib/mysql
+    networks:
+      - default
+volumes:
+  persistent:
