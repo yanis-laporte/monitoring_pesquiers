@@ -8,12 +8,30 @@
     height: 100%;
 }
 
+.addAlert {
+    display: inline;
+    display: flex;
+
+    cursor: pointer;
+
+    svg,
+    div {
+        margin: .5em;
+        width: fit-content;
+        height: 30px;
+    }
+
+    &:hover {
+        stroke: blue;
+        color: blue;
+    }
+}
+
 .alerts-container {
     display: flex;
     justify-content: center;
-    height: 95%;
+    // height: auto;
     padding: 2%;
-    background-color: #ff00001c;
     // display: flex;
     // align-items: center;
     // justify-content: center;
@@ -31,11 +49,9 @@
 
     border-radius: 30px;
 
-    background: radial-gradient(
-        100% 4069.56% at 100% 100%,
-        rgba(242, 249, 255, 0.95) 0%,
-        rgba(235, 246, 255, 0.95) 100%
-    );
+    background: radial-gradient(100% 4069.56% at 100% 100%,
+            rgba(242, 249, 255, 0.95) 0%,
+            rgba(235, 246, 255, 0.95) 100%);
 }
 
 .baliseName {
@@ -72,6 +88,7 @@
         background: #ffffff;
         border-radius: 10px 5px 5px 10px;
     }
+
     select[name="operator"] {
         margin-left: 10px;
         margin-right: 10px;
@@ -79,6 +96,7 @@
         border-radius: 5px 5px 5px 5px;
         background: #ffffff;
     }
+
     input[name="comparator"] {
         background: #ffffff;
         border-radius: 5px 10px 10px 5px;
