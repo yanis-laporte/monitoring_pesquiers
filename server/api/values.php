@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             );
         }
     }
+
     header('Content-Type: application/json');
     echo json_encode($res);
 }
@@ -58,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $i++;
         }
 
-        cors();
         header('Content-Type: application/json');
         echo json_encode($data);
     } else {
@@ -74,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $i++;
         }
 
-        cors();
         header('Content-Type: application/json');
         echo json_encode($data);
     }

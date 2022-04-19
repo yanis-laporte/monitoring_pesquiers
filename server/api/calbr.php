@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $i++;
     }
 
-    cors();
     header('Content-Type: application/json');
     echo json_encode($data);
 }
