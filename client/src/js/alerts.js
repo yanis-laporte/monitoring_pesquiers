@@ -10,11 +10,17 @@ const createAlert = async (data) => {
     $('alerts-container').appendChild(clone)
 
 
+    // Nom de l'alerte
     $(`alert${data.alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML = data.name
     $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex = ['>', '=', '<'].indexOf(data.sign) + 1
 
-    // Fetch les données de la balise
-    let balise = await fetchNode(data.balise_id)
+    // fetch les nodes depuis le cache ou INTERNET
+    if (typeof window.cache.nodes[data.balise_id] == 'undefined') {
+        balise = await fetchNode(data.balise_id)
+        window.cache.nodes[data.balise_id] = balise
+    } else {
+        balise = window.cache.nodes[data.balise_id]
+    }
 
     // Recupère la liste des capteurs
     // Filtre uniquemet les capteurs de la balise
@@ -61,38 +67,92 @@ const fetchSensor = async () => {
         .catch(err => console.log(err));
 }
 
-$('addAlert').addEventListener('click', () => {
-    var a = document.createElement('div')
-    a.innerHTML = alertElement
-    // a.innerHTML = a.innerHTML.replace('Nom Balise', d.name)
-    a.className = 'alert-item'
-    a.setAttribute('id', `alert${alertContainer.children.length}`)
-    console.log(a);
-    alertContainer.appendChild(a)
-})
+/**
+ * 
+ * @param {Number} id // Alert id 
+ */
+const saveChange = async (alert_id) => {
+    window.cache.alerts[alert_id].balise_id
+    let data = {
+        alert_id: alert_id,
+        name: $(`alert${alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML,
+        template: $(`alert${alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value,
+        balise_id: window.cache.alerts[alert_id].balise_id,
+        sensor_id: $(`alert${alert_id}`).querySelectorAll("select[name='a-sensor']")[0].selectedIndex,
+        control: $(`alert${alert_id}`).querySelectorAll("input[name='a-control']")[0].value,
+        sign: $(`alert${alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex,
+        email: $(`alert${alert_id}`).querySelectorAll("input[name='a-email']")[0].value
+    }
 
-const alertElement = $('alert0').innerHTML
-const alertContainer = $('alerts-container');
+    // fetch post
+    await fetch(`${API_URL}/alerts.php`, {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+
+        })
+        .catch(err => console.log(err));
+
+
+
+
+
+
+
+}
 
 (async () => {
     window.cache = {
-        sensors: await fetchSensor()
+        sensors: await fetchSensor(),
+        nodes: [],
+        alerts: []
     }
     console.log('sensors', cache.sensors);
 
     // Getting alerts
-    fetch(`${API_URL}/alerts.php`, {
+    await fetch(`${API_URL}/alerts.php`, {
         mode: 'cors',
     })
         .then(res => res.json())
         .then(data => {
+            window.cache.alerts = data
             data.forEach(async (data) => {
-                console.log(data)
                 await createAlert(data);
             })
         })
         .catch(err => console.log(err));
 
+    let disquettes = document.getElementsByClassName('save')
+    for (let i = 0; i < disquettes.length; i++) {
+        disquettes[i].addEventListener('click', (e) => {
+            // get item alertid
+            saveChange(e.path[3].id.split('alert')[1])
+        })
+    }
+
+    // // Alert Save button
+    // $('al-save').addEventListener('click', (e) => {
+    //     console.log(e);
+    // })
 })()
 
 
+$('addAlert').addEventListener('click', () => {
+    var a = document.createElement('div')
+    a.innerHTML = $('alert0').innerHTML
+    // a.innerHTML = a.innerHTML.replace('Nom Balise', d.name)
+    a.className = 'alert-item'
+    a.setAttribute('id', `alert${$('alerts-container').children.length}`)
+    $('alerts-container').appendChild(a)
+})
+
+
+// Alert delete button
+$('al-delete').addEventListener('click', () => { })
