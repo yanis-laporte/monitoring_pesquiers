@@ -1,7 +1,19 @@
+@use "sass:color";
+
 @import "reset";
 @import "base";
 @import "glassy";
 @import "colors";
+
+@keyframes scaleup {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.5);
+    }
+}
 
 .container {
     width: 100%;
@@ -9,87 +21,161 @@
 }
 
 .addAlert {
-    display: inline;
     display: flex;
+    width: fit-content;
 
     cursor: pointer;
+
+    background: linear-gradient(212.48deg, #ffffff33 1.45%, #00000000 99.49%);
+    border: 3px solid #ffffff66;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    filter: drop-shadow(0px 0px 15px #00000040);
+
+    border-radius: 15px;
+
+    text-align: center;
+    align-items: center;
+
+    margin: 1em 0 0 1em;
 
     svg,
     div {
         margin: .5em;
         width: fit-content;
         height: 30px;
+        // Center text in div
+        display: flex;
+        align-items: center;
+        user-select: none;
     }
 
+
     &:hover {
-        stroke: blue;
-        color: blue;
+        // $color: color.adjust($blue, $blackness: +0.5%);
+        $color: #0085ff;
+        stroke: $color;
+        color: $color;
+        text-decoration: underline;
+        background: linear-gradient(212.48deg, #ffffff33 1.45%, #00000000 99.49%);
     }
 }
 
 .alerts-container {
     display: flex;
-    justify-content: center;
-    // height: auto;
-    padding: 2%;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 
-    // padding: 5%;
+    gap: 1em;
+    padding-top: 1em;
+}
+
+// Chache le template
+#alert0 {
+    display: none !important;
 }
 
 .alert-item {
     display: block;
+
+    width: fit-content;
     min-width: 70%;
     max-width: 100%;
-    width: fit-content;
     height: min-content;
 
     border-radius: 30px;
 
     background: radial-gradient(100% 4069.56% at 100% 100%,
-            rgba(242, 249, 255, 0.95) 0%,
-            rgba(235, 246, 255, 0.95) 100%);
+            rgba(232, 239, 250, 0.95) 0%,
+            rgba(225, 236, 250, 0.95) 100%);
+    // rgba(232, 239, 250, 0.95) 0%,
+    // rgba(225, 236, 250, 0.95) 100%);
 }
 
-.baliseName {
+.top {
     width: 50%;
-    background: #9fc5e8;
+    background: $aqua;
     border-radius: 30px 0px;
     padding-left: 30px;
     padding: 1em;
+
+    .button {
+        float: right;
+        display: flex;
+        gap: 10px;
+    }
+
+    .wastebasket,
+    .save {
+        cursor: pointer;
+
+        &:hover {
+            animation: scaleup .1s linear;
+            transform: scale(1.5);
+
+            &:active {
+                animation: clicked 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+                transform: rotate(360deg);
+            }
+        }
+
+    }
 }
+
+@keyframes clicked {
+    from {
+        transform: rotate(0deg);
+
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
 
 .inputs {
-    width: fit-content;
-    height: 100%;
+    width: 100%;
+    height: fit-content;
     /* top right bottom left */
-    margin: 0 1em 0 1em;
+    // margin: 0 1em 0 1em;
+    display: flex;
 }
 
-.L-inputs,
-.R-inputs {
-    height: 100%;
-    width: 100%;
+.inputs div {
+    // flex-grow: 1;
+    flex-basis: 50%;
+}
 
-    .input {
+select,
+input {
+    padding: 10px;
+}
+
+.l-in {
+    padding: 1em;
+
+    input[name="a-email"] {
         width: 100%;
+        background: #ffffff;
+        border-radius: 10px;
     }
+}
 
-    select,
-    input {
-        margin: 1em 0 1em 0;
-        padding: 10px;
-    }
+.cpt-v {
+    display: flex;
+    margin: 0 0 1em 0;
 
-    select[name="sensor"] {
+    select[name="a-sensor"] {
+        max-width: 100%;
+        width: 150%;
         background: #ffffff;
         border-radius: 10px 5px 5px 10px;
     }
 
-    select[name="operator"] {
+    select[name="a-sign"] {
         margin-left: 10px;
         margin-right: 10px;
 
@@ -97,97 +183,25 @@
         background: #ffffff;
     }
 
-    input[name="comparator"] {
+    input[name="a-control"] {
         background: #ffffff;
         border-radius: 5px 10px 10px 5px;
         width: 50%;
     }
+}
 
-    input[name="email"] {
-        width: 100%;
-        background: #ffffff;
-        border-radius: 10px;
-    }
+.r-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1em 0 0;
 
     textarea {
-        flex: 1;
+        background-color: white;
         width: 100%;
         height: 100%;
-        background: #ffffff;
-        border-radius: 10px;
+        // resize: none;
+        border-radius: 20px;
+        padding: 20px;
     }
 }
-
-.R-inputs {
-    width: 50%;
-}
-
-// .alert-item {
-//     width: 70%;
-//     background: radial-gradient(
-//             100% 4069.56% at 100% 100%,
-//             rgba(242, 249, 255, 0.95) 0%,
-//             rgba(235, 246, 255, 0.95) 100%
-//         )
-//         /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-//     border-radius: 30px;
-
-//     .baliseName {
-//         width: 50%;
-//         background: #9fc5e8;
-//         border-radius: 30px 0px;
-//         padding-left: 30px;
-//         padding: 1em;
-//     }
-
-//     //
-//     .wrapper {
-//         display: flex;
-//         flex-direction: row;
-
-//         margin: 20px;
-
-//         .left {
-//             display: flex;
-//             flex-direction: column;
-//             .top {
-//                 display: flex;
-//                 flex-direction: row;
-
-//                 height: 60px;
-//                 width: 100%;
-
-//                 select[name="sensor"] {
-//                     // margin: 1%;
-//                     background: #ffffff;
-//                     border-radius: 20px 0px 0px 20px;
-//                 }
-//                 select[name="operator"] {
-//                     margin-left: 10px;
-//                     margin-right: 10px;
-//                     background: #ffffff;
-//                 }
-//                 input[name="comparator"] {
-//                     // margin: 1%;
-//                     background: #ffffff;
-//                     border-radius: 0px 20px 20px 0px;
-//                 }
-//             }
-//         }
-
-//         .right {
-//             display: flex;
-//             textarea {
-//                 width: 100px;
-//                 height: 100px;
-//             }
-//         }
-//     }
-// }
-
-// input,
-// textarea {
-//     background: #ffffff;
-//     border-radius: 20px;
-//     padding: 20px;
-// }

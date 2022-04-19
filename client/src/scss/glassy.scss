@@ -3,9 +3,17 @@
     background-size: 100%;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
+}
+
+.bg-animated {
+    background-image: url("../../assets/bg_animated/bg_a_1.webp");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .glass {
-    background: rgba(255, 255, 255, 0.026);
+    background: #ffffff07;
     backdrop-filter: blur(2px);
 }
