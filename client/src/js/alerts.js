@@ -68,7 +68,7 @@ const fetchSensor = async () => {
 }
 
 /**
- * 
+ * Make a PATCH request to update the alert with the id passed as parameter
  * @param {Number} id // Alert id 
  */
 const saveChange = async (alert_id) => {
@@ -95,17 +95,33 @@ const saveChange = async (alert_id) => {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
-
+            console.log('PACH res:', data)
+            if (data.errorInfo[0] == "00000") {
+                // show sucess popup
+            }
         })
         .catch(err => console.log(err));
+}
 
-
-
-
-
-
-
+const deleteAlert = async (alert_id) => {
+    // delete fetch request
+    await fetch(`${API_URL}/alerts.php`, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ alert_id: alert_id })
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log('DELETE res:', data)
+            if (data.errorInfo[0] == "00000") {
+                $(`alert${alert_id}`).remove()
+                // show sucess popup
+            }
+        })
+        .catch(err => console.log(err));
 }
 
 (async () => {
@@ -134,6 +150,14 @@ const saveChange = async (alert_id) => {
         disquettes[i].addEventListener('click', (e) => {
             // get item alertid
             saveChange(e.path[3].id.split('alert')[1])
+        })
+
+    }
+    let poubelles = document.getElementsByClassName('wastebasket')
+    for (let i = 0; i < disquettes.length; i++) {
+        poubelles[i].addEventListener('click', (e) => {
+            // get item alertid
+            deleteAlert(e.path[3].id.split('alert')[1])
         })
     }
 
