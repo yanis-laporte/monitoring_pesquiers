@@ -69,7 +69,7 @@ const fetchSensor = async () => {
 
 /**
  * Make a PATCH request to update the alert with the id passed as parameter
- * @param {Number} id // Alert id 
+ * @param {Number} alert_id // Alert id 
  */
 const saveChange = async (alert_id) => {
     window.cache.alerts[alert_id].balise_id
@@ -103,6 +103,10 @@ const saveChange = async (alert_id) => {
         .catch(err => console.log(err));
 }
 
+/**
+ * Make a DELETE request to delete the alert with the id passed as parameter
+ * @param {Number} alert_id 
+ */
 const deleteAlert = async (alert_id) => {
     // delete fetch request
     await fetch(`${API_URL}/alerts.php`, {
@@ -145,19 +149,18 @@ const deleteAlert = async (alert_id) => {
         })
         .catch(err => console.log(err));
 
-    let disquettes = document.getElementsByClassName('save')
-    for (let i = 0; i < disquettes.length; i++) {
-        disquettes[i].addEventListener('click', (e) => {
-            // get item alertid
+    let floopy = document.getElementsByClassName('save')
+    for (let i = 0; i < floopy.length; i++) {
+        floopy[i].addEventListener('click', (e) => {
+            //                  get alert id 
             saveChange(e.path[3].id.split('alert')[1])
         })
-
     }
-    let poubelles = document.getElementsByClassName('wastebasket')
-    for (let i = 0; i < disquettes.length; i++) {
-        poubelles[i].addEventListener('click', (e) => {
-            // get item alertid
-            deleteAlert(e.path[3].id.split('alert')[1])
+    let wastebasket = document.getElementsByClassName('wastebasket')
+    for (let i = 0; i < wastebasket.length; i++) {
+        wastebasket[i].addEventListener('click', (e) => {
+            // confirm deletation                                                   // get alertid
+            if (confirm('Are you sure you want to delete this alert ?')) deleteAlert(e.path[3].id.split('alert')[1])
         })
     }
 
