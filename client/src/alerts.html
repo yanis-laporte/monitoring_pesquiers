@@ -27,20 +27,20 @@
                 <!-- Alert item template -->
                 <div class="alert-item" id="alert0">
                     <div class="top">
-                        <span name="a-name">{{BaliseName}}</span>
+                        <span name="a-name">BaliseName</span>
                         <div class="button">
-                            <button class="save">💾</button>
-                            <button class="wastebasket">🗑️</button>
+                            <button class="save" id="al-save">💾</button>
+                            <button class="wastebasket" id="al-delete">🗑️</button>
                         </div>
                     </div>
                     <div class="inputs flex-row-center">
                         <div class="l-in">
                             <div class="cpt-v">
                                 <select name="a-sensor">
-                                    <option value="" selected disabled>Selectionner un capteur</option>
+                                    <option value="" selected disabled hidden>Selectionner un capteur</option>
                                 </select>
                                 <select name="a-sign">
-                                    <option value="" disabled>&plusmn;</option>
+                                    <option value="" disabled hidden>&plusmn;</option>
                                     <option value="gt">&gt;</option>
                                     <option value="eq">&equals;</option>
                                     <option value="lt">&lt;</option>
