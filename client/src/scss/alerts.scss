@@ -5,7 +5,7 @@
 @import "glassy";
 @import "colors";
 
-@keyframes scaleup {
+@keyframes scale_up {
     from {
         transform: scale(1);
     }
@@ -14,6 +14,17 @@
         transform: scale(1.5);
     }
 }
+
+@keyframes rotate_360 {
+    to {
+        transform: scale(1.5) rotate(0deg);
+    }
+
+    from {
+        transform: scale(1.5) rotate(360deg);
+    }
+}
+
 
 .container {
     width: 100%;
@@ -71,7 +82,7 @@
     padding-top: 1em;
 }
 
-// Chache le template
+// Cache le template
 #alert0 {
     display: none !important;
 }
@@ -111,29 +122,21 @@
         cursor: pointer;
 
         &:hover {
-            animation: scaleup .1s linear;
+            animation: scale_up .5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             transform: scale(1.5);
-
-            &:active {
-                animation: clicked 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-                transform: rotate(360deg);
-            }
         }
 
+        &:active,
+        &:focus {
+            &:not(:focus) {
+                transform: scale(1.5);
+            }
+
+            animation: rotate_360 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
     }
 }
 
-@keyframes clicked {
-    from {
-        transform: rotate(0deg);
-
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-
-}
 
 
 .inputs {
