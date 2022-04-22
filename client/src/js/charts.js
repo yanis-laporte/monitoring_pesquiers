@@ -1,8 +1,4 @@
-const { API_URL } = require('./base')
-const $ = (e) => {
-    return document.getElementById(e)
-}
-
+import { API_URL, $, $$ } from './base';
 
 window.addEventListener('hashchange', async () => {
     ids = await fetchNode();
