@@ -1,4 +1,5 @@
 import { API_URL, $, $$ } from './base';
+import { Toast } from './toast';
 
 /**
  * Append to alerts-container a new child
@@ -95,9 +96,9 @@ const saveChange = async (alert_id) => {
     })
         .then(res => res.json())
         .then(data => {
-            console.log('PACH res:', data)
+            console.log('PATCH res:', data)
             if (data.errorInfo[0] == "00000") {
-                // show sucess popup
+                _toast.show('Succès', 'L\'alerte a été sauvegardée avec succès', 'success')
             }
         })
         .catch(err => console.log(err));
@@ -122,13 +123,16 @@ const deleteAlert = async (alert_id) => {
             console.log('DELETE res:', data)
             if (data.errorInfo[0] == "00000") {
                 $(`alert${alert_id}`).remove()
-                // show sucess popup
+                _toast.show('Succès', 'L\'alerte a été supprimée avec succès', 'success')
             }
         })
         .catch(err => console.log(err));
 }
 
 (async () => {
+    // Declare toast container
+    _toast = new Toast($('toast-container'))
+
     window.cache = {
         sensors: await fetchSensor(),
         nodes: [],
@@ -151,19 +155,12 @@ const deleteAlert = async (alert_id) => {
 
     let floopy = document.getElementsByClassName('save')
     for (let i = 0; i < floopy.length; i++) {
-        floopy[i].addEventListener('click', (e) => {
-            //                  get alert id 
-            saveChange(e.path[3].id.split('alert')[1])
-        })
+        floopy[i].addEventListener('click', OnSaveClick)
     }
     let wastebasket = document.getElementsByClassName('wastebasket')
     for (let i = 0; i < wastebasket.length; i++) {
-        wastebasket[i].addEventListener('click', (e) => {
-            // confirm deletation                                                   // get alertid
-            if (confirm('Are you sure you want to delete this alert ?')) deleteAlert(e.path[3].id.split('alert')[1])
-        })
+        wastebasket[i].addEventListener('click', OnWastebasketClick)
     }
-
     // // Alert Save button
     // $('al-save').addEventListener('click', (e) => {
     //     console.log(e);
@@ -178,7 +175,16 @@ $('addAlert').addEventListener('click', () => {
     a.className = 'alert-item'
     a.setAttribute('id', `alert${$('alerts-container').children.length}`)
     $('alerts-container').appendChild(a)
+
+    //
+    let floopy = document.getElementsByClassName('save')
+    floopy[floopy.length - 1].addEventListener('click', OnSaveClick)
+    let wastebasket = document.getElementsByClassName('wastebasket')
+    wastebasket[wastebasket.length - 1].addEventListener('click', OnWastebasketClick)
 })
+
+const OnSaveClick = (e) => { saveChange(e.path[3].id.split('alert')[1]) }
+const OnWastebasketClick = (e) => { if (confirm('Are you sure you want to delete this alert ?')) deleteAlert(e.path[3].id.split('alert')[1]) }
 
 
 // Alert delete button
