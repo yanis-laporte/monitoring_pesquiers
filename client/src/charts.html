@@ -6,29 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="scss/topbar.scss" />
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <link rel="stylesheet" href="scss/charts.scss" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/windbarb.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js" integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Monitoring des Pesquiers</title>
 </head>
 
 <body>
-    <div class="container">
-        <nav id="navbar">
-            <ul>
-                <li id="close"></li>
-                <li id="battery">🔋</li>
-                <li id="name"></li>
-            </ul>
-        </nav>
+    <div class="close">Fermer</div>
+    <nav id="navbar">
+        <ul>
+            <li id="close"><i class="fa-solid fa-xmark"></i></li>
+            <li id="battery">🔋
+                <!-- https://fontawesome.com/search?q=battery&s=solid%2Cbrands -->
+            </li>
+            <li id="name"></li>
+        </ul>
+    </nav>
+
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainerWind" style="height: 370px; width: 100%;"></div>
+
+    <div class="chartsWrapper">
         <div id="chartsContainer">
-            <div id="chartContainer"></div>
+        </div>
+        <div id="bigChartContainer">
         </div>
     </div>
 
-    <!-- Javascript -->
-    <script type="module" src="js/charts.js"></script>
-    <script src="js/topbar.js"></script>
-    <!-- Auto reload -->
-    <script src="./js/client.59712999.js"></script>
 </body>
+
+<!-- Javascript -->
+<!-- <script src="js/topbar.js"></script> -->
+<script type="module" src="js/charts.js"></script>
+<!-- Auto reload -->
+<script src="./js/client.59712999.js"></script>
 
 </html>

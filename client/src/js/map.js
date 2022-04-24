@@ -43,6 +43,7 @@ fetch(`${API_URL}/nodes.php`, {
 function markerOnClick(e) {
     console.log(e);
     console.log(e.target.options);
+    window.open('./charts.html?balise_id=' + e.target.options.balise_id, '_blank');
 }
 
 function markerOnMove(e) {

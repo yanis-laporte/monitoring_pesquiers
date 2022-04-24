@@ -1,32 +1,24 @@
 import { API_URL, $, $$ } from './base';
 
-window.addEventListener('hashchange', async () => {
-    ids = await fetchNode();
-    ids.forEach(async (id) => {
-        makeChart(await fetchValues(id))
-    })
-})
+// function addData(data) {
+//     for (var i = 0; i < data.length; i++) {
+//         dataPoints.push({
+//             x: new Date(data[i].date),
+//             y: data[i].units
+//         });
+//     }
+//     chart.render();
 
-window.addEventListener('load', async () => {
-    ids = await fetchNode();
-    ids.forEach(async (id) => {
-        makeChart(await fetchValues(id))
-    })
-})
+// }
 
-async function fetchNode() {
-    const id = window.location.hash.substring(1)
-    var a;
-    await fetch(`${API_URL}/nodes.php?id=${id}`)
+// function drawChart(container_id) {
+//     var chart = new CanvasJS.Chart(container_id)
+// }
+
+
+async function fetchNode(b_id) {
+    return await fetch(`${API_URL}/nodes.php?id=${b_id}`)
         .then(res => res.json())
-        .then(data => {
-            data = data[0]
-            console.log(data)
-            $('battery').innerHTML += data.battery_level + '%'
-            $('name').innerHTML = data.name
-            a = data.sensors_id.split(',');
-        })
-    return a
 }
 
 async function fetchValues(id) {
@@ -36,79 +28,217 @@ async function fetchValues(id) {
     return a
 }
 
-function addData(data) {
-    for (var i = 0; i < data.length; i++) {
-        dataPoints.push({
-            x: new Date(data[i].date),
-            y: data[i].units
-        });
-    }
-    chart.render();
+async function drawChart(data, units, container) {
+    units = units[0]
 
-}
-
-
-function makeChart(values) {
-    console.log(values);
-    var dataPoints = []
-    addData(values)
-
-    // x: new Date(values.timestamp), y: value
-    // { x: new Date(2017, 6, 28), y: 12.5 }
-    // values.forEach((value) => {
-    //     listval.push({ x: new Date(value.timestamp), y: value.value })
-    // })
-    // console.log({ listval });
-
-    var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        title: {
-            text: "Daily High Temperature at Different Beaches"
-        },
-        axisX: {
-            valueFormatString: "DD MMM,YY"
-        },
-        axisY: {
-            title: "Temperature (in °C)",
-            suffix: " °C"
-        },
-        legend: {
-            cursor: "pointer",
-            fontSize: 16,
-            itemclick: toggleDataSeries
-        },
-        toolTip: {
-            shared: true
-        },
-        data: [{
-            name: "Myrtle Beach",
-            type: "spline",
-            yValueFormatString: "#0.## °C",
-            showInLegend: true,
-            dataPoints: listval
-        }]
+    // high charts chart
+    let dataPoints = data[0].map(e => parseInt(e.value));
+    let dataPointsX = data[0].map(e => parseInt(e.timestamp));
+    let dp = [];
+    dataPoints.forEach((e, i) => {
+        dp.push({ time: dataPoints[i], value: dataPoints[i] })
     });
-    chart.render();
+    console.log(dp);
 
-    function toggleDataSeries(e) {
-        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-        }
-        else {
-            e.dataSeries.visible = true;
-        }
-        chart.render();
-    }
+    var chart = HighCharts.chart(container, {
 
-    function addData(data) {
-        for (var i = 0; i < data.length; i++) {
-            dataPoints.push({
-                x: new Date(data[i].date),
-                y: data[i].units
-            });
-        }
-        chart.render();
+    });
 
-    }
 
+    // https://www.highcharts.com/forum/viewtopic.php?t=35142
+
+    // var chart = Highcharts.chart(container, {
+
+    //     time: {
+    //         timezone: 'Europe/Paris'
+    //     },
+
+    //     lang: {
+    //         viewFullscreen: 'Plein écran',
+    //         printChart: 'Imprimer le graphique',
+    //         downloadPNG: 'Télécharger en PNG',
+    //         downloadJPEG: 'Télécharger en JPEG',
+    //         downloadPDF: 'Télécharger en PDF',
+    //         downloadSVG: 'Télécharger en SVG',
+    //         downloadCSV: 'Exporter en CSV',
+    //         downloadXLS: 'Exporter en XLS',
+    //         viewData: 'Voir la table de données',
+    //         contextButtonTitle: 'Menu contextuel'
+    //     },
+
+    //     navigation: {
+    //         buttonOptions: {
+    //             theme: {
+    //                 // Good old text links
+    //                 // todo
+    //                 style: {
+    //                     color: '#039',
+    //                     textDecoration: 'underline'
+    //                 }
+    //             }
+    //         }
+    //     },
+
+    //     exporting: {
+    //         buttons: {
+    //             contextButton: {
+    //                 enabled: true
+    //             },
+    //             exportButton: {
+    //                 text: 'Télécharger',
+    //                 // Use only the download related menu items from the default
+    //                 // context button
+    //                 menuItems: [
+    //                     'downloadPNG',
+    //                     'downloadJPEG',
+    //                     'separator',
+    //                     'downloadCSV'
+    //                 ]
+    //             }
+    //         }
+    //     },
+
+    //     title: {
+    //         text: `Évolution de la ${units.name} toute les 30 minutes`
+    //     },
+
+    //     yAxis: {
+    //         title: {
+    //             text: `Y axis`
+    //         }
+    //     },
+
+    //     xAxis: {
+    //         title: {
+    //             text: 'Date de X à Y FAIRE L\'DU TEMPS'
+    //         }
+    //     },
+
+    //     plotOptions: {
+    //         series: {
+    //             label: {
+    //                 connectorAllowed: false
+    //             },
+    //             pointStart: 2010
+    //         }
+    //     },
+
+    //     legend: {
+    //         align: 'left',
+    //         verticalAlign: 'top',
+    //         borderWidth: 0
+    //     },
+
+    //     series: [{
+    //         // yAxis: 0,
+    //         // type: 'line',
+    //         // name: 'Température',
+    //         data: {
+    //             x: dataPoints,
+    //             y: dataPointsX
+    //         }
+    //     }
+    //     ],
+
+    //     tooltip: {
+    //         dateTimeLabelFormats: {
+    //             hour: '%A, %b %e, %l %p'
+    //         },
+    //     },
+    //     xAxis: {
+    //         dateTimeLabelFormats: {
+    //             hour: '%l %p'
+    //         },
+    //         type: 'datetime'
+    //     },
+
+    //     // caption: {
+    //     //     text: 'Temperature'
+    //     // },
+
+    //     // chart: {
+    //     // backgroundColor: 'gray'
+    //     // https://api.highcharts.com/highcharts/chart
+    //     // },
+
+
+
+    //     // loading: {
+    //     //     // https://api.highcharts.com/highcharts/loading
+    //     // }
+
+    //     // tooltip: {
+    //     //     // https://api.highcharts.com/highcharts/tooltip
+    //     // },
+
+    //     // responsive: {
+    //     // https://api.highcharts.com/highcharts/responsive
+    //     //     rules: [{
+    //     //         condition: {
+    //     //             maxWidth: 500
+    //     //         },
+    //     //         chartOptions: {
+    //     //             legend: {
+    //     //                 layout: 'horizontal',
+    //     //                 align: 'center',
+    //     //                 verticalAlign: 'bottom'
+    //     //             }
+    //     //         }
+    //     //     }]
+    //     // }
+
+
+
+
+    // });
 }
+
+(async () => {
+    // Getting balise id
+    const b_id = window.location.search.split('?')[1].split('=')[1]
+    console.log({ b_id });
+
+    // Fetching balise (node) data
+    const b_data = await fetchNode(b_id)
+    console.log('b_data', b_data);
+
+    // Getting sensors id
+    const sensors_list = b_data.sensors_id.split(',')
+    console.log('sensors_list', sensors_list);
+
+    // Fetching sensors data
+    var sensors_data = []
+    var sensors_units = []
+
+
+    console.time('fetchValues')
+    const asyncForEach = async (array, callback) => {
+        for (let index = 0; index < array.length; index++) {
+            await callback(array[index], index, array);
+        }
+    }
+    await asyncForEach(sensors_list, async (sensor_id) => {
+        let s_data = await fetchValues(sensor_id)
+        console.timeLog('fetchValues', 'fetched sensor data')
+        sensors_units.push({ name: s_data[0].name, unit: s_data[0].unit, symb: s_data[0].symbol })
+        sensors_data.push(s_data)
+        // id, balise_id, sensor_id, value, timestamp
+    });
+    console.timeEnd('fetchValues')
+
+
+    console.log(sensors_data);
+    console.log(sensors_units);
+
+    // Draw Charts
+    drawChart(sensors_data, sensors_units, 'chartContainer')
+
+
+
+
+
+
+
+    $('battery').innerHTML += b_data.battery_level + '%'
+    $('name').innerHTML = b_data.name
+})()
