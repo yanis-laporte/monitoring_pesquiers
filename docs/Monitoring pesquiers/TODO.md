@@ -7,6 +7,7 @@
 ### Nav bar
 - [ ] Finir le style
 - [ ] Responsive
+- [ ] Animation out de l'underline
 	
 ### Carte
 - [x] Récupération points de la map
@@ -31,6 +32,10 @@
 - [ ] Pouvoir modifier le nom de l'alerte + balise_id
 - [ ] Sauvegarder une alerte
 - [ ] Filtre les alertes
+- [ ] Change la localisation du cache
+- [ ] Mettre en place les modals
+- [ ] Fixer la glass
+- [ ] Refaire animation bouton sauvegarde et suppression, scale down puis scale up comme bouton classique finalement
 
 ### Export CSV
 - [ ] Page
@@ -46,3 +51,18 @@
 ### Global
 - [ ] Toast
 - [ ] 
+
+## Toast
+- [ ] Responsive -> toast en milieu  haut de l'écran
+
+
+https://www.reddit.com/r/webdev/comments/u5m4ue/frosted_class_effect_in_css_one_of_my_favorites/
+
+### Charts
+
+
+[tmp code](obsidian://open?vault=Monitoring%20pesquiers&file=tmp)
+	
+https://www.highcharts.com/demo/windbarb-series
+https://www.highcharts.com/demo/synchronized-charts
+https://www.highcharts.com/demo/combo-meteogram#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=51.50853&lon=-0.12574&altitude=25
