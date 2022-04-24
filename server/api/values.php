@@ -50,11 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $data;
         $i = 0;
-        while ($req_f = $req->fetch()) {
+        while ($req_f = $req->fetch(PDO::FETCH_ASSOC)) {
             foreach ($req_f as $key => $value) {
-                if (!is_numeric($key)) {
-                    $data[$i][$key] = $value;
-                }
+                $data[$i][$key] = $value;
             }
             $i++;
         }
@@ -65,11 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $req = $bdd->query('SELECT * FROM sensorsValues');
 
         $i = 0;
-        while ($req_f = $req->fetch()) {
+        while ($req_f = $req->fetch(PDO::FETCH_ASSOC)) {
             foreach ($req_f as $key => $value) {
-                if (!is_numeric($key)) {
-                    $data[$i][$key] = $value;
-                }
+                $data[$i][$key] = $value;
             }
             $i++;
         }

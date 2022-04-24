@@ -6,11 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // echo "GET";
     $i = 0;
     $req = $bdd->query('SELECT * FROM alerts');
-    while ($req_f = $req->fetch()) {
+    while ($req_f = $req->fetch(PDO::FETCH_ASSOC)) {
         foreach ($req_f as $key => $value) {
-            if (!is_numeric($key)) {
-                $data[$i][$key] = $value;
-            }
+            $data[$i][$key] = $value;
         }
         $i++;
     }
