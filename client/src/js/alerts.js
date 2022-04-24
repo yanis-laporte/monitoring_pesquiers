@@ -5,7 +5,7 @@ import { Toast } from './toast';
  * Append to alerts-container a new child
  * @param {Object} data 
  */
-const createAlert = async (data) => {
+async function createAlert(data) {
     let clone = $('alert0').cloneNode(true)
     clone.setAttribute('id', `alert${data.alert_id}`)
     $('alerts-container').appendChild(clone)
@@ -44,7 +44,7 @@ const createAlert = async (data) => {
  * @param {Number} balise_id id of the balise you want to fetch
  * @returns 
  */
-const fetchNode = async (balise_id) => {
+async function fetchNode(balise_id) {
     return await fetch(`${API_URL}/nodes.php?id=${balise_id}`, {
         mode: 'cors',
     })
@@ -59,7 +59,7 @@ const fetchNode = async (balise_id) => {
  * fetch all sensors
  * @returns {Object}
  */
-const fetchSensor = async () => {
+async function fetchSensor() {
     return await fetch(`${API_URL}/sensors.php`, {
         mode: 'cors',
     })
@@ -72,7 +72,7 @@ const fetchSensor = async () => {
  * Make a PATCH request to update the alert with the id passed as parameter
  * @param {Number} alert_id // Alert id 
  */
-const saveChange = async (alert_id) => {
+async function saveChange(alert_id) {
     window.cache.alerts[alert_id].balise_id
     let data = {
         alert_id: alert_id,
@@ -108,7 +108,7 @@ const saveChange = async (alert_id) => {
  * Make a DELETE request to delete the alert with the id passed as parameter
  * @param {Number} alert_id 
  */
-const deleteAlert = async (alert_id) => {
+async function deleteAlert(alert_id) {
     // delete fetch request
     await fetch(`${API_URL}/alerts.php`, {
         method: 'DELETE',
@@ -183,8 +183,8 @@ $('addAlert').addEventListener('click', () => {
     wastebasket[wastebasket.length - 1].addEventListener('click', OnWastebasketClick)
 })
 
-const OnSaveClick = (e) => { saveChange(e.path[3].id.split('alert')[1]) }
-const OnWastebasketClick = (e) => { if (confirm('Are you sure you want to delete this alert ?')) deleteAlert(e.path[3].id.split('alert')[1]) }
+function OnSaveClick(e) { saveChange(e.path[3].id.split('alert')[1]) }
+function OnWastebasketClick(e) { if (confirm('Are you sure you want to delete this alert ?')) deleteAlert(e.path[3].id.split('alert')[1]) }
 
 
 // Alert delete button
