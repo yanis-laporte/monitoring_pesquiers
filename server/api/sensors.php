@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // echo "POST";
     $_POST = jsonInput();
 
-    $req = $bdd->prepare('INSERT INTO listSensors (name, unite, symbole) VALUES (:name, :unite, :symbole)');
+    $req = $bdd->prepare('INSERT INTO listSensors (name, units, symbol) VALUES (:name, :units, :symbol)');
     $req->execute(array(
         "name" => $_POST['name'],
-        "unite" => $_POST['unite'],
-        "symbole" => $_POST['symbole']
+        "units" => $_POST['units'],
+        "symbol" => $_POST['symbol']
     ));
 
     header('Content-Type: application/json');
