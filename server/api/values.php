@@ -37,9 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $req = $bdd->prepare(
             'SELECT
-                v.id,v.balise_id,v.sensor_id, 
+            -- v.id,v.balise_id, v.sensor_id,--
+                 
                 (CEIL((v.value + (SELECT calbr_rect from sensorsCalbr where sensor_id = v.sensor_id limit 1)) * 100)/100) AS value,
-                v.timestamp, s.name, s.unite, s.symbole
+                v.timestamp, s.name, s.unit, s.symbol
             FROM sensorsValues v
             LEFT JOIN listSensors s
             ON v.sensor_id=s.sensor_id WHERE v.sensor_id = :sensor_id '
