@@ -31,18 +31,70 @@ async function fetchValues(id) {
 async function drawChart(data, units, container) {
     units = units[0]
 
-    // high charts chart
-    let dataPoints = data[0].map(e => parseInt(e.value));
-    let dataPointsX = data[0].map(e => parseInt(e.timestamp));
-    let dp = [];
-    dataPoints.forEach((e, i) => {
-        dp.push({ time: dataPoints[i], value: dataPoints[i] })
+    let dataPoints = [];
+    let dataPointsY = data[0].map(e => parseInt(e.value));
+    let dataPointsX = data[0].map(e => new Date(e.timestamp).getTime());
+    dataPointsY.forEach((e, i) => {
+        // Value, Timestamp
+        dataPoints.push([dataPointsX[i], dataPointsY[i],])
     });
-    console.log(dp);
 
-    var chart = HighCharts.chart(container, {
+    Highcharts.chart(container, {
+        chart: {
+            zoomType: 'x'
+        },
+        title: {
+            text: 'Titre'
+        },
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                'Cliquer-glisser dans le zone de point pour agrandir' : 'Pincer le graphique pour zomer'
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: 'Exchange rate'
+            }
+        },
+        legend: {
+            enabled: false
+        },
 
+        series: [{
+            type: 'line',
+            name: `${units.name}, ${units.unit}`,
+            data: dataPoints
+        }]
     });
+
+    //#region 
+    // var chart = Highcharts.chart(container, {
+    //     title: {
+    //         text: `Évolution de la ${units.name} toute les 30 minutes`
+    //     },
+
+    //     yAxis: {
+    //         title: {
+    //             text: `Y axis`
+    //         }
+    //     },
+
+    //     xAxis: {
+    //         title: {
+    //             text: 'Date de X à Y FAIRE L\'DU TEMPS'
+    //         }
+    //     },
+
+    //     series: [{
+    //         yAxis: 0,
+    //         type: 'line',
+    //         name: 'Température',
+    //         data: dp
+    //     }],
+
+    // });
 
 
     // https://www.highcharts.com/forum/viewtopic.php?t=35142
@@ -186,11 +238,8 @@ async function drawChart(data, units, container) {
     //     //         }
     //     //     }]
     //     // }
-
-
-
-
     // });
+    //#endregion
 }
 
 (async () => {
@@ -232,12 +281,6 @@ async function drawChart(data, units, container) {
 
     // Draw Charts
     drawChart(sensors_data, sensors_units, 'chartContainer')
-
-
-
-
-
-
 
     $('battery').innerHTML += b_data.battery_level + '%'
     $('name').innerHTML = b_data.name
