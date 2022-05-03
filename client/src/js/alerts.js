@@ -13,7 +13,7 @@ async function createAlert(data) {
 
     // Nom de l'alerte
     $(`alert${data.alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML = data.name
-    $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex = ['>', '=', '<'].indexOf(data.sign) + 1
+    $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex = ['>', '<'].indexOf(data.sign) + 1
 
     // fetch les nodes depuis le cache ou INTERNET
     if (typeof window.cache.nodes[data.balise_id] == 'undefined') {
