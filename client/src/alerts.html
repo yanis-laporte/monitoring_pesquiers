@@ -16,10 +16,11 @@
                 <import src="./nav.html" />
             </nav>
             <div class="addAlert glass" id="addAlert">
-                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <i class="fas fa-plus"></i>
+                <!-- <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M32 21.3335V32.0002M32 32.0002V42.6668M32 32.0002H42.6666M32 32.0002H21.3333" stroke="currentColor" stroke-width="5.33333" stroke-linecap="round" />
                     <path d="M32 58.6668C46.7276 58.6668 58.6667 46.7278 58.6667 32.0002C58.6667 17.2726 46.7276 5.3335 32 5.3335C17.2724 5.3335 5.33333 17.2726 5.33333 32.0002C5.33333 46.7278 17.2724 58.6668 32 58.6668Z" stroke="currentColor" stroke-width="5.33333" />
-                </svg>
+                </svg> -->
                 <div>Ajouter une alerte</div>
             </div>
             <div class="alerts-container" id="alerts-container">
@@ -28,8 +29,13 @@
                     <div class="top">
                         <span name="a-name">BaliseName</span>
                         <div class="button">
-                            <button class="save" id="al-save">💾</button>
-                            <button class="wastebasket" id="al-delete">🗑️</button>
+                            <button class="save" id="al-save">
+                                <i class="far fa-save"></i>
+                                <!-- 💾 -->
+                            </button>
+                            <button class="wastebasket" id="al-delete"><i class="far fa-trash-alt"></i>
+                                <!-- 🗑️ -->
+                            </button>
                         </div>
                     </div>
                     <div class="inputs flex-row-center">
@@ -41,7 +47,6 @@
                                 <select name="a-sign">
                                     <option value="" disabled hidden>&plusmn;</option>
                                     <option value="gt">&gt;</option>
-                                    <option value="eq">&equals;</option>
                                     <option value="lt">&lt;</option>
                                 </select>
                                 <input type="number" name="a-control" placeholder="10">
