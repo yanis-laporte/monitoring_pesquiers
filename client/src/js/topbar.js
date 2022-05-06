@@ -1,5 +1,5 @@
 // get the file name from the url
-const getFileName = () => {
+function getFileName() {
     const url = window.location.href;
     const parts = url.split('/');
     const filename = parts[parts.length - 1];
