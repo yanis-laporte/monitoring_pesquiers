@@ -2,61 +2,61 @@ import { API_URL, $, $$ } from './base';
 import { Toast } from './toast';
 
 /**
- * Append to alerts-container a new child
+ * Ajotue un enfant à alerts-container et le remplit avec les données de l'alerte
  * @param {Object} data 
  */
 async function createAlert(data) {
+    console.log("alert data: ", data);
+
+    // Création du div alert et ajout dans le container
     let clone = $('alert0').cloneNode(true)
     clone.setAttribute('id', `alert${data.alert_id}`)
     $('alerts-container').appendChild(clone)
 
-
-    // Nom de l'alerte
-    $(`alert${data.alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML = data.name
-    $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex = ['>', '<'].indexOf(data.sign) + 1
-
-    // fetch les nodes depuis le cache ou INTERNET
-    if (typeof window.cache.nodes[data.balise_id] == 'undefined') {
-        balise = await fetchNode(data.balise_id)
-        window.cache.nodes[data.balise_id] = balise
-    } else {
-        balise = window.cache.nodes[data.balise_id]
-    }
-
-    // Recupère la liste des capteurs
-    // Filtre uniquemet les capteurs de la balise
-    // Ajouter un element 'option' du select 'a-sensor'
-    var balise_sensors = window.cache.sensors.filter((x) => balise[0].sensors_id.includes(x.sensor_id));
+    // 
+    balise = await getNode(data.balise_id)
+    var balise_sensors = window.cache.sensors.filter((x) => balise.sensors_id.includes(x.sensor_id));
     balise_sensors.forEach((s) => {
         let option = document.createElement('option')
         option.value = s.sensor_id
-        option.innerHTML = `${s.name} (${s.symbole})`
+        option.innerHTML = `${s.name} (${s.symbol})`
         $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sensor']")[0].appendChild(option)
     })
 
+    // Signe
+    $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex = ['>', '<'].indexOf(data.sign) + 1
+    $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sensor']")[0].value = data.sensor_id
+    $(`alert${data.alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML = data.name
     $(`alert${data.alert_id}`).querySelectorAll("input[name='a-control']")[0].value = data.control
-    $(`alert${data.alert_id}`).querySelectorAll("input[name='a-email']")[0].value = data.email
+    // $(`alert${data.alert_id}`).querySelectorAll("input[name='a-email']")[0].value = data.email
     $(`alert${data.alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value = data.template
 }
 
 /**
- * Fetch the node with the id passed as parameter
- * @param {Number} balise_id id of the balise you want to fetch
+ * Retourne la balise demandée
+ *  * @param {Number} balise_id id le balise
  * @returns 
  */
-async function fetchNode(balise_id) {
-    return await fetch(`${API_URL}/nodes.php?id=${balise_id}`, {
-        mode: 'cors',
-    })
-        .then(res => res.json())
-        .then(data => {
-            return data
-        })
-        .catch(err => console.log(err));
+async function getNode(balise_id) {
+    // Vérifie si la balise est déjà dans le cache
+    if (typeof window.cache.nodes[balise_id] == 'undefined') {
+        console.log('cache', balise_id);
+        window.cache.nodes[balise_id] =
+            await fetch(`${API_URL}/nodes.php?id=${balise_id}`, {
+                mode: 'cors',
+            })
+                .then(res => res.json())
+                .then(data => {
+                    return data
+                })
+                .catch(err => console.error(err));
+    }
+
+    return window.cache.nodes[balise_id]
 }
 
 /**
- * fetch all sensors
+ * Recupère tout les sensors
  * @returns {Object}
  */
 async function fetchSensor() {
@@ -65,7 +65,7 @@ async function fetchSensor() {
     })
         .then(res => res.json())
         .then(data => { return data })
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
 }
 
 /**
@@ -73,35 +73,63 @@ async function fetchSensor() {
  * @param {Number} alert_id // Alert id 
  */
 async function saveChange(alert_id) {
-    window.cache.alerts[alert_id].balise_id
+    console.log("saveChange alert_id: ", alert_id);
+
+    const alert = window.cache.alerts.filter(x => x.alert_id == alert_id)[0]
+    console.log(alert);
+
     let data = {
-        alert_id: alert_id,
         name: $(`alert${alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML,
         template: $(`alert${alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value,
-        balise_id: window.cache.alerts[alert_id].balise_id,
+        balise_id: 1,
         sensor_id: $(`alert${alert_id}`).querySelectorAll("select[name='a-sensor']")[0].selectedIndex,
         control: $(`alert${alert_id}`).querySelectorAll("input[name='a-control']")[0].value,
-        sign: $(`alert${alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex,
-        email: $(`alert${alert_id}`).querySelectorAll("input[name='a-email']")[0].value
+        sign: ['>', '<'][$(`alert${alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex - 1],
+        email: null
+        // email: $(`alert${alert_id}`).querySelectorAll("input[name='a-email']")[0].value
     }
 
-    // fetch post
-    await fetch(`${API_URL}/alerts.php`, {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => res.json())
-        .then(data => {
-            console.log('PATCH res:', data)
-            if (data.errorInfo[0] == "00000") {
-                _toast.show('Succès', 'L\'alerte a été sauvegardée avec succès', 'success')
-            }
+    if (!alert) {
+        // Nouvelles alertes
+        await fetch(`${API_URL}/alerts.php`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
-        .catch(err => console.log(err));
+            .then(res => res.json())
+            .then(data => {
+                console.log('POST res:', data)
+                if (data.errorInfo[0] == "00000") {
+                    _toast.show('Succès', 'L\'alerte a été crée avec succès', 'success')
+                }
+            })
+            .catch(err => console.error(err));
+
+
+    } else {
+        // Mise à jour des alertes
+        data.alert_id = alert_id;
+        await fetch(`${API_URL}/alerts.php`, {
+            method: 'PATCH',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('PATCH res:', data)
+                if (data.errorInfo[0] == "00000") {
+                    _toast.show('Succès', 'L\'alerte a été sauvegardée avec succès', 'success')
+                }
+            })
+            .catch(err => console.error(err));
+    }
+
 }
 
 /**
@@ -126,7 +154,7 @@ async function deleteAlert(alert_id) {
                 _toast.show('Succès', 'L\'alerte a été supprimée avec succès', 'success')
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
 }
 
 (async () => {
@@ -138,7 +166,7 @@ async function deleteAlert(alert_id) {
         nodes: [],
         alerts: []
     }
-    console.log('sensors', cache.sensors);
+    console.log('List sensors: ', cache.sensors);
 
     // Getting alerts
     await fetch(`${API_URL}/alerts.php`, {
@@ -151,7 +179,7 @@ async function deleteAlert(alert_id) {
                 await createAlert(data);
             })
         })
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
 
     let floopy = document.getElementsByClassName('save')
     for (let i = 0; i < floopy.length; i++) {
@@ -183,8 +211,9 @@ $('addAlert').addEventListener('click', () => {
     wastebasket[wastebasket.length - 1].addEventListener('click', OnWastebasketClick)
 })
 
-function OnSaveClick(e) { saveChange(e.path[3].id.split('alert')[1]) }
-function OnWastebasketClick(e) { if (confirm('Are you sure you want to delete this alert ?')) deleteAlert(e.path[3].id.split('alert')[1]) }
+// 4 = index du div container
+function OnSaveClick(e) { saveChange(e.path[4].id.split('alert')[1]) }
+function OnWastebasketClick(e) { if (confirm('Êtes vous sur de vouloir supprimer cette alerte ?')) deleteAlert(e.path[4].id.split('alert')[1]) }
 
 
 // Alert delete button
