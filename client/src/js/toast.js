@@ -1,3 +1,5 @@
+import '../scss/toast.scss';
+
 /**
  * Class that handles the toast notifications.
  */
