@@ -33,14 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if ($_GET && $_GET['u'] == true) {
-
+    if ($_GET && isset($_GET['u'])) {
         $req = $bdd->prepare(
             'SELECT
-            -- v.id,v.balise_id, v.sensor_id,--
-                 
-                (CEIL((v.value + (SELECT calbr_rect from sensorsCalbr where sensor_id = v.sensor_id limit 1)) * 100)/100) AS value,
-                v.timestamp, s.name, s.unit, s.symbol
+            -- v.id,v.balise_id, v.sensor_id, --
+                v.value, v.timestamp, s.name, s.unit, s.symbol
             FROM sensorsValues v
             LEFT JOIN listSensors s
             ON v.sensor_id=s.sensor_id WHERE v.sensor_id = :sensor_id '
@@ -49,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             "sensor_id" => $_GET['id']
         ));
 
-        $data;
+        $data = [];
         $i = 0;
         while ($req_f = $req->fetch(PDO::FETCH_ASSOC)) {
             foreach ($req_f as $key => $value) {
