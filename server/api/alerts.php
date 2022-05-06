@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $_POST = jsonInput();
+
     $req = $bdd->prepare('INSERT INTO alerts (name, template, balise_id, sensor_id, control, sign, email) VALUES (:name, :template, :balise_id, :sensor_id, :control, :sign, :email)');
     $req->execute(array(
         "name" => $_POST['name'],
@@ -30,7 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ));
 
     header('Content-Type: application/json');
-    echo json_encode(array("errorInfo" => $req->errorInfo()));
+    echo json_encode(array(
+        "errorInfo" => $req->errorInfo()
+        /** , "data" => json_encode($_POST)**/
+    ));
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
