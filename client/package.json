@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "parcel build ./src/*.html --public-url . --no-source-maps",
-    "dev": "del /Q /F \"./dist/\" && echo F|xcopy /F /Y \"assets/favicon.ico\" \"dist/favicon.ico\" && parcel serve ./src/*.html -p 6969",
+    "dev": "del /Q /F \"./dist/\" && del /Q /F \".parcel-cache/\" && echo F|xcopy /F /Y \"assets/favicon.ico\" \"dist/favicon.ico\" && parcel serve ./src/*.html -p 6969",
     "clean": "del /Q /F \"./dist/\""
   },
   "staticFiles": {
