@@ -1,4 +1,4 @@
-const { API_URL } = require('./base')
+import { API_URL } from './base'
 
 var map = L.map('map', { doubleClickZoom: false }).setView([43.05832154846533, 6.170368194580079], 14);
 
