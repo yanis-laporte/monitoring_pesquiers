@@ -1,15 +1,119 @@
 @import "reset";
 @import "base";
 
-
-
 html,
 body,
 .container {
     height: 100%;
     width: 100%;
+
+    // Pour empêcher la scrollbar bottom d'apparaitre quand on clique sur le menu hamburger d'un graphique
+    overflow-x: hidden;
 }
 
-body {
-    background-color: rgb(116, 116, 116);
+nav#chart-navbar {
+    top: 0;
+    height: 3em;
+    margin: 5px;
+    padding-left: 15px;
+
+    background: #ffffff66;
+    border: 3px solid #ffffff66;
+    box-shadow: 0px 0px 15px #00000040;
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+
+    ul {
+        height: 100%;
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        gap: 3em;
+
+
+        #close {
+            width: 1.6em;
+            text-align: center;
+            font-size: 1.6em;
+            color: black;
+
+            &:hover {
+                cursor: pointer;
+                color: white;
+            }
+        }
+
+        #battery {
+            font-size: 1.5em;
+        }
+
+        #name {
+            width: fit-content;
+            font-size: 1.5em;
+            // hide text overflow
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+    }
+}
+
+#timerange {
+    margin: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+    font-size: smaller;
+
+    background: rgba(255, 255, 255, 0.4);
+    border: 3px solid #ffffff66;
+    box-shadow: 0px 0px 15px #00000040;
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+
+    ul,
+    li {
+        display: inline-flex;
+        text-align: center;
+        align-items: center;
+    }
+}
+
+.chartsWrapper {
+    padding: 5px;
+
+}
+
+#chartsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.no-data {
+    font-size: xx-large;
+    position: absolute;
+    top: calc(50% - 3em);
+    color: white;
+    background: #0000008a;
+    box-shadow: 0px 0px 20px 20px #0000008a;
+    text-align: center;
+
+}
+
+.chart {
+    width: calc(100% / 2 - 3px);
+    border-radius: 5px;
+
+    // Quand le screen < 1250px -> graphique prend toute la largeur de la page
+    @media screen and (max-width: 1250px) {
+        width: 100%;
+    }
 }
