@@ -15,8 +15,12 @@
 - [ ] (opt) Ajout de balise directement depuis la map
 - [ ] Option d'affichage de la map
 
+
+### Graphiques
+- [ ] - https://www.highcharts.com/docs/stock/navigator
+
 ### Alertes
-- [ ] Finir le style (~refaire)
+- [x] Finir le style (~refaire)
 	- [ ] Fix la text area
 	- [ ] Rendre la partie gauche de la cards plus petite que la droite ~30/70% (Figma)
 	- [ ] Refaire la cards https://puu.sh/IVGeq/9d602ed822.png
@@ -36,6 +40,8 @@
 - [ ] Mettre en place les modals
 - [ ] Fixer la glass
 - [ ] Refaire animation bouton sauvegarde et suppression, scale down puis scale up comme bouton classique finalement
+- [ ] Check les données envoyé php
+
 
 ### Export CSV
 - [ ] Page
@@ -44,13 +50,13 @@
 - [ ] Export
 
 
+
 ### Ajout/Modification de Balises
 ### Ajout/Modification de Capteurs
 ### Calibration (opt)
 
 ### Global
-- [ ] Toast
-- [ ] 
+- [x] Toast
 
 ## Toast
 - [ ] Responsive -> toast en milieu  haut de l'écran
@@ -64,5 +70,10 @@ https://www.reddit.com/r/webdev/comments/u5m4ue/frosted_class_effect_in_css_one_
 [tmp code](obsidian://open?vault=Monitoring%20pesquiers&file=tmp)
 	
 https://www.highcharts.com/demo/windbarb-series
-https://www.highcharts.com/demo/synchronized-charts
 https://www.highcharts.com/demo/combo-meteogram#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=51.50853&lon=-0.12574&altitude=25
+https://jsfiddle.net/hn8sgw5y/23/
+https://www.highcharts.com/docs/stock/navigator
+https://www.tutlane.com/tutorial/highcharts/highcharts-multiple-axes-chart
+scrollbar
+https://jsfiddle.net/0tgyqqkj/
+https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-time-series
