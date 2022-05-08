@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="scss/topbar.scss" />
     <link rel="stylesheet" href="scss/charts.scss" />
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
@@ -19,33 +18,61 @@
 </head>
 
 <body>
-    <div class="close">Fermer</div>
-    <nav id="navbar">
-        <ul>
-            <li id="close"><i class="fas fa-times"></i></li>
-            <li id="battery">🔋
-                <!-- https://fontawesome.com/search?q=battery&s=solid%2Cbrands -->
-            </li>
-            <li id="name"></li>
-        </ul>
-    </nav>
-
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    <div id="chartContainerWind" style="height: 370px; width: 100%;"></div>
-
-    <div class="chartsWrapper">
-        <div id="chartsContainer">
-        </div>
-        <div id="bigChartContainer">
+    <div class="root bg">
+        <div class="container glass">
+            <nav id="chart-navbar">
+                <ul>
+                    <li id="close">
+                        <i class="fas fa-times"></i>
+                    </li>
+                    <li id="battery">
+                        <!-- Batterie icons -->
+                        <!-- <i class="fas fa-battery-empty"></i>
+                            <i class="fas fa-battery-full"></i>
+                            <i class="fas fa-battery-three-quarters"></i>
+                            <i class="fas fa-battery-half"></i>
+                            <i class="fas fa-battery-quarter"></i>
+                            <i class="fas fa-battery-slash"></i> -->
+                        <i class="fas fa-battery-full"></i>
+                    </li>
+                    <li id="name">
+                        Lorem Ipsum
+                    </li>
+                </ul>
+            </nav>
+            <div id="timerange">
+                <ul>
+                    <li><span>de</span> <input type="datetime-local" name="trFrom" id="trFrom"></li>
+                    <li><span>à</span> <input type="datetime-local" name="trTo" id="trTo"></li>
+                    <li>
+                        <select name="quickranges" id="quickranges">
+                            <option value="" selected disabled hidden>Choix rapide</option>
+                            <option value="now">Maintenant</option>
+                            <optgroup label="Dernière">
+                                <option value="5m">5 minutes</option>
+                                <option value="30m">30 minutes</option>
+                                <option value="1h">1 heure</option>
+                                <option value="5h">5 heure</option>
+                                <option value="12h">12 heure</option>
+                                <option value="24h">24 heure</option>
+                                <option value="1y">1 année</option>
+                            </optgroup>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="chartsWrapper">
+                <div id="chartsContainer">
+                    <!-- Le graphiques sont mit ici -->
+                </div>
+            </div>
         </div>
     </div>
-
+    <div id="toast-container"></div>
 </body>
 
 <!-- Javascript -->
 <!-- <script src="js/topbar.js"></script> -->
 <script type="module" src="js/charts.js"></script>
-<!-- Auto reload -->
-<script src="./js/client.59712999.js"></script>
 
 </html>
