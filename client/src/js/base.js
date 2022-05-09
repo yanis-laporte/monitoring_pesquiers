@@ -3,12 +3,19 @@ module.exports = {
     // API_URL: "http://localhost/api",
     API_URL: "http://192.168.0.120/api",
 
-    /* A function that returns the element with the id passed as parameter. */
+    /* Retourne l'element associé avec l'id en paramètre */
     $: (e) => {
         return document.getElementById(e)
     },
-    /* A function that returns the elements with the name passed as parameter. */
+    /* Retourne les éléments associé avec le nom en paramètre */
     $$: (e) => {
         return document.getElementsByName(e)
+    },
+
+    /* Fonction ForEach asynchrone */
+    asyncForEach: async (array, callback) => {
+        for (let index = 0; index < array.length; index++) {
+            await callback(array[index], index, array);
+        }
     }
 }
