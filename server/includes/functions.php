@@ -4,7 +4,8 @@ cors();
 
 
 /**
- * 
+ * Parse les données récupérées dans php://input
+ * @return array
  */
 function jsonInput() {
     // si url donnee dans l'url
