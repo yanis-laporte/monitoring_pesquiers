@@ -29,7 +29,7 @@ async function createAlert(data) {
     $(`alert${data.alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML = data.name
     $(`alert${data.alert_id}`).querySelectorAll("input[name='a-control']")[0].value = data.control
     // $(`alert${data.alert_id}`).querySelectorAll("input[name='a-email']")[0].value = data.email
-    $(`alert${data.alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value = data.template
+    // $(`alert${data.alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value = data.template
 }
 
 /**
@@ -80,7 +80,7 @@ async function saveChange(alert_id) {
 
     let data = {
         name: $(`alert${alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML,
-        template: $(`alert${alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value,
+        // template: $(`alert${alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value,
         balise_id: 1,
         sensor_id: $(`alert${alert_id}`).querySelectorAll("select[name='a-sensor']")[0].selectedIndex,
         control: $(`alert${alert_id}`).querySelectorAll("input[name='a-control']")[0].value,
