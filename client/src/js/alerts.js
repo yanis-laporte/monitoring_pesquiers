@@ -106,7 +106,10 @@ async function saveChange(alert_id) {
                     _toast.show('Succès', 'L\'alerte a été crée avec succès', 'success')
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err)
+                _toast.show('Erreur', 'Une erreur est survenue lors de la création de l\'alerte', 'danger')
+            });
 
 
     } else {
@@ -127,7 +130,11 @@ async function saveChange(alert_id) {
                     _toast.show('Succès', 'L\'alerte a été sauvegardée avec succès', 'success')
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err)
+                _toast.show('Erreur', 'Une erreur est survenue lors de l\'enregistrement de l\'alerte', 'danger')
+            }
+            );
     }
 
 }
@@ -154,7 +161,10 @@ async function deleteAlert(alert_id) {
                 _toast.show('Succès', 'L\'alerte a été supprimée avec succès', 'success')
             }
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            console.error(err);
+            _toast.show('Erreur', 'Une erreur est survenue lors de la suppression de l\'alerte', 'danger');
+        });
 }
 
 (async () => {
@@ -179,7 +189,12 @@ async function deleteAlert(alert_id) {
                 await createAlert(data);
             })
         })
-        .catch(err => console.error(err));
+        .catch(err => {
+            _toast.show('Erreur', 'Erreur lors de la récupération des alertes', 'danger', {
+                autohide: false
+            })
+            console.error(err)
+        });
 
     let floopy = document.getElementsByClassName('save')
     for (let i = 0; i < floopy.length; i++) {
