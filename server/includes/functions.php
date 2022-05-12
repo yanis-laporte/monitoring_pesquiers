@@ -57,3 +57,17 @@ function cors() {
         exit(0);
     }
 }
+
+/**
+ * Retourne une réponse au format json.
+ * 
+ * @param array $data Les données à retourner
+ * @param int $status Le code de statut HTTP (defaut: 200)
+ * @return void
+ */
+function res($data, $status = 200) {
+    header('Content-Type: application/json');
+    http_response_code($status);
+    echo json_encode($data);
+    exit();
+}
