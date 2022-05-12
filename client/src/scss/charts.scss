@@ -95,6 +95,7 @@ nav#chart-navbar {
 
 .chartsWrapper {
     padding: 5px;
+    height: 100%;
 
 }
 
@@ -110,7 +111,7 @@ nav#chart-navbar {
 
 }
 
-.no-data {
+span.no-data {
     font-size: xx-large;
     position: absolute;
     top: calc(50% - 3em);
