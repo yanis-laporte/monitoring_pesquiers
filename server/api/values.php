@@ -3,8 +3,19 @@
 include('../includes/database_conn.php');
 include('../includes/functions.php');
 
+/**
+ * Requête POST
+ * Insert une nouvelle entrée dans la base de donnée
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Lecture des données POST
     $_POST = jsonInput();
+
+    // if (!isset($_POST['balise_id']) && !is_numeric($_POST['balise_id'])) {
+    //     exit();
+    // }
+
+    // Réponse
     $res = [];
 
     foreach ($_POST as $key => $value) {
@@ -22,14 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "value" => $value
             ));
 
-            $res[] = array(
-                "errorInfo" => $req->errorInfo()
-            );
+            $errorInfo = $req->errorInfo();
+            if ($errorInfo[0] != "00000") {
+                $res[] = array("status" => "error", "message" => $errorInfo);
+            } else {
+                $res[] = array("status" => "success", "message" => "Insertion réussie", "data" => $_POST);
+            }
         }
     }
 
-    header('Content-Type: application/json');
-    echo json_encode($res);
+    res($res);
 }
 
 /**
