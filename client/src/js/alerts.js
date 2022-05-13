@@ -84,7 +84,6 @@ async function saveChange(alert_id) {
     // Récupère les données depuis les inputs
     let data = {
         name: $(`alert${alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML,
-        template: null,
         // template: $(`alert${alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value,
         balise_id: 1,
         sensor_id: $(`alert${alert_id}`).querySelectorAll("select[name='a-sensor']")[0].selectedIndex,
