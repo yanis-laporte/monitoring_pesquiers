@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     // Vérifie si les bonne données sont envoyées
     try {
-        issetArray($_GET, ['id']);
+        issetArray($_GET, ['sensor_id']);
     } catch (\Throwable $th) {
         res(array(
             "error" => $th->getMessage()
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // unitée de mesure
     if (isset($_GET['u']) && $_GET['u'] == "true") {
         $reqU = $bdd->prepare("SELECT name, unit, symbol FROM listSensors WHERE sensor_id = :sensor_id");
-        $reqU->execute(array("sensor_id" => $_GET['id']));
+        $reqU->execute(array("sensor_id" => $_GET['sensor_id']));
 
         $res['params']['u'] = $reqU->fetchAll(PDO::FETCH_ASSOC)[0];
     }
@@ -98,14 +98,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     //  Requête sql 
     $req = $bdd->prepare($sql);
-    $req->bindValue('sensor_id', $_GET['id']);
+    $req->bindValue('sensor_id', $_GET['sensor_id']);
     // Si 
     if (isset($_GET['from'])) $req->bindValue('from', $_GET['from']);
     if (isset($_GET['to'])) $req->bindValue('to', $_GET['to']);
     $req->execute();
 
     // Réponse
-    $res['params']['id'] = $_GET['id'];
+    $res['params']['id'] = $_GET['sensor_id'];
     $res['values'] = [];
 
     $i = 0;
