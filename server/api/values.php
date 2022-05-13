@@ -11,21 +11,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Lecture des données POST
     $_POST = jsonInput();
 
-    // if (!isset($_POST['balise_id']) && !is_numeric($_POST['balise_id'])) {
-    //     exit();
-    // }
-
     // Réponse
     $res = [];
 
     foreach ($_POST as $key => $value) {
-        if (is_numeric($key)) {
-            // echo json_encode(array(
-            //     "post" => $_POST,
-            //     "key" => $key,
-            //     "value" => $value
-            // ));
+        // DEBUG
+        // echo json_encode(array(
+        //     "post" => $_POST,
+        //     "key" => $key,
+        //     "value" => $value
+        // ));
 
+
+        // Batterie
+        if ($key == "b") {
+            $req = $bdd->prepare('UPDATE listBalise SET battery_level = :btlvl WHERE balise_id = :balise_id');
+            $req->execute(array(
+                "btlvl" => $_POST['b'],
+                "balise_id" => $_POST['balise_id'],
+            ));
+
+            // Réponse
+            $errorInfo = $req->errorInfo();
+            if ($errorInfo[0] != "00000") {
+                $res[] = array("status" => "error", "message" => $errorInfo);
+            } else {
+                $res[] = array("status" => "success", "message" => "Insertion réussie", "data" => $_POST);
+            }
+        }
+
+        // Grandeurs
+        if (is_numeric($key)) {
             $req = $bdd->prepare('INSERT INTO sensorsValues (balise_id, sensor_id, value) VALUES (:balise_id, :sensor_id, :value)');
             $req->execute(array(
                 "balise_id" => $_POST['balise_id'],
@@ -33,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "value" => $value
             ));
 
+            // Réponse
             $errorInfo = $req->errorInfo();
             if ($errorInfo[0] != "00000") {
                 $res[] = array("status" => "error", "message" => $errorInfo);
