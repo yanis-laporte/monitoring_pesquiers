@@ -2,28 +2,33 @@
 include('../includes/database_conn.php');
 include('../includes/functions.php');
 
+/**
+ * Requête GET
+ * Retourne la liste des alertes
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    // echo "GET";
     $i = 0;
     $req = $bdd->query('SELECT * FROM alerts');
     while ($req_f = $req->fetch(PDO::FETCH_ASSOC)) {
         foreach ($req_f as $key => $value) {
-            $data[$i][$key] = $value;
+            $res[$i][$key] = $value;
         }
         $i++;
     }
 
-    header('Content-Type: application/json');
-    echo json_encode($data);
+    res($res);
 }
 
+/**
+ * Requête POST
+ * Ajoute une nouvelle alerte
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_POST = jsonInput();
 
-    $req = $bdd->prepare('INSERT INTO alerts (name, template, balise_id, sensor_id, control, sign, email) VALUES (:name, :template, :balise_id, :sensor_id, :control, :sign, :email)');
+    $req = $bdd->prepare('INSERT INTO alerts (name, balise_id, sensor_id, control, sign, email) VALUES (:name, :balise_id, :sensor_id, :control, :sign, :email)');
     $req->execute(array(
         "name" => $_POST['name'],
-        "template" => $_POST['template'],
         "balise_id" => $_POST['balise_id'],
         "sensor_id" => $_POST['sensor_id'],
         "control" => $_POST['control'],
@@ -31,19 +36,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "email" => $_POST['email']
     ));
 
-    header('Content-Type: application/json');
-    echo json_encode(array(
-        "errorInfo" => $req->errorInfo()
-        /** , "data" => json_encode($_POST)**/
-    ));
+    res($req->errorInfo());
 }
 
+/**
+ * Requête PATCH
+ * Modifie une alerte
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
     $_PATCH = jsonInput();
 
     $req = $bdd->prepare('UPDATE alerts SET
         name = :name,
-        template = :template,
         balise_id = :balise_id,
         sensor_id =  :sensor_id,
         control =  :control,
@@ -53,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
     $req->execute(array(
         "alert_id" => $_PATCH['alert_id'],
         "name" => $_PATCH['name'],
-        "template" => $_PATCH['template'],
         "balise_id" => $_PATCH['balise_id'],
         "sensor_id" => $_PATCH['sensor_id'],
         "control" => $_PATCH['control'],
@@ -61,10 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
         "email" => $_PATCH['email']
     ));
 
-    header('Content-Type: application/json');
-    echo json_encode(array("errorInfo" => $req->errorInfo()));
+    res($req->errorInfo());
 }
 
+/**
+ * Requête DELETE
+ * Supprime une alerte
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     $_DELETE = jsonInput();
 
@@ -73,6 +79,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         "alert_id" => $_DELETE['alert_id']
     ));
 
-    header('Content-Type: application/json');
-    echo json_encode(array("errorInfo" => $req->errorInfo()));
+    res($req->errorInfo());
 }
