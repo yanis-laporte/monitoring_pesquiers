@@ -5,6 +5,7 @@ cors();
 
 /**
  * Parse les données récupérées dans php://input
+ * !GET
  * @return array
  */
 function jsonInput() {
@@ -61,6 +62,7 @@ function cors() {
 
 /**
  * Retourne une réponse au format json.
+ * exit
  * 
  * @param array $data Les données à retourner
  * @param int $status Le code de statut HTTP (defaut: 200)
@@ -71,4 +73,42 @@ function res($data, $status = 200) {
     http_response_code($status);
     echo json_encode($data);
     exit();
+}
+
+
+/**
+ * Vérifier si une variable est du type donné.
+ * Throw une exception si la variable n'est pas du type donné.
+ * Throw une exception si le type n'existe pas.
+ * @param array $arr Tableau de variables avec le type a vérifier
+ */
+function typeCheck($arr) {
+    // types valide
+    $types = ["boolean", "integer", "double", "string", "array", "NULL"];
+
+    foreach ($arr as $type => $value) {
+        //
+        if (!in_array($type, $types)) {
+            throw new Exception("Invalid type: " . $type);
+        }
+        // Le type de la valeur est correct
+        if (gettype($value) != $type) {
+            throw new Exception("Invalid variable type: $value is not a $type");
+        }
+    }
+}
+
+/**
+ * Test si dans une variable existe une clé.
+ * Throw une exception si la clé n'existe pas.
+ * @param array $src Tableau de variables
+ * @param array $arr Tableau de clés a tester
+ *
+ */
+function issetArray($src, $arr) {
+    foreach ($arr as $key) {
+        if (!isset($src[$key])) {
+            throw new Exception("Missing key: $key");
+        }
+    }
 }
