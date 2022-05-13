@@ -16,7 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $i++;
     }
 
-    res($res);
+    if ($req->errorInfo()[0] == "00000") {
+        res($res);
+    } else {
+        res($req->errorInfo(), 500);
+    }
 }
 
 /**
@@ -25,6 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
  */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_POST = jsonInput();
+
+    // Vérifie si les bonne données sont envoyées
+    try {
+        issetArray($_POST, ['name', 'balise_id', 'sensor_id', 'control', 'sign', 'email']);
+    } catch (\Throwable $th) {
+        res(array(
+            "error" => $th->getMessage()
+        ), 400);
+    }
 
     $req = $bdd->prepare('INSERT INTO alerts (name, balise_id, sensor_id, control, sign, email) VALUES (:name, :balise_id, :sensor_id, :control, :sign, :email)');
     $req->execute(array(
@@ -36,7 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "email" => $_POST['email']
     ));
 
-    res($req->errorInfo());
+    if ($req->errorInfo()[0] == "00000") {
+        res($req->errorInfo());
+    } else {
+        res($req->errorInfo(), 500);
+    }
 }
 
 /**
@@ -45,6 +62,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
  */
 if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
     $_PATCH = jsonInput();
+
+    // Vérifie si les bonne données sont envoyées
+    try {
+        issetArray($_PATCH, ['name', 'balise_id', 'sensor_id', 'control', 'sign', 'email', 'alert_id']);
+    } catch (\Throwable $th) {
+        res(array(
+            "error" => $th->getMessage()
+        ), 400);
+    }
+
 
     $req = $bdd->prepare('UPDATE alerts SET
         name = :name,
@@ -64,7 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
         "email" => $_PATCH['email']
     ));
 
-    res($req->errorInfo());
+    if ($req->errorInfo()[0] == "00000") {
+        res(array("success" => "L'alerte été modifiée avec succès"));
+    } else {
+        res(array("error" => "Une erreur est survenue lors de la sauvegarde de l'alerte", $req->errorInfo()), 500);
+    }
 }
 
 /**
@@ -74,10 +105,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     $_DELETE = jsonInput();
 
+    // Vérifie si les bonne données sont envoyées
+    try {
+        issetArray($_DELETE, ['alert_id']);
+    } catch (\Throwable $th) {
+        res(array(
+            "error" => $th->getMessage()
+        ), 400);
+    }
+
+
     $req = $bdd->prepare('DELETE FROM alerts WHERE alert_id = :alert_id');
     $req->execute(array(
         "alert_id" => $_DELETE['alert_id']
     ));
 
-    res($req->errorInfo());
+    if ($req->errorInfo()[0] == "00000") {
+        res($req->errorInfo());
+    } else {
+        res($req->errorInfo(), 500);
+    }
 }
