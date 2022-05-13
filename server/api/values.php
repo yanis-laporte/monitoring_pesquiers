@@ -11,6 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Lecture des données POST
     $_POST = jsonInput();
 
+    // Vérifie si les bonnes données sont envoyées
+    try {
+        issetArray($_POST, ['balise_id']);
+    } catch (\Throwable $th) {
+        res(array(
+            "error" => $th->getMessage()
+        ), 400);
+    }
+
     // Réponse
     $res = [];
 
@@ -30,14 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "btlvl" => $_POST['b'],
                 "balise_id" => $_POST['balise_id'],
             ));
-
-            // Réponse
-            $errorInfo = $req->errorInfo();
-            if ($errorInfo[0] != "00000") {
-                $res[] = array("status" => "error", "message" => $errorInfo);
-            } else {
-                $res[] = array("status" => "success", "message" => "Insertion réussie", "data" => $_POST);
-            }
         }
 
         // Grandeurs
@@ -48,18 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 "sensor_id" => $key,
                 "value" => $value
             ));
-
-            // Réponse
-            $errorInfo = $req->errorInfo();
-            if ($errorInfo[0] != "00000") {
-                $res[] = array("status" => "error", "message" => $errorInfo);
-            } else {
-                $res[] = array("status" => "success", "message" => "Insertion réussie", "data" => $_POST);
-            }
         }
     }
 
-    res($res);
+    // Réponse
+    res($req->errorInfo());
 }
 
 /**
@@ -70,10 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Contient la réponse de la requête
     $res = [];
 
-    // Vérification présence de l'id
-    if (!isset($_GET['id'])) {
+    // Vérifie si les bonne données sont envoyées
+    try {
+        issetArray($_GET, ['id']);
+    } catch (\Throwable $th) {
         res(array(
-            "msg" => "id manquant"
+            "error" => $th->getMessage()
         ), 400);
     }
 
