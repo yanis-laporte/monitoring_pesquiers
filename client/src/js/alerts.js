@@ -45,7 +45,7 @@ async function getNode(balise_id) {
     if (typeof window.cache.nodes[balise_id] == 'undefined') {
         console.log('cache', balise_id);
         window.cache.nodes[balise_id] =
-            await fetch(`${API_URL}/nodes.php?id=${balise_id}`, {
+            await fetch(`${API_URL}/nodes.php?balise_id=${balise_id}`, {
                 mode: 'cors',
             })
                 .then(res => res.json())
