@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $i++;
     }
 
+    // Réponse
     res($res);
 }
 
@@ -26,6 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_POST = jsonInput();
 
+    // Vérifie si les bonnes données sont envoyées
+    try {
+        issetArray($_POST, ['sensor_id', 'name', 'unit', 'symbol']);
+    } catch (\Throwable $th) {
+        res(array(
+            "error" => $th->getMessage()
+        ), 400);
+    }
+
     $req = $bdd->prepare('INSERT INTO listSensors (sensor_id, name, unit, symbol) VALUES (:sensor_id, :name, :unit, :symbol)');
     $req->execute(array(
         "sensor_id" => $_POST['sensor_id'],
@@ -34,5 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "symbol" => $_POST['symbol']
     ));
 
+    // Réponse
     res($req->errorInfo());
 }

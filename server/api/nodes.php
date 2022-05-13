@@ -37,6 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_POST = jsonInput();
 
+    // Vérifie si les bonnes données sont envoyées
+    try {
+        issetArray($_POST, ['balise_id', 'name', 'latitude', 'longitude', 'sensors_id']);
+    } catch (\Throwable $th) {
+        res(array(
+            "error" => $th->getMessage()
+        ), 400);
+    }
+
     $req = $bdd->prepare('INSERT INTO listBalise (balise_id, name, latitude, longitude, sensors_id) VALUES (:balise_id, :name, :latitude, :longitude, :sensors_id)');
     $req->execute(array(
         "balise_id" => $_POST['balise_id'],

@@ -16,11 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $i++;
     }
 
-    if ($req->errorInfo()[0] == "00000") {
-        res($res);
-    } else {
-        res($req->errorInfo(), 500);
-    }
+    // Réponse
+    res($res);
 }
 
 /**
@@ -30,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_POST = jsonInput();
 
-    // Vérifie si les bonne données sont envoyées
+    // Vérifie si les bonnes données sont envoyées
     try {
         issetArray($_POST, ['name', 'balise_id', 'sensor_id', 'control', 'sign', 'email']);
     } catch (\Throwable $th) {
@@ -49,11 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "email" => $_POST['email']
     ));
 
-    if ($req->errorInfo()[0] == "00000") {
-        res($req->errorInfo());
-    } else {
-        res($req->errorInfo(), 500);
-    }
+    // Réponse
+    res($req->errorInfo());
 }
 
 /**
@@ -63,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
     $_PATCH = jsonInput();
 
-    // Vérifie si les bonne données sont envoyées
+    // Vérifie si les bonnes données sont envoyées
     try {
         issetArray($_PATCH, ['name', 'balise_id', 'sensor_id', 'control', 'sign', 'email', 'alert_id']);
     } catch (\Throwable $th) {
@@ -91,11 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
         "email" => $_PATCH['email']
     ));
 
-    if ($req->errorInfo()[0] == "00000") {
-        res(array("success" => "L'alerte été modifiée avec succès"));
-    } else {
-        res(array("error" => "Une erreur est survenue lors de la sauvegarde de l'alerte", $req->errorInfo()), 500);
-    }
+    // Réponse
+    res($req->errorInfo());
 }
 
 /**
@@ -105,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     $_DELETE = jsonInput();
 
-    // Vérifie si les bonne données sont envoyées
+    // Vérifie si les bonnes données sont envoyées
     try {
         issetArray($_DELETE, ['alert_id']);
     } catch (\Throwable $th) {
@@ -120,9 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         "alert_id" => $_DELETE['alert_id']
     ));
 
-    if ($req->errorInfo()[0] == "00000") {
-        res($req->errorInfo());
-    } else {
-        res($req->errorInfo(), 500);
-    }
+    // Réponse
+    res($req->errorInfo());
 }
