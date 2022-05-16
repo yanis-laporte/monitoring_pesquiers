@@ -75,14 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     // unitée de mesure
     if (isset($_GET['u']) && $_GET['u'] == "true") {
-        $reqU = $bdd->prepare("SELECT name, unit, symbol FROM listSensors WHERE sensor_id = :sensor_id AND balise_id = :balise_id");
-        $reqU->execute(array("sensor_id" => $_GET['sensor_id'], "balise_id" => $_GET['balise_id']));
+        $reqU = $bdd->prepare("SELECT name, unit, symbol FROM listSensors WHERE sensor_id = :sensor_id");
+        $reqU->execute(array("sensor_id" => $_GET['sensor_id']));
 
         $res['params']['u'] = $reqU->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
     // Requête pour récupérer les valeurs des capteurs
-    $sql = 'SELECT value, timestamp FROM sensorsValues WHERE sensor_id = :sensor_id balise_id = :balise_id';
+    $sql = 'SELECT value, timestamp FROM sensorsValues WHERE sensor_id = :sensor_id AND balise_id = :balise_id';
 
     // intervalle de temps
     // from
