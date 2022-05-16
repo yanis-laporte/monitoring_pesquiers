@@ -7,7 +7,7 @@ import { Toast } from './toast';
  * @returns {JSON}
  */
 async function fetchNode(id) {
-    return await fetch(`${API_URL}/nodes.php?id=${id}`)
+    return await fetch(`${API_URL}/nodes.php?balise_id=${id}`)
         .then(res => res.json())
 }
 
@@ -16,8 +16,9 @@ async function fetchNode(id) {
  * @param id id du capteur
  * @returns {JSON}
  */
-async function fetchValues(id) {
-    return await fetch(`${API_URL}/values.php?u=true&id=${id}`)
+async function fetchValues(s_id, b_id, from, to) {
+    url = `${API_URL}/values.php?u=true&sensor_id=${s_id}&balise_id=${b_id}`
+    return await fetch(url)
         .then(res => res.json())
 }
 
@@ -216,14 +217,14 @@ async function drawChart(data, units, container) {
         },
         yAxis: {
             title: {
-                text: `${units.name} en ${units.symb}`
+                text: `${units.name} en ${units.symbol}`
             }
         },
 
 
         series: [{
             type: 'line',
-            name: `${units.name} ${units.symb}`,
+            name: `${units.name} ${units.symbol}`,
             data: dataPoints
         }]
     });
@@ -234,7 +235,7 @@ async function drawChart(data, units, container) {
  * @param {Number} level Niveau de batterie
  * @returns {String}} Icon du niveau de batterie + Niveau de batterie
  */
-function batteryIcon(level, element) {
+function batteryIcon(level) {
     /**
      * Recréation de la function map dans arduino
      * https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/#post-800377
@@ -244,8 +245,8 @@ function batteryIcon(level, element) {
     }
 
     return `
-    <i class="fas fa-battery-${['empty', 'quarter', 'half', 'three-quarters', 'full'][Math.floor(remap(level, 0, 100, 0, 5))]}"></i>
-    <span class="">${level} %</span>
+    <i class="fas fa-battery-${['empty', 'quarter', 'half', 'three-quarters', 'full'][Math.floor(remap(level, 0, 100, 0, 4))]}"></i>
+    <span>${level} %</span>
     `
 }
 
@@ -278,15 +279,17 @@ function batteryIcon(level, element) {
 
         await asyncForEach(sensors_list, async (sensor_id) => {
             // Récupération des valeurs à afficher
-            var s_data = await fetchValues(sensor_id);
+            var s_data = await fetchValues(sensor_id, b_id);
+
+            console.debug('s_data', s_data);
 
             // Aucune valeur pour ce capteur
             if (!s_data) {
                 _toast.show('Succès', 'Aucune valeur disponible pour ce capteur {nom capteur}', 'success', { autohide: false })
 
             } else {
-                let sensors_units = { name: s_data[0].name, unit: s_data[0].unit, symb: s_data[0].symbol }
-                let sensors_data = s_data
+                let sensors_units = s_data.params.u
+                let sensors_data = s_data.values
 
                 // Debug
                 console.debug("sensors_data:", sensors_data);
