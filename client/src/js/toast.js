@@ -71,7 +71,7 @@ class Toast {
     }
 
     /**
-     * Supprimer la toast associé a l'element child
+     * Supprimer le toast associé a l'element child
      * @param {HTMLElement} child
      */
     remove(child) {
@@ -84,6 +84,15 @@ class Toast {
         } else {
             child.remove();
         }
+    }
+
+    /**
+     * Supprimer tout les toasts
+     */
+    removeAll() {
+        this.element.childNodes.forEach(child => {
+            this.remove(child);
+        });
     }
 }
 
