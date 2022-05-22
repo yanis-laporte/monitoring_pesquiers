@@ -30,11 +30,14 @@ class Toast {
         this.title = title || { 'success': 'Succès', 'info': 'Information', 'warning': 'Attention', 'danger': 'Erreur' }.type
         this.message = message
 
-        this.options = options || {
+        this.options = {
             animation: true,
             autohide: true,
             delay: 2500,
         }
+
+        // Combine les 2 objets options
+        Object.assign(this.options, options)
 
         this.type = ['success', 'info', 'warning', 'danger'].indexOf(type) > -1 ? type : 'info';
 
