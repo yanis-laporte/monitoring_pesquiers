@@ -1,13 +1,13 @@
 import '../scss/toast.scss';
 
 /**
- * Class that handles the toast notifications.
+ * Class qui gère les notifications sous forme de toast.
  */
 class Toast {
     /**
-     * Create a new toast
+     * Constructeur
      * @class
-     * @param {HTMLElement} container - The container where the toast will be displayed
+     * @param {HTMLElement} container - Le container ou les toasts seront placé
      */
     constructor(container) {
         console.log("Toast constructor...", container);
@@ -18,13 +18,13 @@ class Toast {
 
     /**
      * 
-     * @param {String} [title=type] - The title of the toast (default: equal to type)
-     * @param {String} message - The message to be displayed
-     * @param {String} [type=info] -  Type of the toast
-     * @param {Object[]} [options] - Options of the toast
-     * @param {Boolean} [options.animation=true] - If true, the toast will be animated
-     * @param {Boolean} [options.autohide=true] - If true, the toast will be automatically removed after a delay
-     * @param {Number} [options.delay=2500] - Delay before the toast is removed (only if autohide is true)
+     * @param {String} [title=type] - Titre (default: égale à type)
+     * @param {String} message - Message/ body du toast
+     * @param {String} [type=info] -  Type du toast (info, success, warning, error)
+     * @param {Object[]} [options] - Options du toast
+     * @param {Boolean} [options.animation=true] - Si true, le toast sera animé
+     * @param {Boolean} [options.autohide=true] - Si true, le toast sera automatiquement supprimé après un certain temps
+     * @param {Number} [options.delay=2500] - Délais en ms avant la suppression du toast
      */
     show(title, message, type, options) {
         this.title = title || { 'success': 'Succès', 'info': 'Information', 'warning': 'Attention', 'danger': 'Erreur' }.type
@@ -63,13 +63,17 @@ class Toast {
                 this.remove(child)
             }, this.options.delay)
         } else {
-            // Add mark to close the toast
+            // Supprimer le toast lorsque l'utilisateur clique sur la croix
             child.querySelector('.toast-mark').addEventListener('click', () => {
                 this.remove(child)
             });
         }
     }
 
+    /**
+     * Supprimer la toast associé a l'element child
+     * @param {HTMLElement} child
+     */
     remove(child) {
         if (this.options.animation) {
             child.className += ' toast-animation-out'
