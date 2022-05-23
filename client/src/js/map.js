@@ -1,6 +1,6 @@
 import { API_URL } from './base'
 
-var map = L.map('map', { doubleClickZoom: false }).setView([43.05832154846533, 6.170368194580079], 14);
+var map = L.map('map', { doubleClickZoom: false }).setView([43.05669098943963, 6.140842437744141], 14);
 
 L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
     attribution:
@@ -9,30 +9,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
 
-
-// var marker = [
-//     [43.060822251265805, 6.139522937662637],
-//     [43.045865340392304, 6.140130198958956]
-// ].forEach((coords) => {
-
-//     L.marker(coords, { title: "Balise", balise_id: 12 }
-//     ).on('click', markerOnClick).addTo(map);
-// })
-
 //fetch data from api
-
 fetch(`${API_URL}/nodes.php`, {
     mode: 'cors',
 })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        console.debug("list balise: ", data);
         data.forEach((balise) => {
-            console.log(balise);
+            // console.debug(balise);
             L.marker([balise.latitude, balise.longitude], { title: "Balise", balise_id: Number(balise.balise_id), draggable: true })
-                .on('click', markerOnClick)
-                .on('moveend', markerOnMove)
-                .bindTooltip(`${balise.battery_level}%`, { permanent: false, direction: 'top' })
+                .on('click', (e) => {
+                    window.open('./charts.html?balise_id=' + e.target.options.balise_id, '_blank');
+                })
+                .on('moveend', (e) => {
+                    console.log(balise.name, e.sourceTarget._latlng);
+                })
+                .bindTooltip(`${balise.name} | 🔋${balise.battery_level}%`, { permanent: false, direction: 'top' })
                 .addTo(map);
         }
         )
@@ -40,12 +33,6 @@ fetch(`${API_URL}/nodes.php`, {
     )
     .catch(err => console.log(err));
 
-function markerOnClick(e) {
-    console.log(e);
-    console.log(e.target.options);
-    window.open('./charts.html?balise_id=' + e.target.options.balise_id, '_blank');
-}
-
-function markerOnMove(e) {
-    console.log(e.sourceTarget._latlng);
-}
+// map.on('dragend', function (e) {
+//     console.log(map.getCenter());
+// })
