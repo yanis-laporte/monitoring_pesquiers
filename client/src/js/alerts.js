@@ -16,7 +16,7 @@ async function createAlert(data) {
     // Récupère la balise
     balise = await getNode(data.balise_id)
     // Crée un array avec les données des capteurs présent dans la balise
-    var balise_sensors = window.cache.sensors.filter((x) => balise.sensors_id.includes(x.sensor_id));
+    var balise_sensors = window.pCache.sensors.filter((x) => balise.sensors_id.includes(x.sensor_id));
     // Crée les options du select
     balise_sensors.forEach((s) => {
         let option = document.createElement('option')
@@ -28,10 +28,8 @@ async function createAlert(data) {
     // Afficher les données dans les inputs
     $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex = ['>', '<'].indexOf(data.sign) + 1
     $(`alert${data.alert_id}`).querySelectorAll("input[name='a-control']")[0].value = data.control
-    $(`alert${data.alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML = data.name
+    $(`alert${data.alert_id}`).querySelectorAll("input[name='a-name']")[0].innerHTML = data.name
     $(`alert${data.alert_id}`).querySelectorAll("select[name='a-sensor']")[0].value = data.sensor_id
-    // $(`alert${data.alert_id}`).querySelectorAll("input[name='a-email']")[0].value = data.email
-    // $(`alert${data.alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value = data.template
 }
 
 /**
@@ -42,9 +40,9 @@ async function createAlert(data) {
  */
 async function getNode(balise_id) {
     // Vérifie si la balise n'est pas dans le cache
-    if (typeof window.cache.nodes[balise_id] == 'undefined') {
+    if (typeof window.pCache.nodes[balise_id] == 'undefined') {
         console.log('cache', balise_id);
-        window.cache.nodes[balise_id] =
+        window.pCache.nodes[balise_id] =
             await fetch(`${API_URL}/nodes.php?balise_id=${balise_id}`, {
                 mode: 'cors',
             })
@@ -55,7 +53,7 @@ async function getNode(balise_id) {
                 .catch(err => console.error(err));
     }
 
-    return window.cache.nodes[balise_id]
+    return window.pCache.nodes[balise_id]
 }
 
 /**
@@ -72,25 +70,23 @@ async function fetchSensor() {
 }
 
 /**
- * Sauvegarde les changemens fait à une alertes (PATCH), si l'alerte n'existe pas, elle est crée (POST)
+ * Sauvegarde les changements fait à une alertes (PATCH), si l'alerte n'existe pas, elle est crée (POST)
  * @param {Number} alert_id id de l'alerte qui va être sauvegardée 
  */
 async function saveChange(alert_id) {
     console.debug("saveChange alert_id: ", alert_id);
 
     // Récupère les données de l'alerte avec l'id `alert_id`
-    const alert = window.cache.alerts.filter(x => x.alert_id == alert_id)[0]
+    const alert = window.pCache.alerts.filter(x => x.alert_id == alert_id)[0]
 
     // Récupère les données depuis les inputs
     let data = {
-        name: $(`alert${alert_id}`).querySelectorAll("span[name='a-name']")[0].innerHTML,
+        name: $(`alert${alert_id}`).querySelectorAll("input[name='a-name']")[0].innerHTML,
         // template: $(`alert${alert_id}`).querySelectorAll("textarea[name='a-template']")[0].value,
         balise_id: 1,
         sensor_id: $(`alert${alert_id}`).querySelectorAll("select[name='a-sensor']")[0].selectedIndex,
         control: $(`alert${alert_id}`).querySelectorAll("input[name='a-control']")[0].value,
-        sign: ['>', '<'][$(`alert${alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex - 1],
-        email: null
-        // email: $(`alert${alert_id}`).querySelectorAll("input[name='a-email']")[0].value
+        sign: ['>', '<'][$(`alert${alert_id}`).querySelectorAll("select[name='a-sign']")[0].selectedIndex - 1]
     }
 
     // Si l'alerte n'existe pas ont la crée, sinon on la met à jour
@@ -183,12 +179,12 @@ async function deleteAlert(alert_id) {
     _toast = new Toast($('toast-container'))
 
     // Déclaration du cache
-    window.cache = {
+    window.pCache = {
         sensors: await fetchSensor(),
         nodes: [],
         alerts: []
     }
-    console.log('List sensors: ', cache.sensors);
+    // console.log('List sensors: ', window.Pcache.sensors);
 
     // Récupération des alertes
     await fetch(`${API_URL}/alerts.php`, {
@@ -196,7 +192,7 @@ async function deleteAlert(alert_id) {
     })
         .then(res => res.json())
         .then(data => {
-            window.cache.alerts = data
+            window.pCache.alerts = data
             data.forEach(async (data) => {
                 await createAlert(data);
             })
