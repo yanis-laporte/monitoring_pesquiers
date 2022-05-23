@@ -33,7 +33,7 @@ class Toast {
         this.options = {
             animation: true,
             autohide: true,
-            delay: 2500,
+            delay: 3000,
         }
 
         // Combine les 2 objets options
