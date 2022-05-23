@@ -23,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Réponse
     $res = [];
 
+    // Retire \n \r des données fournis
+    $_POST['balise_id'] = explode("|", str_replace(array("\n", "\r"), '|', $_POST['balise_id']))[0];
+
     foreach ($_POST as $key => $value) {
         // DEBUG
         // echo json_encode(array(
