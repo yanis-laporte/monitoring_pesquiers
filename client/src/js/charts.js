@@ -17,7 +17,7 @@ async function fetchNode(id) {
  * @returns {JSON}
  */
 async function fetchValues(s_id, b_id, from, to) {
-    url = `${API_URL}/values.php?u=true&sensor_id=${s_id}&balise_id=${b_id}`
+    url = `${API_URL}/values.php?u=true&sensor_id=${s_id}&balise_id=${b_id}${from ? `&from=${from}` : ''}${to ? `&to=${to}` : ''}`
     return await fetch(url)
         .then(res => res.json())
 }
@@ -67,7 +67,7 @@ async function drawChart(data, units, container) {
         },
     });
 
-    Highcharts.chart(container, {
+    var chart = Highcharts.chart(container, {
         // #region Chart options
         // rangeSelector: {
         //     enabled: true,
@@ -160,6 +160,11 @@ async function drawChart(data, units, container) {
         // });
         //#endregion
 
+        // timezone
+        time: {
+            timezone: 'Europe/Paris'
+        },
+
         // Bouton télécharger
         navigation: {
             buttonOptions: {
@@ -189,7 +194,7 @@ async function drawChart(data, units, container) {
                         'downloadPNG',
                         'downloadJPEG',
                         'separator',
-                        'downloadXLS'
+                        'downloadXLS',
                     ]
                 }
             }
@@ -228,6 +233,10 @@ async function drawChart(data, units, container) {
             data: dataPoints
         }]
     });
+
+    return await chart;
+
+
 }
 
 /**
@@ -251,6 +260,8 @@ function batteryIcon(level) {
 }
 
 (async () => {
+    // Registre des graphs
+    const graphs = [];
     // Déclaration du Toast
     _toast = new Toast($('toast-container'))
 
@@ -284,9 +295,10 @@ function batteryIcon(level) {
             console.debug('s_data', s_data);
 
             // Aucune valeur pour ce capteur
-            if (!s_data) {
-                _toast.show('Succès', 'Aucune valeur disponible pour ce capteur {nom capteur}', 'success', { autohide: false })
+            if (s_data.values.length == 0) {
+                _toast.show(`${s_data.params.u.name}`, 'Aucune valeur disponible pour ce capteur', 'warning', { autohide: false })
 
+                graphs.push(null);
             } else {
                 let sensors_units = s_data.params.u
                 let sensors_data = s_data.values
@@ -302,7 +314,7 @@ function batteryIcon(level) {
                 $(`chartContainer${sensor_id}`).classList += 'chart';
 
                 // Drawing chart
-                drawChart(sensors_data, sensors_units, `chartContainer${sensor_id}`)
+                graphs.push(await drawChart(sensors_data, sensors_units, `chartContainer${sensor_id}`));
             }
 
         });
@@ -313,5 +325,62 @@ function batteryIcon(level) {
         $('trTo').addEventListener('change', (d) => { console.log(new Date(d.target.value)); })
         // $('trFrom').value = new Date().toISOString().slice(0, 16)
         // $('trTo').value = new Date().toISOString().slice(0, 16)
+    }
+
+
+    $('quickranges').addEventListener('change', (d) => {
+        console.log(d.target.value);
+
+        b_data.sensors_id.split(',').forEach((sensor_id, index) => {
+            from = new Date()
+            to = new Date()
+            from.setDate(from.getDate() + 0)
+            to.setDate(to.getDate() + 10)
+            values = fetchValues(sensor_id, b_id, from = '', to = '')
+            graphs[index].series[0].setData(values);
+            graphs[index].redraw();
+
+        });
+    })
+
+    $('trFrom').addEventListener('change', () => {
+        $('redrawBtn').classList = 'change'
+    });
+
+    $('trTo').addEventListener('change', () => {
+        $('redrawBtn').classList = 'change'
+    })
+
+    $('redrawBtn').addEventListener('click', () => {
+        $('redrawBtn').classList = ''
+        updateCharts()
+    })
+
+    function updateCharts() {
+        const sensors_list = b_data.sensors_id.split(',')
+
+        asyncForEach(sensors_list, async (sensor_id, i) => {
+            data = await fetchValues(sensor_id, b_id, $('trFrom').value, $('trTo').value)
+
+            if (data.values.length > 0) {
+                console.debug('redraw chart', i, data);
+
+                // Création du tableau de données
+                // [timestamp, value]
+                let dataPoints = [];
+                let dataPointsY = data.values.map(e => parseInt(e.value));
+                let dataPointsX = data.values.map(e => new Date(e.timestamp).getTime());
+                dataPointsY.forEach((e, i) => {
+                    // Value, Timestamp
+                    dataPoints.push([dataPointsX[i], dataPointsY[i],])
+                });
+
+                // Met à jour les points + redessine le graph
+                graphs[i].series[0].setData(dataPoints, true);
+
+            } else {
+                _toast.show(`${data.params.u.name}`, 'Aucune valeur disponible pour ce capteur dans l\'intervalle ', 'warning', { autohide: true })
+            }
+        });
     }
 })()
