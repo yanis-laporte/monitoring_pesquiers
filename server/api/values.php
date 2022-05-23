@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
     // to 
     if (isset($_GET['to'])) {
-        $res['params']['to'] = $_GET['from'];
+        $res['params']['to'] = $_GET['to'];
         $sql .= ' AND timestamp < :to';
     }
 
