@@ -13,7 +13,8 @@
     <script src="https://code.highcharts.com/modules/windbarb.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js" integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data-2012-2022.min.js"></script>
     <title>Monitoring des Pesquiers</title>
 </head>
 
@@ -22,9 +23,9 @@
         <div class="container glass">
             <nav id="chart-navbar">
                 <ul>
-                    <li id="close">
+                    <!-- <li id="close">
                         <i class="fas fa-times"></i>
-                    </li>
+                    </li> -->
                     <li id="battery">
                         <!-- Batterie icons -->
                         <!-- <i class="fas fa-battery-empty"></i>
@@ -40,6 +41,7 @@
                 <ul>
                     <li><span>de</span> <input type="datetime-local" name="trFrom" id="trFrom"></li>
                     <li><span>à</span> <input type="datetime-local" name="trTo" id="trTo"></li>
+                    <li><button id="redrawBtn"><i class="fas fa-sync"></i></button></li>
                     <li>
                         <select name="quickranges" id="quickranges">
                             <option value="" selected disabled hidden>Choix rapide</option>
@@ -55,12 +57,12 @@
                             </optgroup>
                         </select>
                     </li>
-                    <li>
+                    <!-- <li>
                         <div id="changeLayout">
                             <i class="fas fa-grip-vertical"></i>
                             <i class="fas fa-grip-horizontal"></i>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="chartsWrapper">
@@ -74,7 +76,7 @@
 </body>
 
 <!-- Javascript -->
-<!-- <script src="js/topbar.js"></script> -->
+<!-- <script src="js/topbar.js"></> -->
 <script type="module" src="js/charts.js"></script>
 
 </html>
