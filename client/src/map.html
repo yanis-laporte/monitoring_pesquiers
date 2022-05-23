@@ -13,15 +13,18 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav id="navbar">
-            <import src="./nav.html" />
-        </nav>
-        <!-- <div id="leftpanel"></div> -->
-        <div id="map"></div>
-        <script type="module" src="js/map.js"></script>
-        <script src="js/topbar.js"></script>
+    <div class="root bg">
+        <div class="container glass">
+            <nav id="navbar" class="glass">
+                <import src="./nav.html" />
+            </nav>
+            <div class="mapContainer">
+                <div id="map"></div>
+            </div>
+        </div>
     </div>
+    <script type="module" src="js/map.js"></script>
+    <script src="js/topbar.js"></script>
 </body>
 
 </html>
