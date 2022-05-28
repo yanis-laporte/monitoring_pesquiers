@@ -1,3 +1,5 @@
+@import "colors.scss";
+
 @keyframes toast-item-animation {
     from {
         transform: translate(0, 100%);
@@ -90,7 +92,7 @@
 
 // Toast style type
 .toast-success {
-    background-color: #28a745;
+    background-color: $success;
 
     .toast-title::before {
         content: '\f058';
@@ -98,7 +100,7 @@
 }
 
 .toast-info {
-    background-color: #17a2b8;
+    background-color: $info;
 
     .toast-title::before {
         content: '\f05a';
@@ -106,8 +108,7 @@
 }
 
 .toast-warning {
-    // background-color: #ffc107;
-    background-color: #e1b410;
+    background-color: $warning;
 
     .toast-title::before {
         content: '\f0e7';
@@ -115,7 +116,7 @@
 }
 
 .toast-danger {
-    background-color: #dc3545;
+    background-color: $danger;
 
     .toast-title::before {
         content: '\f06a';
