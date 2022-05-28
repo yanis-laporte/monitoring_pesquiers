@@ -1,4 +1,4 @@
-import { API_URL } from './base'
+import { API_URL } from './base';
 
 var map = L.map('map', { doubleClickZoom: false }).setView([43.05916816778099, 6.140842437744141], 14);
 
@@ -9,7 +9,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
 
-// Récuprération des données des balises
+// Récupération des données des balises
 fetch(`${API_URL}/nodes.php`, {
     mode: 'cors',
 })
