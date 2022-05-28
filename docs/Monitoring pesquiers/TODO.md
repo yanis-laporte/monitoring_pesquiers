@@ -1,21 +1,11 @@
-- [ ] Mettre au clair la base de donnée
-		alerts
-			supprimer template
-			supprimer email
-		listeBalise
-			battery ?
-		sensorsCalbr -> Drop table
-		sensorsValues
-			balise_id -> tinytext -> tinyint
-			balise_id utile ?
-		users
-			email -> username
-			isAdmin -> utilité
-- [ ] Mettre a jour l'api avec le function res
-- [ ] Faire en sorte de vérifier le type et le format des donnée reçus
-- [ ] Endpoint api pour mettre à jour le niveau de battery d'une balise
+- [x] Mettre a jour l'api avec le function res
+- [x] Faire en sorte de vérifier le type et le format des donnée reçus
+- [x] Endpoint api pour mettre à jour le niveau de battery d'une balise
 - [ ] Faire le choix de timerange des graphs
-- [ ] Finir la nav bar
+	- [x] Choix avec des inputs calendar
+	- [ ] Choix rapide 5min 10min 1heure etc
+	- [x] Animation tourne quand id=redrawBtn a class change
+- [x] Finir la nav bar
 - [ ] Export CSV
 - [ ] Faire le système de connexion
 - [ ] Fetch avec le token du cookie php pour pas à implémenter l'html dans php
@@ -23,14 +13,8 @@
 - [ ] Graphique
 - [ ] Carte
 
-Tout poffiner
-Faire l'ajout de balises capteurs
-
 ### api
-- POST Balise 
-	- [ ] ajouter balise_id 
 -  Tout les endpoinrs
-	- [ ] Vérifier les données envoyer, type etc..
 	- [ ] Handles les erreurs
 
 
@@ -41,10 +25,9 @@ Faire l'ajout de balises capteurs
 - [ ] Pas de compte
 
 ### Nav bar
-- [ ] Finir le style
-- [ ] Responsive
-- [ ] Animation out de l'underline
-- [ ] Javascript?
+- [x] Finir le style
+- [x] Responsive
+- [x] Javascript?
 	
 ### Carte
 - [x] Récupération points de la map
@@ -55,27 +38,26 @@ Faire l'ajout de balises capteurs
 
 
 ### Graphiques
-- [ ] - https://www.highcharts.com/docs/stock/navigator
-- [ ] Supprimer colonne balise_id de sensorsValues
+- [x] Supprimer colonne balise_id de sensorsValues
 - [ ] Graphique spécial pour le vent + direction
-- [ ] Time range, affichage en ligne ou colonne
-- [ ] navigator dans dans les graphiques
-- [ ] option pour (afficher seulement 1 graphique avec + d'options ?)
+- [ ] Affichange ligne, colonne
+- [x] Time range
+
 
 ### Alertes
 - [ ] Style
-	- [ ] Refaire animation bouton sauvegarde et suppression, scale down puis scale up comme bouton classique finalement
+	- [x] Refaire animation bouton sauvegarde et suppression, scale down puis scale up comme bouton classique finalement
 	- [ ] Responsive
 		- [ ] Breakpoint 800px
-	- [ ] Fix la text area
-	- [ ] Rendre la partie gauche de la cards plus petite que la droite ~30/70% (Figma)
-	- [ ] Refaire la cards https://puu.sh/IVGeq/9d602ed822.png
-	- [ ] 
-- [ ] Pouvoir modifier le nom de l'alerte + balise_id
+	- [x] Rendre la partie gauche de la cards plus petite que la droite ~30/70% (Figma)
+	- [x] Refaire la cards https://puu.sh/IVGeq/9d602ed822.png
+- [ ] Indication quand changement non effectuer ~
 - [ ] (bonus) Filtre les alertes
-- [ ] Changer la localisation du cache
-- [ ]  Check les données envoyé à php
-- [ ] Vérification lors de la sauvegarde du succès de la requête avec le nouveau système
+- [x] Pouvoir modifier le ~~nom de l'alerte~~ + balise_id
+
+- [x] Changer la localisation du cache  window.cache  -> window.pCache
+- [x]  Check les données envoyé à php
+- [x] Vérification lors de la sauvegarde du succès de la requête avec le nouveau système
 - [x] Throw une erreur quand le fetch ne reçoit pas de réponse
 	- Affiche un toast d'erreur lors de l'échec de la
 		- récupération des alertes
@@ -112,6 +94,7 @@ Faire l'ajout de balises capteurs
 ## Toast
 - [x] Fonctionnel
 - [ ] Responsive -> toast en milieu  haut de l'écran
+- [ ] Quand pas de titre, affichier le toast juste sur une ligne
 
 
 Breakpoint sass
@@ -134,3 +117,5 @@ https://www.tutlane.com/tutorial/highcharts/highcharts-multiple-axes-chart
 scrollbar
 https://jsfiddle.net/0tgyqqkj/
 https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-time-series
+
+- [ ] https://cdnjs.com/libraries/leaflet

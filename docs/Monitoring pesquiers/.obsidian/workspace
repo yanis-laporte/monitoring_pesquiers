@@ -7,8 +7,12 @@
         "id": "abebef0bef3af674",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "TODO.md",
+            "mode": "source",
+            "source": false
+          }
         }
       }
     ],
@@ -65,6 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -84,9 +89,9 @@
   },
   "active": "abebef0bef3af674",
   "lastOpenFiles": [
-    "lien.md",
     "TODO.md",
+    "tmp.md",
     "snippets.md",
-    "tmp.md"
+    "lien.md"
   ]
 }
