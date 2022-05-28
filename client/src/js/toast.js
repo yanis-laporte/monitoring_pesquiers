@@ -10,7 +10,7 @@ class Toast {
      * @param {HTMLElement} container - Le container ou les toasts seront placé
      */
     constructor(container) {
-        console.log("Toast constructor...", container);
+        console.debug("Toast constructor...", container);
 
         this.element = container;
         this.toastsCount = 0;
