@@ -1,8 +1,6 @@
 @import "reset";
 @import "base";
 @import "glassy";
-
-// Nav bar style
 @import "topbar";
 
 html,
@@ -39,12 +37,3 @@ body,
     height: 100%;
     width: 100%;
 }
-
-// #leftpanel {
-//     position: absolute;
-//     z-index: 410;
-//     right: 0;
-//     height: 100%;
-//     width: 50%;
-//     background: red;
-// }
