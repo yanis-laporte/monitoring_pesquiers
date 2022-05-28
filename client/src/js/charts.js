@@ -1,4 +1,4 @@
-import { API_URL, $, $$, asyncForEach } from './base';
+import { API_URL, $, asyncForEach } from './base';
 import { Toast } from './toast';
 
 /**
@@ -8,35 +8,39 @@ import { Toast } from './toast';
  */
 async function fetchNode(id) {
     return await fetch(`${API_URL}/nodes.php?balise_id=${id}`)
-        .then(res => res.json())
+        .then(res => res.json());
 }
 
 /**
- * Retourne les valerus du captuer
+ * Retourne les valeurs du capteur
  * @param id id du capteur
  * @returns {JSON}
  */
 async function fetchValues(s_id, b_id, from, to) {
-    url = `${API_URL}/values.php?u=true&sensor_id=${s_id}&balise_id=${b_id}${from ? `&from=${from}` : ''}${to ? `&to=${to}` : ''}`
+    url = `${API_URL}/values.php?u=true&sensor_id=${s_id}&balise_id=${b_id}${from ? `&from=${from}` : ''}${to ? `&to=${to}` : ''}`;
     return await fetch(url)
-        .then(res => res.json())
+        .then(res => res.json());
 }
 
 /**
  * Dessine le graphique dans le container
+ * @param {Object} data Donnée du graphique
+ * @param {Object} units Nom, unité et symbole de la grandeur
+ * @param {String} container Id du container dans lequel seras ajouter le graphique
+ * @returns {Object} L'objet graphique
  */
 async function drawChart(data, units, container) {
-    console.debug('data:', data, 'units:', units, 'container:', container);
+    console.debug('<drawChart>', 'data:', data, 'units:', units, 'container:', container);
 
     // Création du tableau de données
     // [timestamp, value]
     let dataPoints = [];
-    let dataPointsY = data.map(e => parseInt(e.value));
-    let dataPointsX = data.map(e => new Date(e.timestamp).getTime());
-    dataPointsY.forEach((e, i) => {
-        // Value, Timestamp
-        dataPoints.push([dataPointsX[i], dataPointsY[i],])
-    });
+    let dataPointsY = data.map(entry => parseInt(entry.value));
+    let dataPointsX = data.map(entry => new Date(entry.timestamp).getTime());
+    for (let i = 0; i < dataPointsX.length; i++) {
+        dataPoints.push([dataPointsX[i], dataPointsY[i]]);
+
+    }
 
     // Traduction des textes
     Highcharts.setOptions({
@@ -65,101 +69,13 @@ async function drawChart(data, units, container) {
             viewData: 'Voir la table de données',
             contextButtonTitle: 'Menu contextuel'
         },
+
     });
 
     var chart = Highcharts.chart(container, {
-        // #region Chart options
-        // rangeSelector: {
-        //     enabled: true,
-        //     inputEnabled: false,
-        //     buttonPosition: {
-        //         align: 'right'
-        //     },
-        //     labelStyle: {
-        //         display: 'none'
-        //     },
-        //     buttons: [{
-        //         type: 'month',
-        //         count: 1,
-        //         text: '1m'
-        //     },
-        //     {
-        //         type: 'month',
-        //         count: 3,
-        //         text: '3m'
-        //     },
-        //     {
-        //         type: 'month',
-        //         count: 6,
-        //         text: '6m'
-        //     },
-        //     {
-        //         type: 'year',
-        //         count: 1,
-        //         text: '1y'
-        //     },
-        //     {
-        //         type: 'year',
-        //         count: 2,
-        //         text: '2y'
-        //     },
-        //     {
-        //         type: 'year',
-        //         count: 5,
-        //         text: '5y'
-        //     },
-        //     {
-        //         type: 'all',
-        //         text: 'All'
-        //     },
-        //     {
-        //         type: 'all',
-        //         text: 'Latest',
-        //         events: {
-        //             click: () => {
-
-        //                 alert('in real app I scroll to latest results');
-
-        //                 return false;
-
-        //             }
-        //         }
-        //     }]
-        // },
-        // navigator: {
-        //     enabled: true,
-        // },
-        // legend: {
-        //     enabled: false,
-        //     align: 'left',
-        //     verticalAlign: 'top',
-        //     borderWidth: 0
-        // },
-        // loading: {
-        //     // https://api.highcharts.com/highcharts/loading
-        // },
-
-        // tooltip: {
-        //     // https://api.highcharts.com/highcharts/tooltip
-        // },
-        // responsive: {
-        //     // https://api.highcharts.com/highcharts/responsive
-        //         rules: [{
-        //             condition: {
-        //                 maxWidth: 500
-        //             },
-        //             chartOptions: {
-        //                 legend: {
-        //                     layout: 'horizontal',
-        //                     align: 'center',
-        //                     verticalAlign: 'bottom'
-        //                 }
-        //             }
-        //         }]
-        //     }
-        // });
-        //#endregion
-
+        accessibility: {
+            enabled: false,
+        },
         // timezone
         time: {
             timezone: 'Europe/Paris'
@@ -169,11 +85,8 @@ async function drawChart(data, units, container) {
         navigation: {
             buttonOptions: {
                 theme: {
-                    // Good old text links
-                    // todo
                     style: {
                         color: '#039',
-                        // textDecoration: 'underline'
                     }
                 }
             }
@@ -185,7 +98,7 @@ async function drawChart(data, units, container) {
                 // Menu hamburger
                 contextButton: {
                     enabled: true,
-                    menuItems: ["downloadPNG", "downloadJPEG", "downloadXLS", "separator", "printChart", "viewFullscreen"]
+                    menuItems: ["downloadPNG", "downloadJPEG", "downloadXLS", "viewFullscreen"]
                 },
                 // Bouton télécharger
                 exportButton: {
@@ -193,7 +106,6 @@ async function drawChart(data, units, container) {
                     menuItems: [
                         'downloadPNG',
                         'downloadJPEG',
-                        'separator',
                         'downloadXLS',
                     ]
                 }
@@ -201,24 +113,20 @@ async function drawChart(data, units, container) {
         },
 
         chart: {
+            // Dimension du zoom
             zoomType: 'x',
-            borderRadius: 5,
-            /* DEBUG */
-            // backgroundColor: 'gray',
+            // borderRadius: ,
         },
         title: {
             text: `${units.name}`
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
-                'Cliquer-glisser dans le zone de point pour agrandir' : 'Pincer le graphique pour zomer'
+                'Cliquer-glisser dans le zone de point pour agrandir' : 'Pincer le graphique pour zoomer'
         },
 
         xAxis: {
             type: 'datetime',
-            // scrollbar: {
-            //     enabled: true
-            // },
         },
         yAxis: {
             title: {
@@ -235,18 +143,16 @@ async function drawChart(data, units, container) {
     });
 
     return await chart;
-
-
 }
 
 /**
  * Gère l'affichage de l'icon du niveau de batterie
  * @param {Number} level Niveau de batterie
- * @returns {String}} Icon du niveau de batterie + Niveau de batterie
+ * @returns {String} HTML du niveau de l’icône du niveau de batterie et le niveau
  */
 function batteryIcon(level) {
     /**
-     * Recréation de la function map dans arduino
+     * Recréation de la function map dans Arduino
      * https://forum.unity.com/threads/re-map-a-number-from-one-range-to-another.119437/#post-800377
      */
     function remap(value, from1, to1, from2, to2) {
@@ -255,7 +161,7 @@ function batteryIcon(level) {
 
     return `
     <i class="fas fa-battery-${['empty', 'quarter', 'half', 'three-quarters', 'full'][Math.floor(remap(level, 0, 100, 0, 4))]}"></i>
-    <span>${level} %</span>
+    ${level} %
     `
 }
 
@@ -277,7 +183,8 @@ function batteryIcon(level) {
     $('battery').innerHTML = batteryIcon(b_data.battery_level)
     $('name').innerHTML = b_data.name
 
-    if (!b_data) { // ~-> La balise n'existe pas
+    // Si b_data est null => la balise n'existe pas
+    if (!b_data) {
         _toast.show("", "Aucune donnée disponible pour cette balise", 'info', {
             autohide: false
         })
@@ -288,6 +195,7 @@ function batteryIcon(level) {
         const sensors_list = b_data.sensors_id.split(',')
         console.debug('sensors_list', sensors_list);
 
+        // Itération de tout les capteurs
         await asyncForEach(sensors_list, async (sensor_id) => {
             // Récupération des valeurs à afficher
             var s_data = await fetchValues(sensor_id, b_id);
@@ -297,17 +205,17 @@ function batteryIcon(level) {
             // Aucune valeur pour ce capteur
             if (s_data.values.length == 0) {
                 _toast.show(`${s_data.params.u.name}`, 'Aucune valeur disponible pour ce capteur', 'warning', { autohide: false })
-
                 graphs.push(null);
+
             } else {
                 let sensors_units = s_data.params.u
                 let sensors_data = s_data.values
 
                 // Debug
-                console.debug("sensors_data:", sensors_data);
-                console.debug("sensors_units:", sensors_units);
+                // console.debug("sensors_data:", sensors_data);
+                // console.debug("sensors_units:", sensors_units);
 
-                // Création du container
+                // Création du container et ajout dans le DOM
                 var container = document.createElement('div')
                 container.setAttribute('id', `chartContainer${sensor_id}`)
                 $('chartsContainer').appendChild(container)
@@ -318,30 +226,22 @@ function batteryIcon(level) {
             }
 
         });
-
-        // $('changeLayout')
-
-        $('trFrom').addEventListener('change', (d) => { console.log(new Date(d.target.value)); })
-        $('trTo').addEventListener('change', (d) => { console.log(new Date(d.target.value)); })
-        // $('trFrom').value = new Date().toISOString().slice(0, 16)
-        // $('trTo').value = new Date().toISOString().slice(0, 16)
     }
 
+    // $('quickranges').addEventListener('change', (d) => {
+    //     console.log(d.target.value);
 
-    $('quickranges').addEventListener('change', (d) => {
-        console.log(d.target.value);
+    //     b_data.sensors_id.split(',').forEach((sensor_id, index) => {
+    //         from = new Date()
+    //         to = new Date()
+    //         from.setDate(from.getDate() + 0)
+    //         to.setDate(to.getDate() + 10)
+    //         values = fetchValues(sensor_id, b_id, from = '', to = '')
+    //         graphs[index].series[0].setData(values);
+    //         graphs[index].redraw();
 
-        b_data.sensors_id.split(',').forEach((sensor_id, index) => {
-            from = new Date()
-            to = new Date()
-            from.setDate(from.getDate() + 0)
-            to.setDate(to.getDate() + 10)
-            values = fetchValues(sensor_id, b_id, from = '', to = '')
-            graphs[index].series[0].setData(values);
-            graphs[index].redraw();
-
-        });
-    })
+    //     });
+    // })
 
     $('trFrom').addEventListener('change', () => {
         $('redrawBtn').classList = 'change'
@@ -354,8 +254,10 @@ function batteryIcon(level) {
     $('redrawBtn').addEventListener('click', () => {
         $('redrawBtn').classList = ''
         updateCharts()
+        _toast.show('', 'Graphiques rafraîchie', 'success')
     })
 
+    /* Redessine les graphique avec l'intervalle trFrom trTo sélectionner */
     function updateCharts() {
         const sensors_list = b_data.sensors_id.split(',')
 
