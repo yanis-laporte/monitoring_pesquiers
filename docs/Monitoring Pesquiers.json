@@ -1,8 +1,8 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-08T17:35:07.312Z",
-  "__export_source": "insomnia.desktop.app:v2022.2.1",
+  "__export_date": "2022-05-14T10:18:15.532Z",
+  "__export_source": "insomnia.desktop.app:v2022.3.0",
   "resources": [
     {
       "_id": "req_4e188e8786be40548a566294f8c16040",
@@ -15,7 +15,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"1\": {% randomnumber 1, 24, 0, 1 %},\n\t\"2\": {% randomnumber 1, 24, 0, 1 %},\n\t\"balise_id\": 4\n}"
+        "text": "{\n\t\"10\": {% randomnumber 1, 24, 0, 1 %},\n\t\"balise_id\": 694205,\n\t\"b\": 100\n}"
       },
       "parameters": [],
       "headers": [
@@ -60,10 +60,10 @@
       "_type": "workspace"
     },
     {
-      "_id": "req_3c3a04560ad348329b426b4ac3a92269",
+      "_id": "req_a686b8d7e5a9408aab7f1e56f6925fc3",
       "parentId": "fld_06cf3816377c4685bf905a55a253e200",
-      "modified": 1647600180620,
-      "created": 1647600180620,
+      "modified": 1648119508682,
+      "created": 1648119508682,
       "url": "{{ _.endpoint }}/api/values.php",
       "name": "GET",
       "description": "",
@@ -72,64 +72,34 @@
         "mimeType": "multipart/form-data",
         "params": []
       },
-      "parameters": [],
-      "headers": [
-        {
-          "name": "Content-Type",
-          "value": "multipart/form-data",
-          "id": "pair_f73f96730eee4133bfb22f39ead766d1",
-          "disabled": true
-        }
-      ],
-      "authentication": {},
-      "metaSortKey": -1633949853668.5,
-      "isPrivate": false,
-      "settingStoreCookies": true,
-      "settingSendCookies": true,
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingRebuildPath": true,
-      "settingFollowRedirects": "global",
-      "_type": "request"
-    },
-    {
-      "_id": "req_a686b8d7e5a9408aab7f1e56f6925fc3",
-      "parentId": "fld_06cf3816377c4685bf905a55a253e200",
-      "modified": 1648119508682,
-      "created": 1648119508682,
-      "url": "{{ _.endpoint }}/api/values.php",
-      "name": "GET avec unité",
-      "description": "",
-      "method": "GET",
-      "body": {
-        "mimeType": "multipart/form-data",
-        "params": [
-          {
-            "id": "pair_914380b4363c48ada27f6a36f6d781df",
-            "name": "u",
-            "value": "1",
-            "description": ""
-          },
-          {
-            "id": "pair_0cb6c787fcb74ca6b17381392db7a1c9",
-            "name": "",
-            "value": "",
-            "description": ""
-          }
-        ]
-      },
       "parameters": [
         {
           "id": "pair_042be099b17d4a7992bcb77ec575be8e",
           "name": "u",
           "value": "true",
-          "description": ""
+          "description": "",
+          "disabled": false
         },
         {
           "id": "pair_8b3817acb66545f1b5314feec73c0800",
-          "name": "id",
-          "value": "1",
-          "description": ""
+          "name": "sensor_id",
+          "value": "10",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "id": "pair_7f201639e958434081ef597a8ed66dc5",
+          "name": "from",
+          "value": "2022-01-11",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_09409bcf2038499c85c275b93651979c",
+          "name": "to",
+          "value": "2022-03-20",
+          "description": "",
+          "disabled": true
         }
       ],
       "headers": [
@@ -140,7 +110,7 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": -1633949853618.5,
+      "metaSortKey": -1633949853706,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -192,7 +162,7 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": -1633949853693.5,
+      "metaSortKey": -1633949853712.25,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -218,8 +188,8 @@
       "parameters": [
         {
           "id": "pair_fefe6c657eab4b429e71eb4b797040eb",
-          "name": "id",
-          "value": "1",
+          "name": "balise_id",
+          "value": "694203",
           "description": "",
           "disabled": false
         }
@@ -265,7 +235,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"name\": \"TestNomBalise1\",\n\t\"latitude\": \"43.0632\",\n\t\"longitude\": \"6.13975\",\n\t\"sensors_id\": \"1\"\n}"
+        "text": "{\n\t\"balise_id\": {% randomnumber 1000, 10000, 0, 0 %},\n\t\"name\": \"TestNomBalise1\",\n\t\"latitude\": \"43.0632\",\n\t\"longitude\": \"6.13975\",\n\t\"sensors_id\": \"1\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -306,21 +276,35 @@
           },
           {
             "id": "pair_bba62ce644c1472dbdc34a10eb70824a",
-            "name": "template",
-            "value": "Température anormal : {}",
+            "name": "email",
+            "value": "test@gmail.com",
             "description": ""
           },
           {
             "id": "pair_9ee2741bccd741308b12d3a6a42d208c",
             "name": "balise_id",
-            "value": "1",
-            "description": ""
+            "value": "2",
+            "description": "",
+            "disabled": false
           },
           {
             "id": "pair_cb8e59303c4a4e01a44c63f7854b172f",
             "name": "sensor_id",
             "value": "1",
             "description": ""
+          },
+          {
+            "id": "pair_916f47a59956444e955d2921164b73e1",
+            "name": "control",
+            "value": "5",
+            "description": ""
+          },
+          {
+            "id": "pair_c76513c0d3e84fef887ab1598b62c76f",
+            "name": "sign",
+            "value": ">",
+            "description": "",
+            "disabled": false
           }
         ]
       },
@@ -389,7 +373,7 @@
       "method": "PATCH",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"alert_id\":3,\n\t\"name\":\"Alerte3\",\n\t\"template\":\"Template test 3\",\n\t\"balise_id\":1,\n\t\"sensor_id\":1\n}"
+        "text": "{\n\t\"alert_id\":33,\n\t\"name\":\"Alerte3\",\n\t\"template\":\"Template test 3\",\n\t\"balise_id\":1,\n\t\"sensor_id\":1,\n\t\"control\": 10,\n\t\"sign\": \"<\",\n\t\"email\": \"a@a.com\"\n}\n"
       },
       "parameters": [],
       "headers": [
@@ -421,7 +405,7 @@
       "method": "DELETE",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"alert_id\":3\n}"
+        "text": "{\n\t\"alert_id\":33\n}"
       },
       "parameters": [],
       "headers": [
@@ -488,7 +472,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"name\": \"temepr\",\n\t\"unite\": \"ts\",\n\t\"symbole\": \"te\"\n}"
+        "text": "{\n\t\"sensor_id\": 120\n\t,\n\t\"name\": \"Ultra-Violet\",\n\t\"unit\": \"jsp\",\n\t\"symbol\": \"jsp/2\"\n} \t"
       },
       "parameters": [],
       "headers": [
@@ -510,168 +494,20 @@
       "_type": "request"
     },
     {
-      "_id": "req_421abdf4f97d4aac8017be18a6f3f1ec",
-      "parentId": "fld_d68fbd720a584e8e86319f65c7842117",
-      "modified": 1648207745595,
-      "created": 1648207745595,
-      "url": "{{ _.endpoint }}/api/calbr.php",
-      "name": "Ajouter une calibration",
-      "description": "",
-      "method": "POST",
-      "body": {
-        "mimeType": "multipart/form-data",
-        "params": [
-          {
-            "id": "pair_85f7cf3ba6064eac97d3c2a6666142db",
-            "name": "balise_id",
-            "value": "1",
-            "description": ""
-          },
-          {
-            "id": "pair_bba62ce644c1472dbdc34a10eb70824a",
-            "name": "sensor_id",
-            "value": "1",
-            "description": ""
-          },
-          {
-            "id": "pair_9ee2741bccd741308b12d3a6a42d208c",
-            "name": "calbr_rect",
-            "value": "0.5",
-            "description": ""
-          }
-        ]
-      },
-      "parameters": [],
-      "headers": [
-        {
-          "name": "Content-Type",
-          "value": "multipart/form-data",
-          "id": "pair_5141d6feef0e417fb4b5ed9de5b089ab"
-        }
-      ],
-      "authentication": {},
-      "metaSortKey": -1644188276092.625,
-      "isPrivate": false,
-      "settingStoreCookies": true,
-      "settingSendCookies": true,
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingRebuildPath": true,
-      "settingFollowRedirects": "global",
-      "_type": "request"
-    },
-    {
-      "_id": "fld_d68fbd720a584e8e86319f65c7842117",
-      "parentId": "wrk_6960ae46e9804ac3853867f836617bac",
-      "modified": 1648207745591,
-      "created": 1648207745591,
-      "name": "api/calbr.php",
-      "description": "",
-      "environment": {},
-      "environmentPropertyOrder": null,
-      "metaSortKey": -1647600400933.75,
-      "_type": "request_group"
-    },
-    {
-      "_id": "req_85ba01bc8e174c188f5be8511b15af81",
-      "parentId": "fld_d68fbd720a584e8e86319f65c7842117",
-      "modified": 1648207745599,
-      "created": 1648207745599,
-      "url": "{{ _.endpoint }}/api/calbr.php",
-      "name": "Lister les calibration",
-      "description": "",
-      "method": "GET",
-      "body": {},
-      "parameters": [],
-      "headers": [],
-      "authentication": {},
-      "metaSortKey": -1647601083584,
-      "isPrivate": false,
-      "settingStoreCookies": true,
-      "settingSendCookies": true,
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingRebuildPath": true,
-      "settingFollowRedirects": "global",
-      "_type": "request"
-    },
-    {
-      "_id": "req_9911baa8d1984ecc8a9199e2db6463d4",
-      "parentId": "fld_d68fbd720a584e8e86319f65c7842117",
-      "modified": 1648207745603,
-      "created": 1648207745603,
-      "url": "{{ _.endpoint }}/api/calbr.php",
-      "name": "Modifier une calibration",
-      "description": "",
-      "method": "PATCH",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\n\t\"alert_id\":3,\n\t\"name\":\"Alerte3\",\n\t\"template\":\"Template test 3\",\n\t\"balise_id\":1,\n\t\"sensor_id\":1\n}"
-      },
-      "parameters": [],
-      "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json",
-          "id": "pair_5141d6feef0e417fb4b5ed9de5b089ab"
-        }
-      ],
-      "authentication": {},
-      "metaSortKey": -1640775468601.25,
-      "isPrivate": false,
-      "settingStoreCookies": true,
-      "settingSendCookies": true,
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingRebuildPath": true,
-      "settingFollowRedirects": "global",
-      "_type": "request"
-    },
-    {
-      "_id": "req_73020aeb5d0346e088dd8aedbf9d4606",
-      "parentId": "fld_d68fbd720a584e8e86319f65c7842117",
-      "modified": 1648207745606,
-      "created": 1648207745606,
-      "url": "{{ _.endpoint }}/api/calbr.php",
-      "name": "Supprimer une calibration",
-      "description": "",
-      "method": "DELETE",
-      "body": {
-        "mimeType": "application/json",
-        "text": "{\n\t\"alert_id\":3\n}"
-      },
-      "parameters": [],
-      "headers": [
-        {
-          "name": "Content-Type",
-          "value": "application/json",
-          "id": "pair_5141d6feef0e417fb4b5ed9de5b089ab"
-        }
-      ],
-      "authentication": {},
-      "metaSortKey": -1637362661159.875,
-      "isPrivate": false,
-      "settingStoreCookies": true,
-      "settingSendCookies": true,
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingRebuildPath": true,
-      "settingFollowRedirects": "global",
-      "_type": "request"
-    },
-    {
       "_id": "env_79c810119d68db74c817f1dcca7136cf39927876",
       "parentId": "wrk_6960ae46e9804ac3853867f836617bac",
       "modified": 1646381270611,
       "created": 1646381270611,
       "name": "Base Environment",
       "data": {
-        "endpoint": "http://127.0.0.1/edsa-pesquiers",
+        "endpoint": "{{ _.pi }}",
+        "localhost": "http://localhost",
         "pi": "http://192.168.0.120"
       },
       "dataPropertyOrder": {
         "&": [
           "endpoint",
+          "localhost",
           "pi"
         ]
       },
