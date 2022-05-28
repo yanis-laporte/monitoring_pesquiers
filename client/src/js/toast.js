@@ -1,9 +1,10 @@
 import '../scss/toast.scss';
 
+
 /**
  * Class qui gère les notifications sous forme de toast.
  */
-class Toast {
+export class Toast {
     /**
      * Constructeur
      * @class
@@ -94,10 +95,4 @@ class Toast {
             this.remove(child);
         });
     }
-}
-
-console.info('New Toast initialized');
-
-module.exports = {
-    Toast
 }
