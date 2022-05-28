@@ -79,8 +79,8 @@ async function updateSensorsSelect(alert_id, balise_id) {
  * @param {Object} data données de l'alerte {alert_id, name, balise_id, sensor_id, control, sign}
  * @param {Boolean} [has_data=false] si les données fournis doivent être utilisées pour remplir l'alerte
  */
-async function createAlert(data, has_data) {
-    has_data = has_data || false;
+async function createAlert(data, _has_data) {
+    let has_data = _has_data || false;
     console.debug('createAlert new', data, has_data);
 
     // Création du div alert et ajout dans le DOM
@@ -248,7 +248,7 @@ function OnBaliseChange(e) { updateSensorsSelect(e.path[2].id.split('alert')[1],
  */
 (async () => {
     // Déclare le container des toasts
-    _toast = new Toast($('toast-container'))
+    const _toast = new Toast($('toast-container'))
 
     // Déclaration du cache
     window.pCache = {

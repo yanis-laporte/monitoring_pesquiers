@@ -17,7 +17,7 @@ async function fetchNode(id) {
  * @returns {JSON}
  */
 async function fetchValues(s_id, b_id, from, to) {
-    url = `${API_URL}/values.php?u=true&sensor_id=${s_id}&balise_id=${b_id}${from ? `&from=${from}` : ''}${to ? `&to=${to}` : ''}`;
+    let url = `${API_URL}/values.php?u=true&sensor_id=${s_id}&balise_id=${b_id}${from ? `&from=${from}` : ''}${to ? `&to=${to}` : ''}`;
     return await fetch(url)
         .then(res => res.json());
 }
@@ -169,7 +169,7 @@ function batteryIcon(level) {
     // Registre des graphs
     const graphs = [];
     // Déclaration du Toast
-    _toast = new Toast($('toast-container'))
+    const _toast = new Toast($('toast-container'))
 
     // Récupération de l'id de la balise depuis l'url (?balise_id=)
     const b_id = window.location.search.split('?')[1].split('=')[1]
@@ -262,7 +262,7 @@ function batteryIcon(level) {
         const sensors_list = b_data.sensors_id.split(',')
 
         asyncForEach(sensors_list, async (sensor_id, i) => {
-            data = await fetchValues(sensor_id, b_id, $('trFrom').value, $('trTo').value)
+            let data = await fetchValues(sensor_id, b_id, $('trFrom').value, $('trTo').value)
 
             if (data.values.length > 0) {
                 console.debug('redraw chart', i, data);
