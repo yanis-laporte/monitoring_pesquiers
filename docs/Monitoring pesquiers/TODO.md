@@ -33,13 +33,14 @@
 - [x] Récupération points de la map
 - [x] Ouverture lien (faire un truc) quand clique sur un point 
 	- Ouverture sur une nouvelle tabs des données graphique de la balise
+
+- [ ] https://cdnjs.com/libraries/leaflet
 - [ ] (bonus) Ajout de balise directement depuis la map
 - [ ] (bonus) Option d'affichage de la map
 
 
 ### Graphiques
 - [x] Supprimer colonne balise_id de sensorsValues
-- [ ] Graphique spécial pour le vent + direction
 - [ ] Affichange ligne, colonne
 - [x] Time range
 
@@ -84,38 +85,18 @@
 	- [ ] ?
 - [ ] API ou direct sur php ?
 
-### Ajout/Modification de Balises
-### Ajout/Modification de Capteurs
-
 ### Global
-- [x] Toast
-- [ ] mode:'cors' des fetchs ?
+- [x] ~~mode:'cors' des fetchs ? ~~
 
 ## Toast
-- [x] Fonctionnel
 - [ ] Responsive -> toast en milieu  haut de l'écran
 - [ ] Quand pas de titre, affichier le toast juste sur une ligne
+- [x] Fonctionnel
 
 
 Breakpoint sass
 http://breakpoint-sass.com/
 https://jsdoc.app/index.html
 
-Frosted glass:
-
-https://www.reddit.com/r/webdev/comments/u5m4ue/frosted_class_effect_in_css_one_of_my_favorites/
-
-### Charts
 
 [tmp code](obsidian://open?vault=Monitoring%20pesquiers&file=tmp)
-	
-https://www.highcharts.com/demo/windbarb-series
-https://www.highcharts.com/demo/combo-meteogram#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=51.50853&lon=-0.12574&altitude=25
-https://jsfiddle.net/hn8sgw5y/23/
-https://www.highcharts.com/docs/stock/navigator
-https://www.tutlane.com/tutorial/highcharts/highcharts-multiple-axes-chart
-scrollbar
-https://jsfiddle.net/0tgyqqkj/
-https://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/line-time-series
-
-- [ ] https://cdnjs.com/libraries/leaflet
