@@ -75,6 +75,19 @@ function res($data, $status = 200) {
     exit();
 }
 
+/**
+ * Retourne true si l'utilisateur est connecté
+ * @return boolean
+ */
+function isConnected() {
+    session_start();
+
+    if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 /**
  * Vérifier si une variable est du type donné.
