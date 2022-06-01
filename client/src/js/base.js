@@ -1,7 +1,5 @@
 module.exports = {
-    // API_URL: "http://127.0.0.1/edsa-pesquiers/api"
-    // API_URL: "http://localhost/api",
-    API_URL: "http://192.168.0.120/api",
+    API_URL: "./api",
 
     /* Retourne l'element associé avec l'id en paramètre */
     $: (e) => {
