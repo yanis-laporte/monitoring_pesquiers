@@ -3,6 +3,20 @@ include('../includes/database_conn.php');
 include('../includes/functions.php');
 
 /**
+ * Gère les requêtes sur les alertes
+ * Méthode autorisé:
+ * GET   : Récupère les alertes
+ * POST  : Créer une alerte
+ * PATCH : Modifier une alerte
+ * DELETE: Supprimer une alerte
+ * 
+ * @protected
+ */
+
+// Route protégée
+protectedRoute();
+
+/**
  * Requête GET
  * Retourne la liste des alertes
  */

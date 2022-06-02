@@ -4,6 +4,26 @@ include('../includes/database_conn.php');
 include('../includes/functions.php');
 
 /**
+ * Gère les requêtes sur les valeurs
+ * Méthode autorisé:
+ * GET   : Récupère les valeurs
+ *  @param bool $u Ajoute les unités a la réponse
+ *  @param string $from Timestamp de début d'intervalle
+ *  @param string $to TimeStamp de fin d'intervalle
+ *  @param int $sensor_id id du capteur
+ *  @param int $balise_id id de la balise
+ *  @protected
+ * 
+ * POST  : Ajoute une valeur a la vase de données
+ * 
+ */
+
+// Seulement la route GET est protégée
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    protectedRoute();
+}
+
+/**
  * Requête POST
  * Insert une nouvelle entrée dans la base de donnée
  */

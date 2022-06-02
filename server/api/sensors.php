@@ -3,6 +3,19 @@ include('../includes/database_conn.php');
 include('../includes/functions.php');
 
 /**
+ * Gère les requêtes sur les balises
+ * Méthode autorisé:
+ * GET   : Récupère les balises
+ *  @param int $balise_id L'id de la balise à récupérer
+ * POST  : Créer une balise
+ * 
+ * @protected
+ */
+
+// Route protégée
+protectedRoute();
+
+/**
  * Requête GET
  * Retourne la liste des capteurs
  */
