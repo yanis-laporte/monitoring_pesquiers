@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['login'])) {
         $_SESSION['isConnected'] = false;
         res(array(
             "success" => false,
-            "message" => "Mauvais couple adresse mail/mot de passe"
+            "message" => "Mauvais couple mot de passe/adresse mail"
         ), 401);
     }
 }
