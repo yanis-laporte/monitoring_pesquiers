@@ -1,26 +1,21 @@
 - [x] Mettre a jour l'api avec le function res
 - [x] Faire en sorte de vérifier le type et le format des donnée reçus
 - [x] Endpoint api pour mettre à jour le niveau de battery d'une balise
-- [ ] Faire le choix de timerange des graphs
+- [x] Faire le choix de timerange des graphs
 	- [x] Choix avec des inputs calendar
 	- [ ] Choix rapide 5min 10min 1heure etc
 	- [x] Animation tourne quand id=redrawBtn a class change
 - [x] Finir la nav bar
 - [ ] Export CSV
-- [ ] Faire le système de connexion
-- [ ] Fetch avec le token du cookie php pour pas à implémenter l'html dans php
+- [x] Faire le système de connexion
+	- @alerts, @nodes, @sensors, GET values
 - [ ] Alertes
 - [ ] Graphique
 - [ ] Carte
 
-### api
--  Tout les endpoinrs
-	- [ ] Handles les erreurs
-
-
 ### Connexion
 - [ ] Responsive
-- [ ] Système connexion
+- [x] Système connexion
 - [ ] Mot de passe oubliée
 - [ ] Pas de compte
 
