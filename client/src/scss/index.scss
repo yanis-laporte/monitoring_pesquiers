@@ -11,7 +11,45 @@
   height: 100%;
 }
 
-.center {
+.hidden {
+  display: none;
+}
+
+.userMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  max-width: calc(100% - (.5em *2));
+  margin: .5em;
+  padding: .5em 1em .5em 1em;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .separator:after {
+    margin: 1em;
+    content: '|';
+
+  }
+
+  button {
+    transition: all .3s;
+
+    i {
+      margin-right: .5em;
+    }
+
+    &:hover {
+      text-decoration: underline;
+      color: $p2
+    }
+  }
+}
+
+.middle {
   position: absolute;
   top: 50%;
   right: 50%;
@@ -20,17 +58,6 @@
   width: 500px;
 
   transform: translate(50%, -50%);
-
-  background: linear-gradient(212.48deg, rgba(255, 255, 255, 0.2) 1.45%, rgba(0, 0, 0, 0) 99.49%);
-  border: 3px solid rgba(255, 255, 255, 0.4);
-  box-sizing: border-box;
-  /* Blur */
-  backdrop-filter: blur(10px);
-  /* Note: backdrop-filter has minimal browser support */
-
-  filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.25));
-
-  border-radius: 30px;
 
   form {
     display: flex;
@@ -41,8 +68,8 @@
   .title-wrapper {
     .title {
       flex: 1;
-      background: rgba(255, 255, 255, 0.4);
-      border: 3px solid rgba(255, 255, 255, 0.4);
+      background: #ffffff66;
+      border: 3px solid #ffffff66;
       box-sizing: border-box;
       /* Note: backdrop-filter has minimal browser support */
       backdrop-filter: blur(30px);
@@ -58,7 +85,7 @@
       font-style: normal;
       font-weight: 600;
       font-size: 64px;
-      color: #6fa9dc;
+      color: $p2
     }
   }
 
@@ -72,7 +99,7 @@
     width: 100%;
 
     label {
-      color: white;
+      color: $white;
     }
 
     .email,
@@ -88,24 +115,17 @@
     }
 
     input {
-      /* Positioning  */
       border-radius: 15px;
 
-      /* Display & Box Model */
       height: 3rem;
       width: 100%;
       margin: 1%;
       padding: 1%;
       padding-left: 10px;
 
-      /* Color */
-      background: #ffffff;
+      background: $white;
 
-      /* Text */
       text-align: center;
-
-
-      // filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.25));
 
       &::placeholder {
         text-align: center;
@@ -116,7 +136,8 @@
 
       &:focus {
         &::placeholder {
-          transform: translate(-150%);
+          // transform: translate(-150%);
+          opacity: 0;
           transition: all 0.3s ease-in-out;
         }
       }
@@ -147,16 +168,16 @@
         margin-right: 2em;
 
         background: $blue;
-        border: 3px solid #ffffff66;
+        border: 3px solid $light-gray;
         border-radius: 15px;
 
         color: #ffffff;
 
         font-size: 33px;
-        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        text-shadow: 0px 4px 4px #00000040;
 
         &:hover {
-          border: 3px solid $blue;
+          border: 3px solid $p2;
         }
       }
     }
