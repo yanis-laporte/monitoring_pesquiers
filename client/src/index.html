@@ -11,15 +11,21 @@
 <body>
     <div class="root bg-animated">
         <div class="container">
-            <div class="center">
-                <form action="login.php" method="post" enctype="multipart/form-data">
+            <div id="userMenu" class="userMenu transparent">
+                <ul>
+                    <li><button><i class="fas fa-sign-out-alt"></i>Se déconnecter</button></li>
+                    <!-- <li class="separator"></li> -->
+                </ul>
+            </div>
+            <div class="middle transparent">
+                <form name="logForm">
                     <div class="title-wrapper">
-                        <div class="title">Connexion</div>
+                        <div class="title transparent">Connexion</div>
                     </div>
                     <div class="input-wrapper">
                         <div class="email">
                             <label for="email">E-mail</label>
-                            <input type="email" name="email" placeholder="E-mail">
+                            <input type="text" name="email" placeholder="E-mail">
                         </div>
                         <div class="password">
                             <label for="password">Mot de passe</label>
@@ -40,6 +46,9 @@
             </div>
         </div>
     </div>
+    <div id="toast-container"></div>
+    <script type="module" src="./js/login.js">
+    </script>
 </body>
 
 </html>
