@@ -5,11 +5,13 @@ cors();
 
 /**
  * Parse les données récupérées dans php://input
- * !GET
+ * Si les données envoyé ne sont pas dans le format 'application/x-www-form-urlencoded' ou 'multipart/form-data'
+ * alors $_POST ne contiendra rien car PHP ce sait pas quoi faire des données, le seul moyen de les récupérer c'est via php://input
+ * https://stackoverflow.com/questions/8893574/php-php-input-vs-post#8893792
  * @return array
  */
 function jsonInput() {
-    // si url donnee dans l'url
+
     if ($_POST) {
         return $_POST;
     } else {
@@ -23,6 +25,7 @@ function jsonInput() {
 }
 
 /**
+ * 
  *  An example CORS-compliant method.  It will allow any GET, POST, or OPTIONS requests from any
  *  origin.
  *
@@ -65,7 +68,7 @@ function cors() {
  * exit
  * 
  * @param array $data Les données à retourner
- * @param int $status Le code de statut HTTP (defaut: 200)
+ * @param int $status Le code de statut HTTP (défaut: 200)
  * @return void
  */
 function res($data, $status = 200) {
