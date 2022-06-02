@@ -5,6 +5,17 @@ include('../includes/functions.php');
 session_start();
 
 /**
+ * Gestion de l'utilisateur
+ * Méthode autorisé:
+ * POST
+ *  @query login   : Permet la connexion d'un utilisateur
+ *  @query register: Permet la création d'un compte utilisateur
+ * GET
+ *  @query -       : Retourne si l'utilisateur est connecté ou non
+ *  @query logout  : Déconnecte l'utilisateur
+ */
+
+/**
  * Requête POST
  * Gère l'authentification
  */
