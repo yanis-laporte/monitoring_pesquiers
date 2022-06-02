@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         res(array(
             "success" => true,
             "message" => "Vous êtes connecté",
-            "user" => $_SESSION['user']
+            // "user" => $_SESSION['user']
         ));
     } else {
         res(array(
