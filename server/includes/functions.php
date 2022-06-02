@@ -1,5 +1,7 @@
 <?php
 
+$_DEV_MODE = true;
+
 cors();
 
 
@@ -85,10 +87,24 @@ function res($data, $status = 200) {
 function isConnected() {
     session_start();
 
-    if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
+    global $_DEV_MODE;
+
+    if (isset($_SESSION['isConnected']) && $_SESSION['isConnected'] || $_DEV_MODE) {
         return true;
     } else {
         return false;
+    }
+}
+
+/**
+ * Permet de protéger une page
+ */
+function protectedRoute() {
+    if (!isConnected()) { // L'utilisateur n'est pas connecté
+        res(array(
+            "success" => false,
+            "message" => "Vous n'êtes pas connecté"
+        ), 401); // 401 -> Unauthorized
     }
 }
 
