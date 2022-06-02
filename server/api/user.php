@@ -20,6 +20,8 @@ session_start();
  * Gère l'authentification
  */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['login'])) {
+    $_POST = jsonInput();
+
     try {
         issetArray($_POST, ['email', 'password']);
     } catch (\Throwable $th) {
@@ -55,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['login'])) {
  * Création d'un compte
  */
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['register'])) {
+    $_POST = jsonInput();
+
     try {
         issetArray($_POST, ['email', 'password']);
     } catch (\Throwable $th) {
