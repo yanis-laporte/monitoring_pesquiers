@@ -4,4 +4,4 @@ function getFileName() {
     return url[url.length - 1];
 }
 
-document.querySelector(`a[href='${getFileName()}']`).classList.add("active");
+document.querySelector(`a[href='/${getFileName()}']`).classList.add("active");
