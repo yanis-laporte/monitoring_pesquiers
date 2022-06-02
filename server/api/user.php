@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['login'])) {
         "email" => $_POST['email']
     ));
 
-    $user = $req->fetch(PDO::FETCH_ASSOC);
-    if (password_verify($_POST['password'], $user['password'])) {
+    $user = $req->fetch(PDO::FETCH_ASSOC); // $user = bool(false) si rien est trouvé
+    if ($user && password_verify($_POST['password'], $user['password'])) {
         $_SESSION['isConnected'] = true;
         $_SESSION['user'] = $user;
         res(array(
