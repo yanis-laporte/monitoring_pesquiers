@@ -1,8 +1,8 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-05-30T03:23:46.516Z",
-  "__export_source": "insomnia.desktop.app:v2022.2.1",
+  "__export_date": "2022-06-06T22:10:37.567Z",
+  "__export_source": "insomnia.desktop.app:v2022.3.0",
   "resources": [
     {
       "_id": "req_4e188e8786be40548a566294f8c16040",
@@ -692,13 +692,19 @@
           {
             "id": "pair_853bac5e7dad439da130e962379fc84d",
             "name": "email",
-            "value": "qsdsq",
+            "value": "a",
             "description": ""
           },
           {
             "id": "pair_7f79980fd78743aabb4f1e6f31f21d41",
             "name": "password",
-            "value": "motdepasssqdsqe",
+            "value": "a",
+            "description": ""
+          },
+          {
+            "id": "pair_62a9e69f447947af8d1837c037848dc9",
+            "name": "",
+            "value": "",
             "description": ""
           }
         ]
@@ -770,15 +776,15 @@
         "mimeType": "multipart/form-data",
         "params": [
           {
-            "id": "pair_853bac5e7dad439da130e962379fc84d",
+            "id": "pair_c0b5a53ff1784aa2a945cd6dee0eb3bb",
             "name": "email",
-            "value": "qsdsq",
+            "value": "a",
             "description": ""
           },
           {
             "id": "pair_7f79980fd78743aabb4f1e6f31f21d41",
             "name": "password",
-            "value": "motdepassesd",
+            "value": "a",
             "description": ""
           }
         ]
@@ -816,6 +822,275 @@
       "headers": [],
       "authentication": {},
       "metaSortKey": -1651514945545.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2f1579a58ca9453cad204e8d2d61a234",
+      "parentId": "fld_53d7e28542f543469295387b5a2e0e57",
+      "modified": 1654353135376,
+      "created": 1654353135376,
+      "url": "{{ _.endpoint }}/api/export.php",
+      "name": "values",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": []
+      },
+      "parameters": [
+        {
+          "name": "type",
+          "value": "values",
+          "id": "pair_bf5374f177314e81a75244191d730325"
+        },
+        {
+          "name": "u",
+          "value": "true",
+          "id": "pair_661660b71d324a0da4691e5b7589afb5",
+          "disabled": true
+        },
+        {
+          "name": "balise_id",
+          "value": "1",
+          "id": "pair_6d5f792bdb954076ba13078f496480f3",
+          "disabled": true
+        },
+        {
+          "name": "sensor_id",
+          "value": "1",
+          "id": "pair_1d9a44a955d24ad9af9872c8503b712d",
+          "disabled": true
+        },
+        {
+          "name": "sort",
+          "value": "asc",
+          "id": "pair_de40ce0ea22247e9a004cdd7739ba39c",
+          "disabled": true
+        },
+        {
+          "name": "sby",
+          "value": "value",
+          "id": "pair_15669cd820f34240afddef185fc1ed7c",
+          "disabled": true
+        },
+        {
+          "id": "pair_361c976f14f846299864639375627959",
+          "name": "limit",
+          "value": "50",
+          "description": "",
+          "disabled": true
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1653080490329.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_53d7e28542f543469295387b5a2e0e57",
+      "parentId": "wrk_6960ae46e9804ac3853867f836617bac",
+      "modified": 1654353118043,
+      "created": 1654353118043,
+      "name": "api/export.php",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1654353118043,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_2f72cfc6809c4b0db0f2b464867a873e",
+      "parentId": "fld_53d7e28542f543469295387b5a2e0e57",
+      "modified": 1654457168193,
+      "created": 1654457168193,
+      "url": "{{ _.endpoint }}/api/export.php",
+      "name": "sensors",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": []
+      },
+      "parameters": [
+        {
+          "name": "type",
+          "value": "sensors",
+          "id": "pair_bf5374f177314e81a75244191d730325"
+        },
+        {
+          "name": "sensor_id",
+          "value": "1",
+          "id": "pair_1d9a44a955d24ad9af9872c8503b712d",
+          "disabled": true
+        },
+        {
+          "name": "sort",
+          "value": "asc",
+          "id": "pair_de40ce0ea22247e9a004cdd7739ba39c",
+          "disabled": true
+        },
+        {
+          "name": "sby",
+          "value": "value",
+          "id": "pair_15669cd820f34240afddef185fc1ed7c",
+          "disabled": true
+        },
+        {
+          "id": "pair_361c976f14f846299864639375627959",
+          "name": "limit",
+          "value": "50",
+          "description": "",
+          "disabled": true
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1652689104133.625,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_dd24c2eb8e2c47a39ab24565f030b836",
+      "parentId": "fld_53d7e28542f543469295387b5a2e0e57",
+      "modified": 1654457763171,
+      "created": 1654457763171,
+      "url": "{{ _.endpoint }}/api/export.php",
+      "name": "nodes",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": []
+      },
+      "parameters": [
+        {
+          "name": "type",
+          "value": "nodes",
+          "id": "pair_bf5374f177314e81a75244191d730325"
+        },
+        {
+          "name": "balise_id",
+          "value": "1",
+          "id": "pair_1d9a44a955d24ad9af9872c8503b712d",
+          "disabled": true
+        },
+        {
+          "name": "name",
+          "value": "balisename",
+          "id": "pair_de40ce0ea22247e9a004cdd7739ba39c",
+          "disabled": true
+        },
+        {
+          "name": "latitude",
+          "value": "1",
+          "id": "pair_15669cd820f34240afddef185fc1ed7c",
+          "disabled": true
+        },
+        {
+          "id": "pair_361c976f14f846299864639375627959",
+          "name": "longitude",
+          "value": "1",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_9225ce434f694a129b43cc813b305464",
+          "name": "sensors_id",
+          "value": "3",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_f1e24b9f0c4b44739b556e28f4903fd0",
+          "name": "battery_level",
+          "value": "",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_307f4b2c8aaa441aab5c85e36876d484",
+          "name": "sby",
+          "value": "name",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_0e477ebb371c43a28727ac36e454b3e0",
+          "name": "limit",
+          "value": "1",
+          "description": "",
+          "disabled": true
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1652493411035.5625,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f28a64238d8445f7899740f02208c2db",
+      "parentId": "fld_53d7e28542f543469295387b5a2e0e57",
+      "modified": 1654458198393,
+      "created": 1654458198393,
+      "url": "{{ _.endpoint }}/api/export.php",
+      "name": "alerts",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": []
+      },
+      "parameters": [
+        {
+          "name": "type",
+          "value": "alerts",
+          "id": "pair_bf5374f177314e81a75244191d730325"
+        },
+        {
+          "id": "pair_307f4b2c8aaa441aab5c85e36876d484",
+          "name": "sby",
+          "value": "name",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_0e477ebb371c43a28727ac36e454b3e0",
+          "name": "limit",
+          "value": "1",
+          "description": "",
+          "disabled": true
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1652395564486.5312,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
