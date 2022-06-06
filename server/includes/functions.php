@@ -67,7 +67,7 @@ function cors() {
 
 /**
  * Retourne une réponse au format json.
- * exit
+ * puis termine l'execution du script.
  * 
  * @param array $data Les données à retourner
  * @param int $status Le code de statut HTTP (défaut: 200)
@@ -97,7 +97,7 @@ function isConnected() {
 }
 
 /**
- * Permet de protéger une page
+ * Permet de protéger une route
  */
 function protectedRoute() {
     if (!isConnected()) { // L'utilisateur n'est pas connecté
@@ -109,24 +109,18 @@ function protectedRoute() {
 }
 
 /**
- * Vérifier si une variable est du type donné.
- * Throw une exception si la variable n'est pas du type donné.
- * Throw une exception si le type n'existe pas.
- * @param array $arr Tableau de variables avec le type a vérifier
+ * @param string value (passé en référence) La valeurs à vérifier
+ * @param array allowed Les valeurs autorisées
+ * @return string La valeur passée en paramètre ou la valeur par défaut (index 0 de allowed)
  */
-function typeCheck($arr) {
-    // types valide
-    $types = ["boolean", "integer", "double", "string", "array", "NULL"];
-
-    foreach ($arr as $type => $value) {
-        //
-        if (!in_array($type, $types)) {
-            throw new Exception("Invalid type: " . $type);
-        }
-        // Le type de la valeur est correct
-        if (gettype($value) != $type) {
-            throw new Exception("Invalid variable type: $value is not a $type");
-        }
+function whitelist(&$value, $allowed) {
+    if ($value == null) {
+        return $allowed[0];
+    }
+    if (in_array($value, $allowed)) {
+        return $value;
+    } else {
+        return $allowed[0];
     }
 }
 
