@@ -97,7 +97,7 @@ nav#chart-navbar {
             cursor: pointer;
         }
 
-        &:hover::-webkit-calendar-picker-indicator {
+        &::-webkit-calendar-picker-indicator:hover {
             // https://codepen.io/sosuke/pen/Pjoqqp
             filter: invert(41%) sepia(79%) saturate(7314%) hue-rotate(197deg) brightness(98%) contrast(101%);
         }
