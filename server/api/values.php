@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         ), 400);
     }
 
-    // unitée de mesure
+    // unités de mesure
     if (isset($_GET['u']) && $_GET['u'] == "true") {
         $reqU = $bdd->prepare("SELECT name, unit, symbol FROM listSensors WHERE sensor_id = :sensor_id");
         $reqU->execute(array("sensor_id" => $_GET['sensor_id']));
