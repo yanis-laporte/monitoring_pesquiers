@@ -1,0 +1,117 @@
+@use "sass:color";
+@import "reset";
+@import "base";
+@import "glassy";
+@import "colors";
+@import "topbar";
+
+$border-color: $p1;
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100%;
+}
+
+.Ex-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    select {
+        background-color: white;
+        margin: 1em;
+        padding: .5em;
+
+        border: 3px solid $border-color;
+        border-radius: 10px;
+    }
+}
+
+.separator {
+    height: 3px;
+    width: 70%;
+    margin: 0 15% 0 15%;
+    background-color: $p2;
+}
+
+
+.Ex-options {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        border-top: 3px solid $border-color;
+        border-bottom: 3px solid $border-color;
+        border-left: 3px solid $border-color;
+
+        margin: 1em 0 1em 1em;
+        padding: .5em 1em .5em .5em;
+
+        background-color: white;
+
+        border-radius: 10 0 0 10px;
+    }
+
+    .option-item {
+        display: flex;
+        flex-direction: row;
+    }
+
+    input,
+    select {
+        width: max-content;
+        border-top: 3px solid $border-color;
+        border-bottom: 3px solid $border-color;
+        border-right: 3px solid $border-color;
+
+        background-color: white;
+        margin: 1em 1em 1em 0;
+        padding: .5em .5em .5em 0;
+
+        border-radius: 0 10 10 0;
+
+    }
+}
+
+.Ex-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    button {
+        background-color: white;
+        margin: 1em;
+        padding: .5em;
+        border-radius: 10px;
+        border: 3px solid $border-color;
+
+        &:hover {
+            box-shadow: 0 0 20px $p2;
+            border: 3px solid $primary;
+        }
+
+        &:active {
+            border: 3px solid $p2;
+        }
+    }
+}
+
+input[type=datetime-local] {
+    &::-webkit-calendar-picker-indicator {
+        // https://stackoverflow.com/questions/14946091/are-there-any-style-options-for-the-html5-date-picker/16106788#16106788
+        // margin: 5 5 5 5px;
+        transform: scale(200%);
+        cursor: pointer;
+    }
+
+    &::-webkit-calendar-picker-indicator:hover {
+        // https://codepen.io/sosuke/pen/Pjoqqp
+        filter: invert(41%) sepia(79%) saturate(7314%) hue-rotate(197deg) brightness(98%) contrast(101%);
+    }
+}
+
+select,
+input {
+    cursor: pointer;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./scss/export.scss" />
+    <title>Monitoring des Pesquiers</title>
+</head>
+
+<body>
+    <div class="root bg">
+        <div class="container glass">
+            <nav id="navbar">
+                <import src="./nav.html" />
+            </nav>
+            <div class="Ex-top">
+                <span> </span>
+                <select name="" id="Ex-select">
+                    <option value="" disabled selected>Sélectionner</option>
+                    <option value="values">Exportation des valeurs des capteurs</option>
+                    <option value="nodes">Exportation de la liste des balises</option>
+                    <option value="sensors">Exportation de la liste des capteurs</option>
+                    <option value="alerts">Exportation des alertes</option>
+                </select>
+            </div>
+            <div class="separator"></div>
+            <div class="Ex-options" id="Ex-options">
+            </div>
+            <div class="Ex-bottom"><button id="Ex-btn" class="hidden">Exporter</button></div>
+        </div>
+    </div>
+    <div id="toast-container">
+        <!-- <div class="toast-item-(animation) toast-(success)" id="toast#">
+            <div class="toast-title">Title(<span class="toast-mark">)</span><div>
+            <div class="toast-body">Message</div>
+        </div> -->
+    </div>
+</body>
+<!-- Javascript -->
+<script src="./js/topbar.js"></script>
+<script type="module" src="./js/export.js"></script>
+
+</html>
