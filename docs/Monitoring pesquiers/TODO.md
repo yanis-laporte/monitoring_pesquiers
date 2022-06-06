@@ -70,16 +70,11 @@
 
 
 ### Export CSV
-- [ ] Page
+- [x] Page
 - [ ] Style
-- [ ] Option d'export
-	- [ ] Balise
-	- [ ] Capteur
-	- [ ] Nombre de ligne
-	- [ ] Séparateur
-	- [ ] ?
-- [ ] API ou direct sur php ?
-
+- [x] Option d'export
+	- [Export](Export)
+- [x] Translation des keys
 ### Global
 - [x] ~~mode:'cors' des fetchs ? ~~
 

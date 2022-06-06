@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Installation.md",
+            "file": "TODO.md",
             "mode": "source",
             "source": false
           }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Installation.md",
+                "file": "TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -79,25 +79,33 @@
                 "unlinkedCollapsed": true
               }
             }
+          },
+          {
+            "id": "97351833480ecbfa",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 100
   },
   "active": "abebef0bef3af674",
   "lastOpenFiles": [
+    "TODO.md",
+    "Export.md",
+    "().md",
+    "snippets.md",
     "Installation.md",
     "Pasted image 20220601221610.png.md",
     "imgs/architecture.png",
     "imgs/pma_web_server.png",
     "Pasted image 20220601224129.png",
-    "Pasted image 20220601221721.png",
-    "Pasted image 20220601221610.png",
-    "snippets.md",
-    "TODO.md",
-    "tmp.md"
+    "Pasted image 20220601221721.png"
   ]
 }
