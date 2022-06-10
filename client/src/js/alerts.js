@@ -1,5 +1,6 @@
 import { API_URL, $ } from './base';
 import { Toast } from './toast';
+const _toast = new Toast($('toast-container'));
 
 //#region fetch get data
 
@@ -246,9 +247,9 @@ function OnBaliseChange(e) { updateSensorsSelect(e.path[2].id.split('alert')[1],
 /**
  * Fonction principale
  */
+
 (async () => {
     // Déclare le container des toasts
-    const _toast = new Toast($('toast-container'))
 
     // Déclaration du cache
     window.pCache = {

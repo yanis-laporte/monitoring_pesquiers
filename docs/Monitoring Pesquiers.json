@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-06-06T22:10:37.567Z",
+  "__export_date": "2022-06-09T22:09:44.211Z",
   "__export_source": "insomnia.desktop.app:v2022.3.0",
   "resources": [
     {
@@ -692,13 +692,13 @@
           {
             "id": "pair_853bac5e7dad439da130e962379fc84d",
             "name": "email",
-            "value": "a",
+            "value": "test@gmail.com",
             "description": ""
           },
           {
             "id": "pair_7f79980fd78743aabb4f1e6f31f21d41",
             "name": "password",
-            "value": "a",
+            "value": "test",
             "description": ""
           },
           {
