@@ -13,33 +13,35 @@
         <div class="container">
             <div id="userMenu" class="userMenu transparent">
                 <ul>
-                    <li><button><i class="fas fa-sign-out-alt"></i>Se déconnecter</button></li>
-                    <!-- <li class="separator"></li> -->
+                    <li><button id="logout"><i class="fas fa-sign-out-alt"></i>Se déconnecter</button></li>
+                    <li class="separator"></li>
+                    <li><a href="./map.html"><i class="fas fa-map"></i>Carte</a></li>
                 </ul>
             </div>
-            <div class="middle transparent">
-                <form name="logForm">
+            <!-- Forms -->
+            <div class="form-wrapper transparent">
+                <form name="logForm" id="regForm">
                     <div class="title-wrapper">
                         <div class="title transparent">Connexion</div>
                     </div>
-                    <div class="input-wrapper">
+
+                    <div class="input-wrapper margin-top">
                         <div class="email">
                             <label for="email">E-mail</label>
-                            <input type="text" name="email" placeholder="E-mail">
+                            <input type="email" name="email" placeholder="E-mail" required>
                         </div>
                         <div class="password">
                             <label for="password">Mot de passe</label>
-                            <input type="password" name="password" placeholder="Mot de passe">
-                            <span class="tooltip"><a href="">Mot de passe oublié ?</a></span>
+                            <input type="password" name="password" placeholder="Mot de passe" required>
+                            <!-- <span class="tooltip"><a href="">Mot de passe oublié ?</a></span> -->
                         </div>
                     </div>
-                    <div class="submit">
-                        <div class="button">
-                            <input type="submit" name="submit" value="Valider">
+                    <div class="submit margin-top">
+                        <div class="submit-input">
+                            <input type="submit" name="submit">
                         </div>
                         <div class="tooltip">
-                            <a href="">Pas de compte ? Créer en un</a>
-                            <a href="">Bla Bla ...</a>
+                            <a href="#register">Pas de compte ? Créer en un</a>
                         </div>
                     </div>
                 </form>
