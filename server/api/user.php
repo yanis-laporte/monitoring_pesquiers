@@ -105,7 +105,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['register'])) {
         // 23000 => Duplicate entry sur une clé unique
         if ($th->getCode() == 23000) {
             res(array(
-                "error" => "Email déjà utilisé"
+                "success" => false,
+                "message" => "Cette adresse mail est déjà utilisée"
             ), 400);
         } else {
             res(array(
@@ -134,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['logout'])) {
  * Vérifie si l'utilisateur est connecté
  */
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
+    if (isset($_SESSION['isConnected']) && $_SESSION['isConnected'] || $_DEV_MODE == true) {
         res(array(
             "success" => true,
             "message" => "Vous êtes connecté",
