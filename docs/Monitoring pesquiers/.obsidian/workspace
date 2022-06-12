@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Export.md",
+            "file": "snippets.md",
             "mode": "source",
             "source": false
           }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Export.md",
+                "file": "snippets.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,12 +97,12 @@
   },
   "active": "abebef0bef3af674",
   "lastOpenFiles": [
+    "snippets.md",
     "Export.md",
     "Installation.md",
     "imgs/pma_web_server.png",
     "imgs/pma_dbconfig_common.png",
     "imgs/architecture.png",
-    "snippets.md",
     "TODO.md",
     "().md",
     "Pasted image 20220601221610.png.md",
