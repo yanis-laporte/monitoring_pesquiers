@@ -1,6 +1,6 @@
 <?php
 
-$_DEV_MODE = true;
+$_DEV_MODE = false;
 
 cors();
 
