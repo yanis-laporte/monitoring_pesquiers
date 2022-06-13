@@ -123,7 +123,6 @@ async function saveChange(alert_id) {
 
     // Récupère les données de l'alerte
     const data = {
-        name: "name",
         balise_id: $(`alert${alert_id}`).querySelector("select[name='balise-select']").value,
         sensor_id: $(`alert${alert_id}`).querySelector("select[name='sensors-select']").value,
         control: $(`alert${alert_id}`).querySelector("input[name='control-in']").value,
