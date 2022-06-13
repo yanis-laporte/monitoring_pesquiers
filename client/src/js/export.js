@@ -197,7 +197,7 @@ $('Ex-btn').addEventListener('click', (e) => {
         let value = $$(paramName)[0].value;
         if (value) body[paramName] = value;
     })
-    const queryURL = new URL(`${API_URL}/export.php`)
+    const queryURL = new URL(`${window.location.origin}${API_URL}/export.php`)
     // Génère la requête avec les paramètres
     Object.keys(body).forEach(key => {
         queryURL.searchParams.append(key, body[key])
