@@ -13,7 +13,7 @@ include('../includes/functions.php');
  */
 
 // Route protégée
-protectedRoute();
+// protectedRoute();
 
 /**
  * Requête GET
