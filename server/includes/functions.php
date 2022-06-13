@@ -89,7 +89,11 @@ function isConnected() {
 
     global $_DEV_MODE;
 
-    if (isset($_SESSION['isConnected']) && $_SESSION['isConnected'] || $_DEV_MODE) {
+    if ($_DEV_MODE == true) {
+        return true;
+    }
+
+    if (isset($_SESSION['isConnected']) && $_SESSION['isConnected'] == true) {
         return true;
     } else {
         return false;
