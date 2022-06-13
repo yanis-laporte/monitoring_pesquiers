@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Vérifie si les bonnes données sont envoyées
     try {
-        issetArray($_POST, ['name', 'balise_id', 'sensor_id', 'control', 'sign']);
+        issetArray($_POST, ['balise_id', 'sensor_id', 'control', 'sign']);
     } catch (\Throwable $th) {
         res(array(
             "error" => $th->getMessage()
@@ -52,10 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $req = $bdd->prepare('INSERT INTO
-        alerts (name, balise_id, sensor_id, control, sign)
-        VALUES (:name, :balise_id, :sensor_id, :control, :sign)');
+        alerts (balise_id, sensor_id, control, sign)
+        VALUES (:balise_id, :sensor_id, :control, :sign)');
     $req->execute(array(
-        "name" => $_POST['name'],
         "balise_id" => $_POST['balise_id'],
         "sensor_id" => $_POST['sensor_id'],
         "control" => $_POST['control'],
@@ -75,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
 
     // Vérifie si les bonnes données sont envoyées
     try {
-        issetArray($_PATCH, ['alert_id', 'name', 'balise_id', 'sensor_id', 'control', 'sign']);
+        issetArray($_PATCH, ['alert_id', 'balise_id', 'sensor_id', 'control', 'sign']);
     } catch (\Throwable $th) {
         res(array(
             "error" => $th->getMessage()
@@ -83,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
     }
 
     $req = $bdd->prepare('UPDATE alerts SET
-        name = :name,
         balise_id = :balise_id,
         sensor_id = :sensor_id,
         control = :control,
@@ -91,7 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
         WHERE alert_id = :alert_id');
     $req->execute(array(
         "alert_id" => $_PATCH['alert_id'],
-        "name" => $_PATCH['name'],
         "balise_id" => $_PATCH['balise_id'],
         "sensor_id" => $_PATCH['sensor_id'],
         "control" => $_PATCH['control'],
