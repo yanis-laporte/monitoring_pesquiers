@@ -1,6 +1,3 @@
-import '../scss/toast.scss';
-
-
 /**
  * Class qui gère les notifications sous forme de toast.
  */
