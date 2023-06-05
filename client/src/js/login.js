@@ -33,55 +33,10 @@ $('logout').addEventListener('click', e => {
  * Formulaire soumis
  */
 document.querySelector('form').addEventListener('submit', async (e) => {
-    // regForm.onsubmit = async (e) => {
-    e.preventDefault();
-    const formId = $(e.path.find(e => e.nodeName == 'FORM').id)
-    const data = {};
-    // const data = new URLSearchParams();
-    for (const pair of new FormData(formId)) {
-        data[pair[0]] = pair[1]
-    }
-    console.log(e);
+  const composedPath = e.composedPath();
+  const formId = $(composedPath.find((e) => e.nodeName == 'FORM').id);
 
-    switch (e.path.find(e => e.nodeName == 'FORM').id) {
-        // Login form
-        case 'logForm':
-            fetch(`${API_URL}/user.php?login`, {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    _toast.show('Authentification', data.message, data.success ? 'success' : 'danger')
-                    if (data.success == true) {
-                        setTimeout(() => { window.location.href = './map.html' }, 1000)
-                    }
-                })
-            break;
-        // Register form
-        case 'regForm':
-            fetch(`${API_URL}/user.php?register`, {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    _toast.show('Authentification', data.message, data.success ? 'success' : 'danger')
-                })
-            break;
-        default:
-            break;
-    }
+  switch (composedPath.find((e) => e.nodeName == 'FORM').id) {
 });
 
 /**
